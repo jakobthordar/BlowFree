@@ -42,6 +42,12 @@ public class Cellpath {
         this.active = active;
     }
 
+    /**
+     * This function checks if checks if either point a or point b are
+     * located at the point of coordinate.
+     * @param coordinate
+     * @return
+     */
     public boolean checkPointButtons(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
                 point_a.getCoordinate().getRow() == coordinate.getRow()) {
@@ -56,6 +62,11 @@ public class Cellpath {
         return false;
     }
 
+    /**
+     * Checks if the point you are on is the end goal of the path
+     * @param coordinate
+     * @return
+     */
     public boolean checkIfEnd(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
                 point_a.getCoordinate().getRow() == coordinate.getRow() &&
@@ -104,6 +115,8 @@ public class Cellpath {
         this.finished = isFinished;
         point_a.setStart(false);
         point_b.setStart(false);
+        point_a.setEnd(false);
+        point_b.setEnd(false);
     }
 
     public boolean isFinished() {

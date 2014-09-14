@@ -25,7 +25,7 @@ public class Board extends View {
     private ShapeDrawable m_shape = new ShapeDrawable(new OvalShape());
 
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
-    private Cellpath m_cellPath = new Cellpath(new PointButton(new Coordinate(0, 0)), new PointButton(new Coordinate(1, 2)));
+    //private Cellpath m_cellPath = new Cellpath(new PointButton(new Coordinate(0, 0)), new PointButton(new Coordinate(1, 2)));
 
 
     private int xToCol( int x ) {
@@ -94,9 +94,7 @@ public class Board extends View {
         m_cellHeight = (yNew - getPaddingTop() - getPaddingBottom() - sw) / NUM_CELLS;
     }
 
-    @Override
-    protected void onDraw( Canvas canvas ) {
-
+    public void drawBoardAndPoints(Canvas canvas) {
         for (int r = 0; r<NUM_CELLS; ++r) {
             for (int c = 0; c < NUM_CELLS; ++c) {
                 int x = colToX(c);
@@ -121,12 +119,17 @@ public class Board extends View {
             }
         }
 
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+
+        drawBoardAndPoints(canvas);
+
         // TODO: Check if PointButton
         // TODO: If PointButton draw from it and match it to the correct Cellpath
         for (Cellpath cp : m_cellPaths) {
-            if(!cp.isFinished()) {
-                cp.getThisPath().reset();
-            }
+            cp.getThisPath().reset();
 
             if (!cp.isEmpty()) {
                 List<Coordinate> colist = cp.getCoordinates();
@@ -143,7 +146,6 @@ public class Board extends View {
             }
 
             canvas.drawPath(cp.getThisPath(), cp.getPaintPath());
-
         }
     }
 
@@ -152,43 +154,52 @@ public class Board extends View {
     }
 
     @Override
-    public boolean onTouchEvent( MotionEvent event ) {
+    public boolean onTouchEvent(MotionEvent event) {
 
         int x = (int) event.getX();         // NOTE: event.getHistorical... might be needed.
         int y = (int) event.getY();
         int c = xToCol( x );
         int r = yToRow( y );
+        int historySize = event.getHistorySize();
+        int last_x = (int) event.getHistoricalX(historySize - 1);
+        int last_y = (int) event.getHistoricalY(historySize - 1);
 
         if ( c >= NUM_CELLS || r >= NUM_CELLS ) {
             return true;
         }
 
-        Cellpath tempCellPath;
-
         // TODO: When already finished with a path, you should be able to reset it
         // TODO: You should not be able to draw a path over another pats POINT
         // TODO: When a path intersects another path cut off the other path
         // TODO: Win state
+        Coordinate coordinate = new Coordinate(c, r);
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for (Cellpath cp : m_cellPaths) {
                 if (!cp.isFinished()) {
                     cp.reset();
-                    Coordinate coordinate = new Coordinate(c, r);
+
                     if (cp.checkPointButtons(coordinate)) {
                         cp.setStart(coordinate);
                         cp.append(coordinate);
                         cp.setActive(true);
                     }
                 }
+                else if (cp.checkPointButtons(coordinate)) {
+                    cp.reset();
+                    cp.setFinished(false);
+                    cp.setStart(coordinate);
+                    cp.append(coordinate);
+                    cp.setActive(true);
+                }
             }
+            invalidate();
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             for (Cellpath cp : m_cellPaths) {
                 if (cp.isActive()) {
                     if (!cp.isFinished()) {
                         if (!cp.isEmpty()) {
-                            Coordinate coordinate = new Coordinate(c, r);
                             if (cp.checkIfEnd(coordinate)) {
                                 cp.setEnd(coordinate);
                                 cp.setFinished(true);
