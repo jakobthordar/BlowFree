@@ -1,6 +1,8 @@
 package com.example.BlowFreeApp.Board;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.*;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -149,6 +151,13 @@ public class Board extends View {
         }
     }
 
+    public boolean checkWin(List<Cellpath> cellPath){
+        for(Cellpath c : cellPath){
+            if(!c.isFinished())
+                return false;
+        }
+        return true;
+    }
     private boolean areNeighbours( int c1, int r1, int c2, int r2 ) {
         return Math.abs(c1-c2) + Math.abs(r1-r2) == 1;
     }
@@ -160,9 +169,6 @@ public class Board extends View {
         int y = (int) event.getY();
         int c = xToCol( x );
         int r = yToRow( y );
-        int historySize = event.getHistorySize();
-        int last_x = (int) event.getHistoricalX(historySize - 1);
-        int last_y = (int) event.getHistoricalY(historySize - 1);
 
         if ( c >= NUM_CELLS || r >= NUM_CELLS ) {
             return true;
@@ -204,6 +210,9 @@ public class Board extends View {
                                 cp.setEnd(coordinate);
                                 cp.setFinished(true);
                                 System.out.println("Finished!");
+                                if(checkWin(m_cellPaths)){
+                                    displayWinner();
+                                }
                             }
 
                             List<Coordinate> coordinateList = cp.getCoordinates();
@@ -231,5 +240,18 @@ public class Board extends View {
     public void setColor( int color ) {
         m_paintPath.setColor( color );
         invalidate();
+    }
+
+    public void displayWinner() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("OMG YOU WON")
+                .setMessage("You must have an IQ above 145, at least!")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
