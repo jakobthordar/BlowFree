@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">BlowFreeApp</string>
+
+    <string name="app_name">BlowFree</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="new_game">New Game </string>
+    <string name="settings">Settings</string>
+    <string name="continue_game">Continue Game</string>
+    <string name="level_one">Level 1</string>
+
+
 </resources>
