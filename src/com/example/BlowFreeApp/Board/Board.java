@@ -67,8 +67,14 @@ public class Board extends View {
         Cellpath cellPath_b = new Cellpath(point_c, point_d);
         cellPath_b.setColor(Color.BLUE);
 
+        PointButton point_e = new PointButton(new Coordinate(0, 4));
+        PointButton point_f = new PointButton(new Coordinate(4, 3));
+        Cellpath cellPath_c = new Cellpath(point_e, point_f);
+        cellPath_c.setColor(Color.GREEN);
+
         m_cellPaths.add(cellPath_a);
         m_cellPaths.add(cellPath_b);
+        m_cellPaths.add(cellPath_c);
     }
 
     @Override
@@ -159,6 +165,11 @@ public class Board extends View {
 
         Cellpath tempCellPath;
 
+        // TODO: When already finished with a path, you should be able to reset it
+        // TODO: You should not be able to draw a path over another pats POINT
+        // TODO: When a path intersects another path cut off the other path
+        // TODO: Win state
+
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for (Cellpath cp : m_cellPaths) {
                 if (!cp.isFinished()) {
@@ -167,28 +178,38 @@ public class Board extends View {
                     if (cp.checkPointButtons(coordinate)) {
                         cp.setStart(coordinate);
                         cp.append(coordinate);
-                        m_cellPath = cp;
+                        cp.setActive(true);
                     }
                 }
             }
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            if (!m_cellPath.isFinished()) {
-                if (!m_cellPath.isEmpty()) {
-                    Coordinate coordinate = new Coordinate(c, r);
+            for (Cellpath cp : m_cellPaths) {
+                if (cp.isActive()) {
+                    if (!cp.isFinished()) {
+                        if (!cp.isEmpty()) {
+                            Coordinate coordinate = new Coordinate(c, r);
+                            if (cp.checkIfEnd(coordinate)) {
+                                cp.setEnd(coordinate);
+                                cp.setFinished(true);
+                                System.out.println("Finished!");
+                            }
 
-                    if (m_cellPath.checkIfEnd(coordinate)) {
-                        m_cellPath.setEnd(coordinate);
-                        m_cellPath.setFinished(true);
-                        System.out.println("Finished!");
+                            List<Coordinate> coordinateList = cp.getCoordinates();
+                            Coordinate last = coordinateList.get(coordinateList.size() - 1);
+                            if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
+                                cp.append(new Coordinate(c, r));
+                                invalidate();
+                            }
+                        }
                     }
-
-                    List<Coordinate> coordinateList = m_cellPath.getCoordinates();
-                    Coordinate last = coordinateList.get(coordinateList.size() - 1);
-                    if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
-                        m_cellPath.append(new Coordinate(c, r));
-                        invalidate();
-                    }
+                }
+            }
+        }
+        else if(event.getAction() == MotionEvent.ACTION_UP) {
+            for (Cellpath cp : m_cellPaths) {
+                if (cp.isActive()) {
+                    cp.setActive(false);
                 }
             }
         }

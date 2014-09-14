@@ -18,8 +18,8 @@ public class Cellpath {
     private Paint paintPath  = new Paint();
     private Path thisPath = new Path();
     private int color;
-    private boolean isFinished;
-    private boolean isSelected;
+    private boolean finished;
+    private boolean active;
 
     public Cellpath() {
     }
@@ -32,6 +32,14 @@ public class Cellpath {
         paintPath.setStrokeCap(Paint.Cap.ROUND);
         paintPath.setStrokeJoin(Paint.Join.ROUND);
         paintPath.setAntiAlias(true);
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public boolean checkPointButtons(Coordinate coordinate) {
@@ -73,22 +81,35 @@ public class Cellpath {
                 point_a.getCoordinate().getRow() == coordinate.getRow()) {
             point_a.setStart(true);
         }
-    }
 
-    public void setFinished(boolean isFinished) {
-        this.isFinished = isFinished;
-    }
-
-    public boolean isFinished() {
-        return isFinished;
-    }
-
-    public void setEnd(Coordinate coordinate) {
         if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
                 point_b.getCoordinate().getRow() == coordinate.getRow()) {
             point_b.setStart(true);
         }
     }
+
+    public void setEnd(Coordinate coordinate) {
+        if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
+                point_a.getCoordinate().getRow() == coordinate.getRow()) {
+            point_a.setStart(true);
+        }
+
+        if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
+                point_b.getCoordinate().getRow() == coordinate.getRow()) {
+            point_b.setStart(true);
+        }
+    }
+
+    public void setFinished(boolean isFinished) {
+        this.finished = isFinished;
+        point_a.setStart(false);
+        point_b.setStart(false);
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
 
     public int getColor() {
         return color;

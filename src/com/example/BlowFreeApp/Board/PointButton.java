@@ -16,7 +16,7 @@ public class PointButton {
     public PointButton(Coordinate coordinate) {
         this.coordinate = coordinate;
         this.isStart = false;
-        this.isStart = false;
+        this.isEnd = false;
     }
 
     public Coordinate getCoordinate() {
