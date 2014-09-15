@@ -183,6 +183,14 @@ public class Board extends View {
         return false;
     }
 
+    public boolean checkWin(List<Cellpath> cellPath){
+        for(Cellpath c : cellPath){
+            if(!c.isFinished())
+                return false;
+        }
+        return true;
+    }
+
     private boolean areNeighbours( int c1, int r1, int c2, int r2 ) {
         return Math.abs(c1-c2) + Math.abs(r1-r2) == 1;
     }
@@ -194,7 +202,6 @@ public class Board extends View {
         int y = (int) event.getY();
         int c = xToCol(x);
         int r = yToRow( y );
-        int historySize = event.getHistorySize();
 
         if ( c >= NUM_CELLS || r >= NUM_CELLS ) {
             return true;
@@ -269,6 +276,12 @@ public class Board extends View {
         return true;
     }
 
+
+    public void setColor( int color ) {
+        m_paintPath.setColor( color );
+        invalidate();
+    }
+
     public void displayWinner() {
         new AlertDialog.Builder(getContext())
                 .setTitle("OMG YOU WON")
@@ -280,18 +293,5 @@ public class Board extends View {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-    }
-
-    public boolean checkWin(List<Cellpath> cellPath){
-        for(Cellpath c : cellPath){
-            if(!c.isFinished())
-                return false;
-        }
-        return true;
-    }
-
-    public void setColor( int color ) {
-        m_paintPath.setColor( color );
-        invalidate();
     }
 }
