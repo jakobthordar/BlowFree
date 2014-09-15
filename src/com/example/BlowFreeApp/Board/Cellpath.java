@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class contains information about a particular cellpath.
  * Created by yngvi on 5.9.2014.
  */
 public class Cellpath {
@@ -20,6 +21,7 @@ public class Cellpath {
     private int color;
     private boolean finished;
     private boolean active;
+    private boolean inUse;
 
     public Cellpath() {
     }
@@ -43,9 +45,33 @@ public class Cellpath {
     }
 
     /**
+     * Sets the cellpath at these coordinates as active.
+     * @param coordinate
+     */
+    public void setActive(Coordinate coordinate) {
+        if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
+                point_a.getCoordinate().getRow() == coordinate.getRow()) {
+            this.active = true;
+        }
+
+        if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
+                point_b.getCoordinate().getRow() == coordinate.getRow()) {
+            this.active = true;
+        }
+    }
+
+    public boolean isInUse() {
+        return inUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        this.inUse = inUse;
+    }
+
+    /**
      * This function checks if checks if either point a or point b are
      * located at the point of coordinate.
-     * @param coordinate
+     * @param coordinate Takes in a given coordinate.
      * @return
      */
     public boolean checkPointButtons(Coordinate coordinate) {
@@ -63,8 +89,10 @@ public class Cellpath {
     }
 
     /**
-     * Checks if the point you are on is the end goal of the path
-     * @param coordinate
+     * Checks if the point you are on is the end goal of the path, the coordinates
+     * need to be valid to this cellpath and the PointButton at the given coordinates
+     * must not also be the start pointButton.
+     * @param coordinate Takes in a given coordinate.
      * @return
      */
     public boolean checkIfEnd(Coordinate coordinate) {
@@ -87,42 +115,53 @@ public class Cellpath {
         return paintPath;
     }
 
+    /**
+     * Sets the PointButton at the given coordinates as start. This function
+     * also needs to reset the boolean variables of point_b and point_a. This
+     * function lastly needs to set this path as not finised.
+     * @param coordinate Takes in a given coordinate.
+     */
     public void setStart(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
                 point_a.getCoordinate().getRow() == coordinate.getRow()) {
             point_a.setStart(true);
+            point_b.setStart(false);
+            point_b.setEnd(false);
+            this.finished = false;
         }
 
         if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
                 point_b.getCoordinate().getRow() == coordinate.getRow()) {
             point_b.setStart(true);
+            point_a.setStart(false);
+            point_a.setEnd(false);
+            this.finished = false;
         }
     }
 
     public void setEnd(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
                 point_a.getCoordinate().getRow() == coordinate.getRow()) {
-            point_a.setStart(true);
+            point_a.setEnd(true);
         }
 
         if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
                 point_b.getCoordinate().getRow() == coordinate.getRow()) {
-            point_b.setStart(true);
+            point_b.setEnd(true);
         }
     }
 
     public void setFinished(boolean isFinished) {
         this.finished = isFinished;
-        point_a.setStart(false);
-        point_b.setStart(false);
-        point_a.setEnd(false);
-        point_b.setEnd(false);
+        this.point_a.setStart(false);
+        this.point_a.setEnd(false);
+        this.point_b.setStart(false);
+        this.point_b.setEnd(false);
     }
 
     public boolean isFinished() {
         return finished;
     }
-
 
     public int getColor() {
         return color;

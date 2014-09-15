@@ -1,6 +1,8 @@
 package com.example.BlowFreeApp.Board;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.*;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -28,22 +30,27 @@ public class Board extends View {
     //private Cellpath m_cellPath = new Cellpath(new PointButton(new Coordinate(0, 0)), new PointButton(new Coordinate(1, 2)));
 
 
-    private int xToCol( int x ) {
+    private int xToCol(int x) {
         return (x - getPaddingLeft()) / m_cellWidth;
     }
 
-    private int yToRow( int y ) {
+    private int yToRow(int y ) {
         return (y - getPaddingTop()) / m_cellHeight;
     }
 
-    private int colToX( int col ) {
+    private int colToX(int col) {
         return col * m_cellWidth + getPaddingLeft() ;
     }
 
-    private int rowToY( int row ) {
+    private int rowToY(int row) {
         return row * m_cellHeight + getPaddingTop() ;
     }
 
+    /**
+     * Constructor for the Board context.
+     * @param context I don't know what this is.
+     * @param attrs I don't know what this is.
+     */
     public Board(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -94,6 +101,11 @@ public class Board extends View {
         m_cellHeight = (yNew - getPaddingTop() - getPaddingBottom() - sw) / NUM_CELLS;
     }
 
+    /**
+     * A helper function which simply draws all the board lines and the
+     * dots onto the screen. I don't expect this to change at all.
+     * @param canvas Needs the canvas to be able to draw
+     */
     public void drawBoardAndPoints(Canvas canvas) {
         for (int r = 0; r<NUM_CELLS; ++r) {
             for (int c = 0; c < NUM_CELLS; ++c) {
@@ -118,9 +130,13 @@ public class Board extends View {
                 }
             }
         }
-
     }
 
+    /**
+     * This function is called at the start of the game and each time
+     * the canvas is validated.
+     * @param canvas We need the canvas for a context to be able to draw.
+     */
     @Override
     protected void onDraw(Canvas canvas) {
 
@@ -128,9 +144,15 @@ public class Board extends View {
 
         // TODO: Check if PointButton
         // TODO: If PointButton draw from it and match it to the correct Cellpath
+
+        // Loop through all cellpaths
         for (Cellpath cp : m_cellPaths) {
+
+            // Reset the path this cellpath has.
             cp.getThisPath().reset();
 
+            // Only start drawing if the cellpath coordinate list is not empty.
+            // And then we draw the path basically from the beginning.
             if (!cp.isEmpty()) {
                 List<Coordinate> colist = cp.getCoordinates();
                 Coordinate co = colist.get(0);
@@ -149,6 +171,18 @@ public class Board extends View {
         }
     }
 
+    private boolean isAnotherPathsPoint(Coordinate coordinate, Cellpath cellpath) {
+        for (Cellpath cp : m_cellPaths) {
+            if (!cp.equals(cellpath)) {
+                if(cp.checkPointButtons(coordinate)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     private boolean areNeighbours( int c1, int r1, int c2, int r2 ) {
         return Math.abs(c1-c2) + Math.abs(r1-r2) == 1;
     }
@@ -158,11 +192,9 @@ public class Board extends View {
 
         int x = (int) event.getX();         // NOTE: event.getHistorical... might be needed.
         int y = (int) event.getY();
-        int c = xToCol( x );
+        int c = xToCol(x);
         int r = yToRow( y );
         int historySize = event.getHistorySize();
-        int last_x = (int) event.getHistoricalX(historySize - 1);
-        int last_y = (int) event.getHistoricalY(historySize - 1);
 
         if ( c >= NUM_CELLS || r >= NUM_CELLS ) {
             return true;
@@ -172,52 +204,61 @@ public class Board extends View {
         // TODO: You should not be able to draw a path over another pats POINT
         // TODO: When a path intersects another path cut off the other path
         // TODO: Win state
+
+        // Get the current coordinate the finger is above
         Coordinate coordinate = new Coordinate(c, r);
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for (Cellpath cp : m_cellPaths) {
-                if (!cp.isFinished()) {
-                    cp.reset();
+                // For each path, reset it if it isnt finished.
+                // Sets the cellPath as active if it has a point at the coordinates
+                cp.setActive(coordinate);
 
-                    if (cp.checkPointButtons(coordinate)) {
-                        cp.setStart(coordinate);
-                        cp.append(coordinate);
-                        cp.setActive(true);
-                    }
-                }
-                else if (cp.checkPointButtons(coordinate)) {
-                    cp.reset();
-                    cp.setFinished(false);
+                if (cp.isActive()) {
                     cp.setStart(coordinate);
-                    cp.append(coordinate);
-                    cp.setActive(true);
+
+                    if (!cp.isFinished()) {
+                        cp.reset();
+                        System.out.println("Not finished");
+                        cp.append(coordinate);
+                    }
+                    else {
+                        System.out.println("Already finished");
+                        cp.reset();
+                        cp.setInUse(true);
+                        cp.setFinished(false);
+                        cp.append(coordinate);
+                    }
                 }
             }
             invalidate();
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            for (Cellpath cp : m_cellPaths) {
-                if (cp.isActive()) {
-                    if (!cp.isFinished()) {
-                        if (!cp.isEmpty()) {
-                            if (cp.checkIfEnd(coordinate)) {
-                                cp.setEnd(coordinate);
-                                cp.setFinished(true);
-                                System.out.println("Finished!");
-                            }
 
-                            List<Coordinate> coordinateList = cp.getCoordinates();
-                            Coordinate last = coordinateList.get(coordinateList.size() - 1);
-                            if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
-                                cp.append(new Coordinate(c, r));
-                                invalidate();
-                            }
+            for (Cellpath cp : m_cellPaths) {
+                if (cp.isActive() && !cp.isFinished() && !cp.isEmpty() && !isAnotherPathsPoint(coordinate, cp)) {
+                    if (cp.checkIfEnd(coordinate)) {
+                        cp.setFinished(true);
+                        cp.setInUse(false);
+                        if(checkWin(m_cellPaths)){
+                            displayWinner();
                         }
+                        System.out.println("Finished!");
                     }
+
+                    List<Coordinate> coordinateList = cp.getCoordinates();
+                    Coordinate last = coordinateList.get(coordinateList.size() - 1);
+                    if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
+                        cp.append(new Coordinate(c, r));
+                        invalidate();
+                    }
+
+                    // TODO: Here we should check if this path intersects another path.
                 }
             }
         }
         else if(event.getAction() == MotionEvent.ACTION_UP) {
+            // TODO: Bad place is here
             for (Cellpath cp : m_cellPaths) {
                 if (cp.isActive()) {
                     cp.setActive(false);
@@ -225,6 +266,27 @@ public class Board extends View {
             }
         }
 
+        return true;
+    }
+
+    public void displayWinner() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("OMG YOU WON")
+                .setMessage("You must have an IQ above 145, at least!")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public boolean checkWin(List<Cellpath> cellPath){
+        for(Cellpath c : cellPath){
+            if(!c.isFinished())
+                return false;
+        }
         return true;
     }
 
