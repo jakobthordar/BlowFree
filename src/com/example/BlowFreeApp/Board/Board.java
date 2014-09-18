@@ -3,13 +3,48 @@ package com.example.BlowFreeApp.Board;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
 import android.graphics.*;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import com.example.BlowFreeApp.GameInfo;
+import com.example.BlowFreeApp.Global;
 
+import java.io.File;
+import java.io.InputStream;
+
+import com.example.BlowFreeApp.InfoBoard;
+import com.example.BlowFreeApp.PackLevels;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.XMLReader;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +53,9 @@ public class Board extends View {
     private final int NUM_CELLS = 5;
     private int m_cellWidth;
     private int m_cellHeight;
+
+    List<GameInfo> g = new ArrayList<GameInfo>();
+
 
     private Rect m_rect = new Rect();
     private Paint m_paintGrid  = new Paint();
@@ -28,6 +66,18 @@ public class Board extends View {
 
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
     //private Cellpath m_cellPath = new Cellpath(new PointButton(new Coordinate(0, 0)), new PointButton(new Coordinate(1, 2)));
+
+
+    /* changed for activities */
+
+    int sizeOfBoard;
+    int idForBoard;
+
+    private Global mGlobals = Global.getInstance();
+
+    String boardCoordinates;
+
+    /* changed for activities */
 
 
     private int xToCol(int x) {
@@ -68,7 +118,6 @@ public class Board extends View {
         Cellpath cellPath_a = new Cellpath(point_a, point_b);
         cellPath_a.setColor(Color.RED);
 
-
         PointButton point_c = new PointButton(new Coordinate(4, 0));
         PointButton point_d = new PointButton(new Coordinate(3, 2));
         Cellpath cellPath_b = new Cellpath(point_c, point_d);
@@ -82,7 +131,125 @@ public class Board extends View {
         m_cellPaths.add(cellPath_a);
         m_cellPaths.add(cellPath_b);
         m_cellPaths.add(cellPath_c);
+
+        // get info from globals to make board */
+
+        g = mGlobals.mGameInfo;
+        GameInfo game = g.get(g.size() - 1);
+        sizeOfBoard = game.getSize();
+        idForBoard = game.getId();
+
+        System.out.println(sizeOfBoard + "******");
+        // next call a function here and extract the info needed to
+        // draw the board
+
+        if(sizeOfBoard <= 6) {
+            try {
+
+                getInfoForBoardDrawing(getContext().getAssets().open("packs/regular.xml"), sizeOfBoard, idForBoard);
+
+            } catch (Exception e) {
+                System.out.println("could not read fle regular.xml");
+            }
+        }
+        if(sizeOfBoard == 7){
+            try {
+
+                getInfoForBoardDrawing(getContext().getAssets().open("packs/mania.xml"), sizeOfBoard, idForBoard);
+
+            } catch (Exception e) {
+                System.out.println("could not read fle mania.xml");
+            }
+        }
     }
+
+    // read board info from xml
+    public void getInfoForBoardDrawing(InputStream is,int size,int idForBoard){
+
+        // fix for reading xml file
+        // and finding 6 by 6 boards
+        if(idForBoard  > 9 ){
+            idForBoard = idForBoard - 10;
+        }
+
+        int tempId;
+        int tempSize;
+
+        try {
+
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse( is );
+            NodeList cList = doc.getElementsByTagName( "challenge" );
+
+            // TO DO get the points for the board and size
+
+            for(int i = 0; i< cList.getLength(); ++i) {
+                Node cNode = cList.item(i);
+                Element challenge = (Element) cNode;
+
+                NodeList n = cNode.getChildNodes();
+
+                for (int c = 0; c < n.getLength(); ++c) {
+
+                    Node nNode = n.item(c);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        // eNode is puzzle
+                        Element eNode = (Element) nNode;
+
+                        String temp = eNode.getAttribute("id");
+                        tempId = Integer.parseInt(temp) -1;
+
+                        // cast to be able to compare
+                        String s = eNode.getElementsByTagName( "size" ).item(0).getFirstChild().getNodeValue();
+                        tempSize = Integer.parseInt(s);
+
+                        // compare size also &&
+                        if( tempId == idForBoard && tempSize == sizeOfBoard){
+                            // TO DO GET THE board from elment flows
+                            boardCoordinates = eNode.getElementsByTagName( "flows" ).item(0).getFirstChild().getNodeValue();
+                        }
+                    }
+                }
+            }
+        }
+        catch ( Exception e ) {
+            System.out.println("Could not read points for board in Board.java");
+        }
+       // trimString(boardCoordinates);
+    }
+
+   /* public List<Coordinate> trimString(String coordinates){
+
+        List<Coordinate> coordinatesToDraw = new ArrayList<Coordinate>();
+
+        String[] parts = coordinates.split(",");
+
+        for(String s:parts){
+
+            String x = s.substring(0);
+            String y = s.substring(1);
+
+            if(!(x == "(") || !(x ==")") || !(y == "(") || !(y ==")") ){
+
+                int tempX = Integer.parseInt(x);
+                int tempY = Integer.parseInt(y);
+
+                Coordinate c = new Coordinate(tempX,tempY);
+                coordinatesToDraw.add(c);
+            }
+
+            // remove the coordinate we have already put in the list
+            s = s.substring(2, s.length() - 2);
+        }
+
+        for(Coordinate c: coordinatesToDraw){
+            System.out.println(c.getCol()+ "xxxxxxxxxxxxx");
+            System.out.println(c.getRow() + "yyyyyyyyyyyy");
+        }
+
+        return coordinatesToDraw;
+    } */
 
     @Override
     protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec ) {
@@ -131,6 +298,7 @@ public class Board extends View {
             }
         }
     }
+
 
     /**
      * This function is called at the start of the game and each time

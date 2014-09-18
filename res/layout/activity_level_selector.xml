@@ -6,18 +6,10 @@
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
                 android:paddingBottom="@dimen/activity_vertical_margin"
-                tools:context="com.example.BlowFreeApp.LevelActivity">
-
-     <!--<Button
-            android:id="@+id/Settings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/level_one"
-            android:onClick="LevelOne"
-            /> -->
+                tools:context="com.example.BlowFreeApp.LevelSelecor">
 
     <ListView
-            android:id="@+id/list"
+            android:id="@+id/listLevel"
             android:layout_height="wrap_content"
             android:layout_width="match_parent">
     </ListView>
