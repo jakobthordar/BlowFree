@@ -1,6 +1,8 @@
 package com.example.BlowFreeApp;
 
 
+import com.example.BlowFreeApp.activities.Pack;
+
 import java.util.List;
 
 public class Global {

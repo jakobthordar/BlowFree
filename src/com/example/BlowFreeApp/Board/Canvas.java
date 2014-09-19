@@ -3,8 +3,10 @@ package com.example.BlowFreeApp.Board;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
-import android.graphics.*;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
@@ -12,29 +14,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import com.example.BlowFreeApp.GameInfo;
 import com.example.BlowFreeApp.Global;
-
-import java.io.File;
-import java.io.InputStream;
-
-import com.example.BlowFreeApp.InfoBoard;
-import com.example.BlowFreeApp.PackLevels;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.XMLReader;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,13 +25,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-public class Board extends View {
+public class Canvas extends View {
 
     private final int NUM_CELLS = 5;
     private int m_cellWidth;
@@ -101,7 +78,7 @@ public class Board extends View {
      * @param context I don't know what this is.
      * @param attrs I don't know what this is.
      */
-    public Board(Context context, AttributeSet attrs) {
+    public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         m_paintGrid.setStyle( Paint.Style.STROKE );
@@ -273,7 +250,7 @@ public class Board extends View {
      * dots onto the screen. I don't expect this to change at all.
      * @param canvas Needs the canvas to be able to draw
      */
-    public void drawBoardAndPoints(Canvas canvas) {
+    public void drawBoardAndPoints(android.graphics.Canvas canvas) {
         for (int r = 0; r<NUM_CELLS; ++r) {
             for (int c = 0; c < NUM_CELLS; ++c) {
                 int x = colToX(c);
@@ -306,7 +283,7 @@ public class Board extends View {
      * @param canvas We need the canvas for a context to be able to draw.
      */
     @Override
-    protected void onDraw(Canvas canvas) {
+    protected void onDraw(android.graphics.Canvas canvas) {
 
         drawBoardAndPoints(canvas);
 

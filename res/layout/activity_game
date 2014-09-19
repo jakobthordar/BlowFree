@@ -7,7 +7,7 @@
 
 
 
-     <com.example.BlowFreeApp.Board.Board
+     <com.example.BlowFreeApp.Board.Canvas
             android:id="@+id/board"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

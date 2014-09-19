@@ -1,11 +1,13 @@
-package com.example.BlowFreeApp;
+package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import com.example.BlowFreeApp.Global;
+import com.example.BlowFreeApp.R;
 
 
-public class GameActivity extends Activity {
+public class Game extends Activity {
 
     private Global mGlobals = Global.getInstance();
 

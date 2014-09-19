@@ -1,4 +1,4 @@
-package com.example.BlowFreeApp;
+package com.example.BlowFreeApp.activities;
 
 public class Pack {
 
@@ -6,7 +6,7 @@ public class Pack {
     private String mDescription;
     private String mFile;
 
-    Pack( String name, String description, String file )  {
+    public Pack( String name, String description, String file )  {
         mName = name;
         mDescription = description;
         mFile = file;

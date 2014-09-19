@@ -1,14 +1,13 @@
-package com.example.BlowFreeApp;
+package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import com.example.BlowFreeApp.R;
 
 
-public class MainActivity extends Activity {
+public class MainMenu extends Activity {
 
     public String EXTRA_MESSAGE = "level 1";
     @Override
@@ -20,7 +19,7 @@ public class MainActivity extends Activity {
     }
 
     public void newGame(View view){
-        Intent myIntent = new Intent(this, LevelActivity.class);
+        Intent myIntent = new Intent(this, Level.class);
         startActivity(myIntent);
     }
 
