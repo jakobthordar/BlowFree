@@ -1,7 +1,5 @@
 package com.example.BlowFreeApp.Board;
 
-import android.graphics.Color;
-
 /**
  * <p></p>
  *
@@ -9,7 +7,7 @@ import android.graphics.Color;
  *         Created on 14.9.2014.
  */
 public class PointButton {
-    private Coordinate coordinate;
+    public Coordinate coordinate;
     private boolean isStart;
     private boolean isEnd;
 

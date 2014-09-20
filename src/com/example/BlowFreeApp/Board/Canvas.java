@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -26,52 +24,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Canvas extends View {
-
     private final int NUM_CELLS = 5;
-    private int m_cellWidth;
-    private int m_cellHeight;
 
-    List<GameInfo> g = new ArrayList<GameInfo>();
-
-
-    private Rect m_rect = new Rect();
-    private Paint m_paintGrid  = new Paint();
-    private Paint m_paintPath  = new Paint();
-    private Paint m_paintShape  = new Paint();
-    private Path m_path = new Path();
-    private ShapeDrawable m_shape = new ShapeDrawable(new OvalShape());
-
+    private Grid grid;
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
-    //private Cellpath m_cellPath = new Cellpath(new PointButton(new Coordinate(0, 0)), new PointButton(new Coordinate(1, 2)));
-
 
     /* changed for activities */
-
     int sizeOfBoard;
     int idForBoard;
+    List<GameInfo> g = new ArrayList<GameInfo>();
 
     private Global mGlobals = Global.getInstance();
 
     String boardCoordinates;
-
-    /* changed for activities */
-
-
-    private int xToCol(int x) {
-        return (x - getPaddingLeft()) / m_cellWidth;
-    }
-
-    private int yToRow(int y ) {
-        return (y - getPaddingTop()) / m_cellHeight;
-    }
-
-    private int colToX(int col) {
-        return col * m_cellWidth + getPaddingLeft() ;
-    }
-
-    private int rowToY(int row) {
-        return row * m_cellHeight + getPaddingTop() ;
-    }
 
     /**
      * Constructor for the Board context.
@@ -81,29 +46,21 @@ public class Canvas extends View {
     public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        m_paintGrid.setStyle( Paint.Style.STROKE );
-        m_paintGrid.setColor( Color.GRAY );
-
-        m_paintPath.setStyle( Paint.Style.STROKE );
-        m_paintPath.setStrokeWidth(32);
-        m_paintPath.setStrokeCap( Paint.Cap.ROUND );
-        m_paintPath.setStrokeJoin( Paint.Join.ROUND );
-        m_paintPath.setAntiAlias( true );
+        grid = new Grid(NUM_CELLS, NUM_CELLS);
+        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
 
         PointButton point_a = new PointButton(new Coordinate(0, 0));
         PointButton point_b = new PointButton(new Coordinate(1, 2));
-        Cellpath cellPath_a = new Cellpath(point_a, point_b);
-        cellPath_a.setColor(Color.RED);
+
+        Cellpath cellPath_a = new Cellpath(point_a, point_b, Color.RED);
 
         PointButton point_c = new PointButton(new Coordinate(4, 0));
         PointButton point_d = new PointButton(new Coordinate(3, 2));
-        Cellpath cellPath_b = new Cellpath(point_c, point_d);
-        cellPath_b.setColor(Color.BLUE);
+        Cellpath cellPath_b = new Cellpath(point_c, point_d, Color.BLUE);
 
         PointButton point_e = new PointButton(new Coordinate(0, 4));
         PointButton point_f = new PointButton(new Coordinate(4, 3));
-        Cellpath cellPath_c = new Cellpath(point_e, point_f);
-        cellPath_c.setColor(Color.GREEN);
+        Cellpath cellPath_c = new Cellpath(point_e, point_f, Color.GREEN);
 
         m_cellPaths.add(cellPath_a);
         m_cellPaths.add(cellPath_b);
@@ -240,9 +197,7 @@ public class Canvas extends View {
 
     @Override
     protected void onSizeChanged( int xNew, int yNew, int xOld, int yOld ) {
-        int sw = Math.max(1, (int) m_paintGrid.getStrokeWidth());
-        m_cellWidth  = (xNew - getPaddingLeft() - getPaddingRight() - sw) / NUM_CELLS;
-        m_cellHeight = (yNew - getPaddingTop() - getPaddingBottom() - sw) / NUM_CELLS;
+        grid.setSize(xNew, yNew);
     }
 
     /**
@@ -250,32 +205,62 @@ public class Canvas extends View {
      * dots onto the screen. I don't expect this to change at all.
      * @param canvas Needs the canvas to be able to draw
      */
-    public void drawBoardAndPoints(android.graphics.Canvas canvas) {
-        for (int r = 0; r<NUM_CELLS; ++r) {
-            for (int c = 0; c < NUM_CELLS; ++c) {
-                int x = colToX(c);
-                int y = rowToY(r);
-                m_rect.set(x, y, x + m_cellWidth, y + m_cellHeight);
-                canvas.drawRect(m_rect, m_paintGrid);
+    public void drawPoints(android.graphics.Canvas canvas) {
+        int x, y;
 
-                for (Cellpath cp : m_cellPaths) {
-                    if (cp.getPoint_a().getCoordinate().getCol() == c &&
-                            cp.getPoint_a().getCoordinate().getRow() == r) {
-                        m_shape.setBounds(m_rect);
-                        m_shape.getPaint().setColor(cp.getColor());
-                        m_shape.draw(canvas);
-                    }
-                    if (cp.getPoint_b().getCoordinate().getCol() == c &&
-                            cp.getPoint_b().getCoordinate().getRow() == r) {
-                        m_shape.setBounds(m_rect);
-                        m_shape.getPaint().setColor(cp.getColor());
-                        m_shape.draw(canvas);
-                    }
-                }
-            }
+        ShapeDrawable circle = new ShapeDrawable(new OvalShape());
+        Rect boundRect = new Rect();
+
+        for (Cellpath cp : m_cellPaths) {
+            // Get Point A
+            x = cp.getPoint_a().getCoordinate().getCol();
+            y = cp.getPoint_a().getCoordinate().getRow();
+
+            // Set bounding Rect
+            boundRect.set(grid.getCellRect(x, y));
+
+            // Draw Point A
+            circle.setBounds(boundRect);
+            circle.getPaint().setColor(cp.getColor());
+            circle.draw(canvas);
+
+            // Get Point B
+            x = cp.getPoint_b().getCoordinate().getCol();
+            y = cp.getPoint_b().getCoordinate().getRow();
+
+            // Set bounding Rect
+            boundRect.set(grid.getCellRect(x, y));
+
+            // Draw Point B
+            circle.setBounds(boundRect);
+            circle.getPaint().setColor(cp.getColor());
+            circle.draw(canvas);
         }
     }
 
+    /**
+     * Draws board paths.
+     * Highlights paths that are finished
+     * @param canvas
+     */
+    public void drawPaths(android.graphics.Canvas canvas) {
+        // TODO: Check if PointButton
+        // TODO: If PointButton draw from it and match it to the correct Cellpath
+
+        // Loop through all cellpaths
+        for (Cellpath cp : m_cellPaths) {
+            // Reset the path this cellpath has.
+            cp.getThisPath().reset();
+
+            // Only start drawing if the cellpath coordinate list is not empty.
+            if(cp.isEmpty()) continue;
+
+            cp.draw(canvas);
+
+            if(cp.isFinished())
+                cp.drawHighlight(canvas);
+        }
+    }
 
     /**
      * This function is called at the start of the game and each time
@@ -284,36 +269,14 @@ public class Canvas extends View {
      */
     @Override
     protected void onDraw(android.graphics.Canvas canvas) {
+        // Draw the background grid
+        grid.draw(canvas);
 
-        drawBoardAndPoints(canvas);
+        // Draw the board points
+        drawPoints(canvas);
 
-        // TODO: Check if PointButton
-        // TODO: If PointButton draw from it and match it to the correct Cellpath
-
-        // Loop through all cellpaths
-        for (Cellpath cp : m_cellPaths) {
-
-            // Reset the path this cellpath has.
-            cp.getThisPath().reset();
-
-            // Only start drawing if the cellpath coordinate list is not empty.
-            // And then we draw the path basically from the beginning.
-            if (!cp.isEmpty()) {
-                List<Coordinate> colist = cp.getCoordinates();
-                Coordinate co = colist.get(0);
-
-                cp.getThisPath().moveTo(colToX(co.getCol()) + m_cellWidth / 2,
-                        rowToY(co.getRow()) + m_cellHeight / 2 );
-
-                for ( int i=1; i<colist.size(); ++i ) {
-                    co = colist.get(i);
-                    cp.getThisPath().lineTo(colToX(co.getCol()) + m_cellWidth / 2,
-                            rowToY(co.getRow()) + m_cellHeight / 2);
-                }
-            }
-
-            canvas.drawPath(cp.getThisPath(), cp.getPaintPath());
-        }
+        // Draw the board paths
+        drawPaths(canvas);
     }
 
     private boolean isAnotherPathsPoint(Coordinate coordinate, Cellpath cellpath) {
@@ -342,13 +305,10 @@ public class Canvas extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        // Get the current coordinate the finger touched
+        Coordinate coordinate = grid.getCellIndex((int) event.getX(), (int) event.getY()).coordinate;
 
-        int x = (int) event.getX();         // NOTE: event.getHistorical... might be needed.
-        int y = (int) event.getY();
-        int c = xToCol(x);
-        int r = yToRow( y );
-
-        if ( c >= NUM_CELLS || r >= NUM_CELLS ) {
+        if (coordinate.getCol() >= NUM_CELLS || coordinate.getRow() >= NUM_CELLS ) {
             return true;
         }
 
@@ -356,9 +316,6 @@ public class Canvas extends View {
         // TODO: You should not be able to draw a path over another pats POINT
         // TODO: When a path intersects another path cut off the other path
         // TODO: Win state
-
-        // Get the current coordinate the finger is above
-        Coordinate coordinate = new Coordinate(c, r);
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             for (Cellpath cp : m_cellPaths) {
@@ -377,7 +334,6 @@ public class Canvas extends View {
                     else {
                         System.out.println("Already finished");
                         cp.reset();
-                        cp.setInUse(true);
                         cp.setFinished(false);
                         cp.append(coordinate);
                     }
@@ -391,7 +347,6 @@ public class Canvas extends View {
                 if (cp.isActive() && !cp.isFinished() && !cp.isEmpty() && !isAnotherPathsPoint(coordinate, cp)) {
                     if (cp.checkIfEnd(coordinate)) {
                         cp.setFinished(true);
-                        cp.setInUse(false);
                         if(checkWin(m_cellPaths)){
                             displayWinner();
                         }
@@ -400,8 +355,8 @@ public class Canvas extends View {
 
                     List<Coordinate> coordinateList = cp.getCoordinates();
                     Coordinate last = coordinateList.get(coordinateList.size() - 1);
-                    if (areNeighbours(last.getCol(), last.getRow(), c, r)) {
-                        cp.append(new Coordinate(c, r));
+                    if (areNeighbours(last.getCol(), last.getRow(), coordinate.getCol(), coordinate.getRow())) {
+                        cp.append(new Coordinate(coordinate.getCol(), coordinate.getRow()));
                         invalidate();
                     }
 
@@ -419,12 +374,6 @@ public class Canvas extends View {
         }
 
         return true;
-    }
-
-
-    public void setColor( int color ) {
-        m_paintPath.setColor( color );
-        invalidate();
     }
 
     public void displayWinner() {

@@ -1,8 +1,6 @@
 package com.example.BlowFreeApp.Board;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
+import android.graphics.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +15,65 @@ public class Cellpath {
     private PointButton point_a;
     private PointButton point_b;
     private Paint paintPath  = new Paint();
-    private Path thisPath = new Path();
+    private Paint paintHighlight = new Paint();
+    private Path path = new Path();
     private int color;
     private boolean finished;
     private boolean active;
-    private boolean inUse;
 
-    public Cellpath() {
-    }
+    public Cellpath(PointButton A, PointButton B, int color) {
+        this.point_a = A;
+        this.point_b = B;
+        this.color = color;
 
-    public Cellpath(PointButton point_a, PointButton point_b) {
-        this.point_a = point_a;
-        this.point_b = point_b;
+        // Set Color
+        paintPath.setColor(color);
+        paintHighlight.setColor(color);
+
+        // Cell path paint settings
         paintPath.setStyle(Paint.Style.STROKE);
         paintPath.setStrokeWidth(32);
+
         paintPath.setStrokeCap(Paint.Cap.ROUND);
         paintPath.setStrokeJoin(Paint.Join.ROUND);
         paintPath.setAntiAlias(true);
+
+        // Set Cell Highlight paint
+        paintHighlight.setAlpha(80);
+    }
+
+    /**
+     * Draws the cellpath
+     * @param canvas
+     */
+    public void draw(android.graphics.Canvas canvas) {
+        Point center;
+        Coordinate cell = m_path.get(0);
+
+        // Get and set the paths starting point
+        center = Grid.getCellCenter(cell.getCol(), cell.getRow());
+        path.moveTo(center.x, center.y);
+
+        for(int i = 1; i < m_path.size(); ++i) {
+            cell = m_path.get(i);
+            center = Grid.getCellCenter(cell.getCol(), cell.getRow());
+
+            path.lineTo(center.x, center.y);
+        }
+
+        canvas.drawPath(path, paintPath);
+    }
+
+    public void drawHighlight(android.graphics.Canvas canvas) {
+        Rect cellRect;
+        Coordinate cell;
+
+        for(int i = 0; i < m_path.size(); ++i) {
+            cell = m_path.get(i);
+            cellRect = Grid.getCellRect(cell.getCol(), cell.getRow());
+
+            canvas.drawRect(cellRect, paintHighlight);
+        }
     }
 
     public boolean isActive() {
@@ -58,14 +98,6 @@ public class Cellpath {
                 point_b.getCoordinate().getRow() == coordinate.getRow()) {
             this.active = true;
         }
-    }
-
-    public boolean isInUse() {
-        return inUse;
-    }
-
-    public void setInUse(boolean inUse) {
-        this.inUse = inUse;
     }
 
     /**
@@ -109,10 +141,6 @@ public class Cellpath {
         }
 
         return false;
-    }
-
-    public Paint getPaintPath() {
-        return paintPath;
     }
 
     /**
@@ -172,16 +200,11 @@ public class Cellpath {
     }
 
     public Path getThisPath() {
-        return thisPath;
+        return path;
     }
 
     public void setThisPath(Path thisPath) {
-        this.thisPath = thisPath;
-    }
-
-    public void setColor(int color) {
-        paintPath.setColor(color);
-        this.color = color;
+        this.path = thisPath;
     }
 
     public void append(Coordinate co) {
@@ -216,5 +239,4 @@ public class Cellpath {
     public boolean isEmpty() {
         return m_path.isEmpty();
     }
-
 }
