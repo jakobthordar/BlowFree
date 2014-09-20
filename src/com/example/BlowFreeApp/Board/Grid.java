@@ -32,7 +32,7 @@ public class Grid {
 
     /**
      * Draws the grid
-     * @param canvas
+     * @param canvas required to draw
      */
     public void draw(android.graphics.Canvas canvas){
         for (int w = 0; w < width; w++) {
@@ -46,8 +46,8 @@ public class Grid {
 
     /**
      * Sets the grid size
-     * @param w
-     * @param h
+     * @param w new board width
+     * @param h new board height
      */
     public void setSize(int w, int h) {
         int strokeWidth = Math.max(1, (int) paint.getStrokeWidth()) * 4;
@@ -87,7 +87,7 @@ public class Grid {
      * Returns cell rect in pixels
      * @param x cell number index
      * @param y row number index
-     * @return
+     * @return returns the cell as rectangle
      */
     public static Rect getCellRect(int x, int y) {
         Rect cell = new Rect();
@@ -109,7 +109,7 @@ public class Grid {
      * Returns a cell index (col , row)
      * @param x in pixels
      * @param y in pixels
-     * @return
+     * @return returns point representing the column and row index
      */
     public PointButton getCellIndex(int x, int y) {
         Coordinate point = new Coordinate(getColumn(x), getRow(y));
@@ -119,8 +119,8 @@ public class Grid {
 
     /**
      * Calculates the cell pos
-     * @param x
-     * @return
+     * @param x in pixels
+     * @return column index
      */
     private int getColumn(int x) {
         return (x - padLeft) / cellWidth;
@@ -128,8 +128,8 @@ public class Grid {
 
     /**
      * Calculates the row pos
-     * @param y
-     * @return
+     * @param y in pixels
+     * @return row index
      */
     private int getRow(int y) {
         return (y - padTop) / cellHeight;

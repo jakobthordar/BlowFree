@@ -154,7 +154,6 @@ public class Cellpath {
                 point_a.getCoordinate().getRow() == coordinate.getRow()) {
             point_a.setStart(true);
             point_b.setStart(false);
-            point_b.setEnd(false);
             this.finished = false;
         }
 
@@ -162,29 +161,14 @@ public class Cellpath {
                 point_b.getCoordinate().getRow() == coordinate.getRow()) {
             point_b.setStart(true);
             point_a.setStart(false);
-            point_a.setEnd(false);
             this.finished = false;
-        }
-    }
-
-    public void setEnd(Coordinate coordinate) {
-        if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
-                point_a.getCoordinate().getRow() == coordinate.getRow()) {
-            point_a.setEnd(true);
-        }
-
-        if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
-                point_b.getCoordinate().getRow() == coordinate.getRow()) {
-            point_b.setEnd(true);
         }
     }
 
     public void setFinished(boolean isFinished) {
         this.finished = isFinished;
         this.point_a.setStart(false);
-        this.point_a.setEnd(false);
         this.point_b.setStart(false);
-        this.point_b.setEnd(false);
     }
 
     public boolean isFinished() {

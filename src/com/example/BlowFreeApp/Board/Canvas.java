@@ -257,6 +257,7 @@ public class Canvas extends View {
 
             cp.draw(canvas);
 
+            // If the path is finished we highlight it
             if(cp.isFinished())
                 cp.drawHighlight(canvas);
         }
