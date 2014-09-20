@@ -12,7 +12,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Level" android:label="BlowFree"></activity>
+        <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
         <activity android:name=".activities.Settings" android:label="BlowFree"></activity>
         <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
         <activity android:name=".activities.Game" android:label="BlowFree"></activity>

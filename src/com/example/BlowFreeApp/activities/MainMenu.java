@@ -19,7 +19,7 @@ public class MainMenu extends Activity {
     }
 
     public void newGame(View view){
-        Intent myIntent = new Intent(this, Level.class);
+        Intent myIntent = new Intent(this, LevelSelectorRegular.class);
         startActivity(myIntent);
     }
 

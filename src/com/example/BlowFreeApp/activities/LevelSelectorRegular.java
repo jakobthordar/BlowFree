@@ -19,7 +19,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Level extends Activity{
+public class LevelSelectorRegular extends Activity{
 
     List<Pack> mPacks = new ArrayList<Pack>();
     private Global mGlobals = Global.getInstance();
