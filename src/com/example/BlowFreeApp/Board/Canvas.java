@@ -142,6 +142,7 @@ public class Canvas extends View {
                         if( tempId == idForBoard && tempSize == sizeOfBoard){
                             // TO DO GET THE board from elment flows
                             boardCoordinates = eNode.getElementsByTagName( "flows" ).item(0).getFirstChild().getNodeValue();
+                            trimString(boardCoordinates);
                         }
                     }
                 }
@@ -150,40 +151,43 @@ public class Canvas extends View {
         catch ( Exception e ) {
             System.out.println("Could not read points for board in Board.java");
         }
-       // trimString(boardCoordinates);
+
     }
 
-   /* public List<Coordinate> trimString(String coordinates){
+    public List<Coordinate> trimString(String coordinates){
 
         List<Coordinate> coordinatesToDraw = new ArrayList<Coordinate>();
-
         String[] parts = coordinates.split(",");
 
-        for(String s:parts){
+        int X1, Y1,X2,Y2 ;
+        String a,b,c,d;
 
-            String x = s.substring(0);
-            String y = s.substring(1);
+        for(int i = 0; i < parts.length; i++){
 
-            if(!(x == "(") || !(x ==")") || !(y == "(") || !(y ==")") ){
+            String temp = parts[i];
+            // regex take everything away but the numbers
+            temp = temp.replaceAll("[^0-9]","");
 
-                int tempX = Integer.parseInt(x);
-                int tempY = Integer.parseInt(y);
+            System.out.println(temp + "''''''''''''''''");
+            a  = Character.toString(temp.charAt(0));
+            b  = Character.toString(temp.charAt(1));
+            c  = Character.toString(temp.charAt(2));
+            d  = Character.toString(temp.charAt(3));
 
-                Coordinate c = new Coordinate(tempX,tempY);
-                coordinatesToDraw.add(c);
-            }
+            X1 = Integer.parseInt(a);
+            Y1 = Integer.parseInt(b);
+            X2 = Integer.parseInt(c);
+            Y2 = Integer.parseInt(d);
 
-            // remove the coordinate we have already put in the list
-            s = s.substring(2, s.length() - 2);
+            //Coordinate coord1 = new Coordinate(X1,Y1);
+            //Coordinate coord2 = new Coordinate(X2,Y2);
+            // coordinatesToDraw.add(coord1);
+            // coordinatesToDraw.add(coord2);
+
         }
 
-        for(Coordinate c: coordinatesToDraw){
-            System.out.println(c.getCol()+ "xxxxxxxxxxxxx");
-            System.out.println(c.getRow() + "yyyyyyyyyyyy");
-        }
-
-        return coordinatesToDraw;
-    } */
+        return null;
+    }
 
     @Override
     protected void onMeasure( int widthMeasureSpec, int heightMeasureSpec ) {
