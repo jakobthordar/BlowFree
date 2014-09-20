@@ -71,30 +71,30 @@
     <splitter split-orientation="horizontal" split-proportion="0.4183243">
       <split-first>
         <leaf>
-          <file leaf-file-name="Grid.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="Grid.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="2431">
-                  <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+                <state vertical-scroll-proportion="2.688253" vertical-offset="408" max-vertical-offset="2601">
+                  <caret line="129" column="7" selection-start-line="129" selection-start-column="7" selection-end-line="129" selection-end-column="7" />
                   <folding>
-                    <element signature="e#2565#2566#0" expanded="true" />
-                    <element signature="e#2611#2612#0" expanded="true" />
-                    <element signature="e#2654#2655#0" expanded="true" />
-                    <element signature="e#2702#2703#0" expanded="true" />
-                    <element signature="e#3181#3182#0" expanded="true" />
-                    <element signature="e#3229#3230#0" expanded="true" />
-                    <element signature="e#3359#3360#0" expanded="true" />
-                    <element signature="e#3407#3408#0" expanded="true" />
+                    <element signature="e#2665#2666#0" expanded="true" />
+                    <element signature="e#2711#2712#0" expanded="true" />
+                    <element signature="e#2854#2855#0" expanded="true" />
+                    <element signature="e#2902#2903#0" expanded="true" />
+                    <element signature="e#3396#3397#0" expanded="true" />
+                    <element signature="e#3444#3445#0" expanded="true" />
+                    <element signature="e#3579#3580#0" expanded="true" />
+                    <element signature="e#3627#3628#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PointButton.java" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="PointButton.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4519941" vertical-offset="0" max-vertical-offset="677">
-                  <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+                  <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
                   <folding>
                     <element signature="e#364#365#0" expanded="true" />
                     <element signature="e#397#398#0" expanded="true" />
@@ -119,11 +119,11 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="Cellpath.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="Cellpath.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-2.0886264" vertical-offset="1907" max-vertical-offset="3553">
-                  <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+                <state vertical-scroll-proportion="1.8537666" vertical-offset="938" max-vertical-offset="3553">
+                  <caret line="132" column="37" selection-start-line="132" selection-start-column="37" selection-end-line="132" selection-end-column="37" />
                   <folding>
                     <element signature="e#2150#2151#0" expanded="true" />
                     <element signature="e#2179#2180#0" expanded="true" />
@@ -207,9 +207,9 @@
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Pack.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelect.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
-        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
+        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" />
       </list>
     </option>
   </component>
@@ -650,12 +650,12 @@
       <workItem from="1410886606004" duration="11491000" />
       <workItem from="1410905703676" duration="47000" />
       <workItem from="1410906645146" duration="52508000" />
-      <workItem from="1411163961599" duration="15070000" />
+      <workItem from="1411163961599" duration="15460000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101474000" />
+    <option name="totallyTimeSpent" value="101864000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -677,7 +677,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32489452" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25632912" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25632912" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1144,27 +1144,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="379" max-vertical-offset="2431">
-          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+        <state vertical-scroll-proportion="1.8537666" vertical-offset="938" max-vertical-offset="3553">
+          <caret line="132" column="37" selection-start-line="132" selection-start-column="37" selection-end-line="132" selection-end-column="37" />
           <folding>
-            <element signature="e#2565#2566#0" expanded="true" />
-            <element signature="e#2611#2612#0" expanded="true" />
-            <element signature="e#2654#2655#0" expanded="true" />
-            <element signature="e#2702#2703#0" expanded="true" />
-            <element signature="e#3181#3182#0" expanded="true" />
-            <element signature="e#3229#3230#0" expanded="true" />
-            <element signature="e#3359#3360#0" expanded="true" />
-            <element signature="e#3407#3408#0" expanded="true" />
+            <element signature="e#2150#2151#0" expanded="true" />
+            <element signature="e#2179#2180#0" expanded="true" />
+            <element signature="e#2224#2225#0" expanded="true" />
+            <element signature="e#2260#2261#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4519941" vertical-offset="0" max-vertical-offset="677">
-          <caret line="18" column="26" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="e#364#365#0" expanded="true" />
             <element signature="e#397#398#0" expanded="true" />
@@ -1172,15 +1168,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java">
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.0886264" vertical-offset="1907" max-vertical-offset="3553">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        <state vertical-scroll-proportion="2.688253" vertical-offset="408" max-vertical-offset="2601">
+          <caret line="129" column="7" selection-start-line="129" selection-start-column="7" selection-end-line="129" selection-end-column="7" />
           <folding>
-            <element signature="e#2150#2151#0" expanded="true" />
-            <element signature="e#2179#2180#0" expanded="true" />
-            <element signature="e#2224#2225#0" expanded="true" />
-            <element signature="e#2260#2261#0" expanded="true" />
+            <element signature="e#2665#2666#0" expanded="true" />
+            <element signature="e#2711#2712#0" expanded="true" />
+            <element signature="e#2854#2855#0" expanded="true" />
+            <element signature="e#2902#2903#0" expanded="true" />
+            <element signature="e#3396#3397#0" expanded="true" />
+            <element signature="e#3444#3445#0" expanded="true" />
+            <element signature="e#3579#3580#0" expanded="true" />
+            <element signature="e#3627#3628#0" expanded="true" />
           </folding>
         </state>
       </provider>

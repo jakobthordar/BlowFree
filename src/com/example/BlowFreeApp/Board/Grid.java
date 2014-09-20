@@ -97,10 +97,20 @@ public class Grid {
         return cell;
     }
 
+    /**
+     * Get x index in pixels
+     * @param x index
+     * @return x in pixel format
+     */
     private static int getColumnPos(int x) {
         return x * cellWidth + padLeft;
     }
 
+    /**
+     * Get y index in pixels
+     * @param y index
+     * @return y in pixel format
+     */
     private static int getRowPos(int y) {
         return y * cellHeight + padRight;
     }
@@ -112,7 +122,7 @@ public class Grid {
      * @return returns point representing the column and row index
      */
     public PointButton getCellIndex(int x, int y) {
-        Coordinate point = new Coordinate(getColumn(x), getRow(y));
+        Coordinate point = new Coordinate(getColumnIndex(x), getRowIndex(y));
 
         return new PointButton(point);
     }
@@ -122,7 +132,7 @@ public class Grid {
      * @param x in pixels
      * @return column index
      */
-    private int getColumn(int x) {
+    private int getColumnIndex(int x) {
         return (x - padLeft) / cellWidth;
     }
 
@@ -131,7 +141,7 @@ public class Grid {
      * @param y in pixels
      * @return row index
      */
-    private int getRow(int y) {
+    private int getRowIndex(int y) {
         return (y - padTop) / cellHeight;
     }
 }
