@@ -1,5 +1,6 @@
 package com.example.BlowFreeApp.activities;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.example.BlowFreeApp.*;
+import com.example.BlowFreeApp.GameInfo;
+import com.example.BlowFreeApp.Global;
+import com.example.BlowFreeApp.PackLevels;
+import com.example.BlowFreeApp.R;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -19,88 +23,93 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelSelectorRegular extends Activity{
+public class LevelSelectorRegular extends Activity {
 
-    List<Pack> mPacks = new ArrayList<Pack>();
+    private List<PackLevels> mPacks = new ArrayList<PackLevels>();
     private Global mGlobals = Global.getInstance();
+    private List<GameInfo> mGameInfo = new ArrayList<GameInfo>();
+    private int sizeOfBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level);
+        setContentView(R.layout.activity_level_selector);
         Intent intent = getIntent();
 
-        try{
-            readPack(getAssets().open("packs/packs.xml"), mPacks);
-            List<Pack> packs = new ArrayList<Pack>();
-            readPack(getAssets().open("packs/packs.xml"), packs);
-            mGlobals.mPacks = packs;
-        }
-        catch ( Exception e){
-            System.out.println("could not read pack");
-        }
-
-        ArrayList<String> array = new ArrayList<String>();
-
-        // TO DO put descritpoin in list also
-        for(Pack p: mGlobals.mPacks){
-            array.add(p.getName());
+        try {
+            readPackFoLevels(getAssets().open("packs/regular.xml"), mPacks);
+            List<PackLevels> packs = new ArrayList<PackLevels>();
+            readPackFoLevels(getAssets().open("packs/regular.xml"), packs);
+            mGlobals.mPacksLevels = packs;
+        } catch (Exception e) {
+            System.out.println("could not read fle regular.xml");
         }
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, array);
-
-        ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(adapter);
+        ArrayAdapter<PackLevels> adapt = new ArrayAdapter<PackLevels>(this,
+                android.R.layout.simple_list_item_1, mPacks);
 
 
+        ListView listView = (ListView) findViewById(R.id.listLevel);
+        listView.setAdapter(adapt);
 
         listView.setOnItemClickListener(mMessageClickedHandler);
-
     }
 
-    /**
-     * Create a message handling object as an anonymous class.
-     */
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
-            if(id == 0){
-                regularPack(v);
+            if (id <= 9) {
+                sizeOfBoard = 5;
             }
-            if(id == 1){
-                maniaPack(v);
+            if (id > 9) {
+                sizeOfBoard = 6;
             }
+            startLevel(id);
         }
     };
 
-    public void maniaPack(View v){
-        Intent intent = new Intent(this, LevelSelectorMania.class);
-        startActivity(intent);
+    public void startLevel(long id){
+        Intent myIntent = new Intent(this, Game.class);
+        //pass to game activity
+
+        // got in trouble passing long with intents
+        int lId;
+        lId = (int) id;
+        // Need id of game
+
+
+        // set gameinstance info so the Board can get
+        // info on what board it should draw
+        GameInfo g = new GameInfo(sizeOfBoard, lId);
+        mGameInfo.add(g);
+        mGlobals.mGameInfo = mGameInfo;
+        startActivity(myIntent);
     }
 
+    private void readPackFoLevels(InputStream is, List<PackLevels> packs) {
 
-
-    public void regularPack(View view){
-        Intent intent = new Intent(this, PackageSelect.class);
-        startActivity(intent);
-    }
-
-    private void readPack( InputStream is, List<Pack> packs) {
         try {
+
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse( is );
-            NodeList nList = doc.getElementsByTagName( "pack" );
-            for ( int c=0; c<nList.getLength(); ++c ) {
-                Node nNode = nList.item(c);
-                if ( nNode.getNodeType() == Node.ELEMENT_NODE ) {
-                    Element eNode = (Element) nNode;
-                    String name = eNode.getElementsByTagName( "name" ).item(0).getFirstChild().getNodeValue();
-                    String description = eNode.getElementsByTagName( "description" ).item(0).getFirstChild().getNodeValue();
-                    String file = eNode.getElementsByTagName( "file" ).item(0).getFirstChild().getNodeValue();
-                    packs.add( new Pack( name, description, file ) );
+            NodeList cList = doc.getElementsByTagName("challenge");
 
+            // i = 0 5x5 i = 1 = 6x6
+            for(int i = 0; i< cList.getLength(); ++i) {
+                Node cNode = cList.item(i);
+                Element challenge = (Element) cNode;
+                String name = challenge.getAttribute("name");
+
+                NodeList n = cNode.getChildNodes();
+
+                for (int c = 0; c < n.getLength(); ++c) {
+                    Node nNode = n.item(c);
+                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element eNode = (Element) nNode;
+                        String id = eNode.getAttribute("id");
+                        packs.add(new PackLevels(id, name));
+                    }
                 }
             }
         }
@@ -108,8 +117,6 @@ public class LevelSelectorRegular extends Activity{
             System.out.println("Could not read the pack, in readPack()");
         }
     }
-    //</editor-fold>
-
-
-
 }
+
+

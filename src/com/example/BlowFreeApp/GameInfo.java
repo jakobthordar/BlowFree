@@ -4,6 +4,7 @@ public class GameInfo {
 
     int size;
     int id;
+
     public GameInfo(int size, int id) {
         this.size = size;
         this.id = id;

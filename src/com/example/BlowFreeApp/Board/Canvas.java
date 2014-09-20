@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Canvas extends View {
-    private final int NUM_CELLS = 5;
+    private int NUM_CELLS;
 
     private Grid grid;
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
@@ -36,8 +36,6 @@ public class Canvas extends View {
 
     private Global mGlobals = Global.getInstance();
 
-    String boardCoordinates;
-
     /**
      * Constructor for the Board context.
      * @param context I don't know what this is.
@@ -46,10 +44,8 @@ public class Canvas extends View {
     public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        grid = new Grid(NUM_CELLS, NUM_CELLS);
-        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
 
-        PointButton point_a = new PointButton(new Coordinate(0, 0));
+        /*PointButton point_a = new PointButton(new Coordinate(0, 0));
         PointButton point_b = new PointButton(new Coordinate(1, 2));
 
         Cellpath cellPath_a = new Cellpath(point_a, point_b, Color.RED);
@@ -58,13 +54,8 @@ public class Canvas extends View {
         PointButton point_d = new PointButton(new Coordinate(3, 2));
         Cellpath cellPath_b = new Cellpath(point_c, point_d, Color.BLUE);
 
-        PointButton point_e = new PointButton(new Coordinate(0, 4));
-        PointButton point_f = new PointButton(new Coordinate(4, 3));
-        Cellpath cellPath_c = new Cellpath(point_e, point_f, Color.GREEN);
-
-        m_cellPaths.add(cellPath_a);
         m_cellPaths.add(cellPath_b);
-        m_cellPaths.add(cellPath_c);
+        m_cellPaths.add(cellPath_c); */
 
         // get info from globals to make board */
 
@@ -72,8 +63,12 @@ public class Canvas extends View {
         GameInfo game = g.get(g.size() - 1);
         sizeOfBoard = game.getSize();
         idForBoard = game.getId();
+        NUM_CELLS = sizeOfBoard;
 
-        System.out.println(sizeOfBoard + "******");
+        grid = new Grid(NUM_CELLS, NUM_CELLS);
+        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
+
+        System.out.println("Size of board: " + sizeOfBoard);
         // next call a function here and extract the info needed to
         // draw the board
 
@@ -97,7 +92,10 @@ public class Canvas extends View {
         }
     }
 
-    // read board info from xml
+    /**
+     * This function reads the XML to be able to aquire the correct board to draw
+     * and that boards flows.
+     */
     public void getInfoForBoardDrawing(InputStream is,int size,int idForBoard){
 
         // fix for reading xml file
@@ -141,6 +139,7 @@ public class Canvas extends View {
                         // compare size also &&
                         if( tempId == idForBoard && tempSize == sizeOfBoard){
                             // TO DO GET THE board from elment flows
+                            String boardCoordinates;
                             boardCoordinates = eNode.getElementsByTagName( "flows" ).item(0).getFirstChild().getNodeValue();
                             trimString(boardCoordinates);
                         }
@@ -154,9 +153,15 @@ public class Canvas extends View {
 
     }
 
-    public List<Coordinate> trimString(String coordinates){
+    /**
+     * This function trims the flow string received from the xml
+     * and creates cellpaths according to that.
+     * @param coordinates
+     */
+    public void trimString(String coordinates){
+        System.out.println("Inside trimString");
 
-        List<Coordinate> coordinatesToDraw = new ArrayList<Coordinate>();
+        List<PointButton> coordinatesToDraw = new ArrayList<PointButton>();
         String[] parts = coordinates.split(",");
 
         int X1, Y1,X2,Y2 ;
@@ -179,14 +184,37 @@ public class Canvas extends View {
             X2 = Integer.parseInt(c);
             Y2 = Integer.parseInt(d);
 
-            //Coordinate coord1 = new Coordinate(X1,Y1);
-            //Coordinate coord2 = new Coordinate(X2,Y2);
-            // coordinatesToDraw.add(coord1);
-            // coordinatesToDraw.add(coord2);
-
+            Coordinate coord1 = new Coordinate(X1,Y1);
+            Coordinate coord2 = new Coordinate(X2,Y2);
+            coordinatesToDraw.add(new PointButton(coord1));
+            coordinatesToDraw.add(new PointButton(coord2));
         }
 
-        return null;
+
+        if (coordinatesToDraw.get(0) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(0), coordinatesToDraw.get(1), Color.GREEN);
+            m_cellPaths.add(cellPath);
+        }
+        if (coordinatesToDraw.get(2) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(2), coordinatesToDraw.get(3), Color.RED);
+            m_cellPaths.add(cellPath);
+        }
+        if (coordinatesToDraw.get(4) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(4), coordinatesToDraw.get(5), Color.BLUE);
+            m_cellPaths.add(cellPath);
+        }
+        if (coordinatesToDraw.get(6) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(6), coordinatesToDraw.get(7), Color.YELLOW);
+            m_cellPaths.add(cellPath);
+        }
+        if (coordinatesToDraw.get(8) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(8), coordinatesToDraw.get(9), Color.CYAN);
+            m_cellPaths.add(cellPath);
+        }
+        if (coordinatesToDraw.get(10) != null) {
+            Cellpath cellPath = new Cellpath(coordinatesToDraw.get(10), coordinatesToDraw.get(11), Color.MAGENTA);
+            m_cellPaths.add(cellPath);
+        }
     }
 
     @Override

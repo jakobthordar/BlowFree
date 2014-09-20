@@ -63,6 +63,7 @@ public class LevelSelectorMania extends Activity {
            startLevelMania(id);
         }
     };
+
     public void startLevelMania(long id){
 
         Intent intent = new Intent(this, Game.class);
