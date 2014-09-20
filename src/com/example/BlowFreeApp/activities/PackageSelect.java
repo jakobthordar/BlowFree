@@ -23,7 +23,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelSelect extends Activity {
+public class PackageSelect extends Activity {
 
     List<PackLevels> mPacks = new ArrayList<PackLevels>();
     private Global mGlobals = Global.getInstance();
@@ -57,22 +57,22 @@ public class LevelSelect extends Activity {
         listView.setOnItemClickListener(mMessageClickedHandler);
     }
 
-        private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
+    private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
+        public void onItemClick(AdapterView parent, View v, int position, long id) {
 
 
-                // levels numberes from 0 - 9 are 5 by 5
-                if(id <= 9){
-                    sizeOfBoard = 5;
-                }
-                // levels numbered above 9 are 6 by 6
-                if(id > 9  && id <= 11){
-                    sizeOfBoard = 6;
-                }
-
-                startLevel(id);
+            // levels numberes from 0 - 9 are 5 by 5
+            if(id <= 9){
+                sizeOfBoard = 5;
             }
-        };
+            // levels numbered above 9 are 6 by 6
+            if(id > 9  && id <= 11){
+                sizeOfBoard = 6;
+            }
+
+            startLevel(id);
+        }
+    };
 
     public void startLevel(long id){
         Intent myIntent = new Intent(this, Game.class);

@@ -17,7 +17,7 @@
         <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
         <activity android:name=".activities.Game" android:label="BlowFree"></activity>
         <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
-        <activity android:name=".activities.LevelSelect" android:label="BlowFree"></activity>
+        <activity android:name=".activities.PackageSelect" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
     </application>
 </manifest>

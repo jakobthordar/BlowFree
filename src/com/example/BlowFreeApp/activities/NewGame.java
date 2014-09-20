@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.example.BlowFreeApp.R;
 
 /**
+ * NOT USED
  * Created by oen on 11.9.2014.
  */
 public class NewGame extends Activity {

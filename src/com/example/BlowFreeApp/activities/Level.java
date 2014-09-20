@@ -24,8 +24,6 @@ public class Level extends Activity{
     List<Pack> mPacks = new ArrayList<Pack>();
     private Global mGlobals = Global.getInstance();
 
-
-    //<editor-fold desc="Reading pack from XML and listing it to the view">
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,42 +59,35 @@ public class Level extends Activity{
         listView.setOnItemClickListener(mMessageClickedHandler);
 
     }
-    //</editor-fold>
 
-
-    //<editor-fold desc="Calling the levels activity ">
-    // Create a message handling object as an anonymous class.
+    /**
+     * Create a message handling object as an anonymous class.
+     */
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
-
             if(id == 0){
-                LevelOne(v);
+                regularPack(v);
             }
             if(id == 1){
-                levelMania(v);
+                maniaPack(v);
             }
-
         }
     };
 
-    public void levelMania(View v){
+    public void maniaPack(View v){
         Intent intent = new Intent(this, LevelSelectorMania.class);
         startActivity(intent);
     }
 
 
 
-    public void LevelOne(View view){
-        Intent intent = new Intent(this, LevelSelect.class);
+    public void regularPack(View view){
+        Intent intent = new Intent(this, PackageSelect.class);
         startActivity(intent);
     }
-    //</editor-fold>
 
-
-    //<editor-fold desc="Read pack function">
     private void readPack( InputStream is, List<Pack> packs) {
         try {
-
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse( is );
