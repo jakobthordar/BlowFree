@@ -98,7 +98,6 @@ public class onTouch {
                                                  // Move is Valid if :
         return  path.isActive()               && // 1. Path is active
                !path.isFinished()             && // 2. Path is not finished
-               // !path.isEmpty()                && // 3. Path is not empty
                !isInPath(move, path, paths);     // 4. Touched cell is path
     }
 
