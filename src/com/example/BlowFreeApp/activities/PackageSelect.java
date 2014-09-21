@@ -1,6 +1,7 @@
 package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,7 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackageSelect extends Activity{
+public class PackageSelect extends ListActivity {
 
     List<Pack> mPacks = new ArrayList<Pack>();
     private Global mGlobals = Global.getInstance();

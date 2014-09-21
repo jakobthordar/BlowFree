@@ -2,6 +2,7 @@ package com.example.BlowFreeApp.activities;
 
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelSelectorRegular extends Activity {
+public class LevelSelectorRegular extends ListActivity {
 
     private List<PackLevels> mPacks = new ArrayList<PackLevels>();
     private Global mGlobals = Global.getInstance();
