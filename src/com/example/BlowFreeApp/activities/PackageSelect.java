@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PackageSelect extends ListActivity {
+public class PackageSelect extends Activity {
 
     List<Pack> mPacks = new ArrayList<Pack>();
     private Global mGlobals = Global.getInstance();

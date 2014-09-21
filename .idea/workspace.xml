@@ -25,7 +25,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4916211-c9fd-48a8-b2a4-b7bee9affdc8" name="Default" comment="adding XML parsing and all the views.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BlowFreeApp.iws" />
@@ -73,10 +74,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="GameStatus.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="GameStatus.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.6593674" vertical-offset="222" max-vertical-offset="731">
+                <state vertical-scroll-proportion="0.0" vertical-offset="222" max-vertical-offset="731">
                   <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
                   <folding>
                     <element signature="e#972#1474#0" expanded="true" />
@@ -89,18 +90,18 @@
           <file leaf-file-name="LevelSelectorRegular.java" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1802">
-                  <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
+                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1802">
+                  <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="PackageSelect.java" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="PackageSelect.java" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1649">
-                  <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
+                <state vertical-scroll-proportion="0.49635038" vertical-offset="0" max-vertical-offset="1649">
+                  <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -259,13 +260,13 @@
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
-        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java" />
-        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java" />
+        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" />
+        <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" />
       </list>
     </option>
   </component>
@@ -851,16 +852,16 @@
       <workItem from="1411163961599" duration="15558000" />
       <workItem from="1411263593315" duration="111000" />
       <workItem from="1411335987286" duration="3123000" />
-      <workItem from="1411339229038" duration="2752000" />
+      <workItem from="1411339229038" duration="2896000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119031000" />
+    <option name="totallyTimeSpent" value="119175000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -872,12 +873,12 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39873418" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38070405" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38070405" sideWeight="0.41125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32464147" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38070405" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38070405" sideWeight="0.58875" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1282,14 +1283,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1649">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1326">
@@ -1304,14 +1297,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5729">
           <caret line="326" column="9" selection-start-line="326" selection-start-column="9" selection-end-line="326" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1802">
-          <caret line="26" column="45" selection-start-line="26" selection-start-column="45" selection-end-line="26" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1368,12 +1353,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6593674" vertical-offset="222" max-vertical-offset="731">
+        <state vertical-scroll-proportion="0.0" vertical-offset="222" max-vertical-offset="731">
           <caret line="36" column="86" selection-start-line="36" selection-start-column="86" selection-end-line="36" selection-end-column="86" />
           <folding>
             <element signature="e#972#1474#0" expanded="true" />
             <element signature="e#1463#1464#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1802">
+          <caret line="26" column="42" selection-start-line="26" selection-start-column="42" selection-end-line="26" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49635038" vertical-offset="0" max-vertical-offset="1649">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

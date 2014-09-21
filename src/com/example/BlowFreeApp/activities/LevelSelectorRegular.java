@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LevelSelectorRegular extends ListActivity {
+public class LevelSelectorRegular extends Activity {
 
     private List<PackLevels> mPacks = new ArrayList<PackLevels>();
     private Global mGlobals = Global.getInstance();
