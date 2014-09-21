@@ -10,6 +10,7 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import com.example.BlowFreeApp.Board.events.onTouch;
 import com.example.BlowFreeApp.GameInfo;
 import com.example.BlowFreeApp.Global;
 import org.w3c.dom.Document;
@@ -27,7 +28,11 @@ public class Canvas extends View {
     private int NUM_CELLS;
 
     private Grid grid;
+    private onTouch touchListner;
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
+
+    // Board style finals
+    private static final int POINT_PADDING = 25;
 
     /* changed for activities */
     int sizeOfBoard;
@@ -44,29 +49,19 @@ public class Canvas extends View {
     public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-
-        /*PointButton point_a = new PointButton(new Coordinate(0, 0));
-        PointButton point_b = new PointButton(new Coordinate(1, 2));
-
-        Cellpath cellPath_a = new Cellpath(point_a, point_b, Color.RED);
-
-        PointButton point_c = new PointButton(new Coordinate(4, 0));
-        PointButton point_d = new PointButton(new Coordinate(3, 2));
-        Cellpath cellPath_b = new Cellpath(point_c, point_d, Color.BLUE);
-
-        m_cellPaths.add(cellPath_b);
-        m_cellPaths.add(cellPath_c); */
-
-        // get info from globals to make board */
-
+        // get info from globals to make board
         g = mGlobals.mGameInfo;
         GameInfo game = g.get(g.size() - 1);
         sizeOfBoard = game.getSize();
         idForBoard = game.getId();
         NUM_CELLS = sizeOfBoard;
 
+        // Setup Grid
         grid = new Grid(NUM_CELLS, NUM_CELLS);
         grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
+
+        // Setup listener
+        touchListner = new onTouch(this);
 
         System.out.println("Size of board: " + sizeOfBoard);
         // next call a function here and extract the info needed to
@@ -223,6 +218,7 @@ public class Canvas extends View {
         int width  = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
         int height = getMeasuredHeight() - getPaddingTop() - getPaddingBottom();
         int size = Math.min(width, height);
+
         setMeasuredDimension( size + getPaddingLeft() + getPaddingRight(),
                 size + getPaddingTop() + getPaddingBottom() );
     }
@@ -233,8 +229,7 @@ public class Canvas extends View {
     }
 
     /**
-     * A helper function which simply draws all the board lines and the
-     * dots onto the screen. I don't expect this to change at all.
+     * Draws the board points in to the canvas
      * @param canvas Needs the canvas to be able to draw
      */
     public void drawPoints(android.graphics.Canvas canvas) {
@@ -249,7 +244,7 @@ public class Canvas extends View {
             y = cp.getPoint_a().getCoordinate().getRow();
 
             // Set bounding Rect
-            boundRect.set(grid.getCellRect(x, y));
+            boundRect.set(grid.getCellPoint(x, y, POINT_PADDING));
 
             // Draw Point A
             circle.setBounds(boundRect);
@@ -261,7 +256,7 @@ public class Canvas extends View {
             y = cp.getPoint_b().getCoordinate().getRow();
 
             // Set bounding Rect
-            boundRect.set(grid.getCellRect(x, y));
+            boundRect.set(grid.getCellPoint(x, y, POINT_PADDING));
 
             // Draw Point B
             circle.setBounds(boundRect);
@@ -276,10 +271,6 @@ public class Canvas extends View {
      * @param canvas
      */
     public void drawPaths(android.graphics.Canvas canvas) {
-        // TODO: Check if PointButton
-        // TODO: If PointButton draw from it and match it to the correct Cellpath
-
-        // Loop through all cellpaths
         for (Cellpath cp : m_cellPaths) {
             // Reset the path this cellpath has.
             cp.getThisPath().reset();
@@ -312,98 +303,40 @@ public class Canvas extends View {
         drawPaths(canvas);
     }
 
-    private boolean isAnotherPathsPoint(Coordinate coordinate, Cellpath cellpath) {
-        for (Cellpath cp : m_cellPaths) {
-            if (!cp.equals(cellpath)) {
-                if(cp.checkPointButtons(coordinate)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    public boolean checkWin(List<Cellpath> cellPath){
-        for(Cellpath c : cellPath){
-            if(!c.isFinished())
-                return false;
-        }
-        return true;
-    }
-
-    private boolean areNeighbours( int c1, int r1, int c2, int r2 ) {
-        return Math.abs(c1-c2) + Math.abs(r1-r2) == 1;
-    }
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Get the current coordinate the finger touched
         Coordinate coordinate = grid.getCellIndex((int) event.getX(), (int) event.getY()).coordinate;
 
-        if (coordinate.getCol() >= NUM_CELLS || coordinate.getRow() >= NUM_CELLS ) {
+        // Check if the coordinate is on the board
+        if (coordinate.getCol() >= NUM_CELLS || coordinate.getRow() >= NUM_CELLS )
             return true;
-        }
-
-        // TODO: When already finished with a path, you should be able to reset it
-        // TODO: You should not be able to draw a path over another pats POINT
-        // TODO: When a path intersects another path cut off the other path
-        // TODO: Win state
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            for (Cellpath cp : m_cellPaths) {
-                // For each path, reset it if it isnt finished.
-                // Sets the cellPath as active if it has a point at the coordinates
-                cp.setActive(coordinate);
-
-                if (cp.isActive()) {
-                    cp.setStart(coordinate);
-
-                    if (!cp.isFinished()) {
-                        cp.reset();
-                        System.out.println("Not finished");
-                        cp.append(coordinate);
-                    }
-                    else {
-                        System.out.println("Already finished");
-                        cp.reset();
-                        cp.setFinished(false);
-                        cp.append(coordinate);
-                    }
-                }
-            }
-            invalidate();
+            touchListner.touchDown(coordinate, m_cellPaths);
         }
         else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            touchListner.touchMove(coordinate, m_cellPaths);
 
-            for (Cellpath cp : m_cellPaths) {
-                if (cp.isActive() && !cp.isFinished() && !cp.isEmpty() && !isAnotherPathsPoint(coordinate, cp)) {
-                    if (cp.checkIfEnd(coordinate)) {
-                        cp.setFinished(true);
-                        if(checkWin(m_cellPaths)){
-                            displayWinner();
-                        }
-                        System.out.println("Finished!");
-                    }
-
-                    List<Coordinate> coordinateList = cp.getCoordinates();
-                    Coordinate last = coordinateList.get(coordinateList.size() - 1);
-                    if (areNeighbours(last.getCol(), last.getRow(), coordinate.getCol(), coordinate.getRow())) {
-                        cp.append(new Coordinate(coordinate.getCol(), coordinate.getRow()));
-                        invalidate();
-                    }
-
-                    // TODO: Here we should check if this path intersects another path.
-                }
-            }
+            // Check for Win
+            if(isWin(m_cellPaths))
+                displayWinner();
         }
         else if(event.getAction() == MotionEvent.ACTION_UP) {
-            // TODO: Bad place is here
-            for (Cellpath cp : m_cellPaths) {
-                if (cp.isActive()) {
-                    cp.setActive(false);
-                }
-            }
+            touchListner.touchUp(m_cellPaths);
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if all paths have been connected
+     * @return if win
+     */
+    private boolean isWin(List<Cellpath> paths) {
+        for(Cellpath c : paths) {
+            if(!c.isFinished())
+                return false;
         }
 
         return true;

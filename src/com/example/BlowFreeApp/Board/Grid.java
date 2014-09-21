@@ -84,7 +84,21 @@ public class Grid {
     }
 
     /**
-     * Returns cell rect in pixels
+     * Returns cell rect in pixels according to point size
+     * @param x cell number index
+     * @param y row number index
+     * @return returns the cell as rectangle
+     */
+    public static Rect getCellPoint(int x, int y, int padding) {
+        Rect cell = getCellRect(x, y);
+
+        cell.set(cell.left + padding, cell.top + padding, cell.right - padding, cell.bottom - padding);
+
+        return cell;
+    }
+
+    /**
+     * Returns cell rect in pixels according to point size
      * @param x cell number index
      * @param y row number index
      * @return returns the cell as rectangle

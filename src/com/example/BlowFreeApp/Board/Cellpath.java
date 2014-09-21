@@ -44,7 +44,7 @@ public class Cellpath {
 
     /**
      * Draws the cellpath
-     * @param canvas
+     * @param canvas require to draw on board
      */
     public void draw(android.graphics.Canvas canvas) {
         Point center;
@@ -64,6 +64,10 @@ public class Cellpath {
         canvas.drawPath(path, paintPath);
     }
 
+    /**
+     * Highlight the current path
+     * @param canvas require to draw on board
+     */
     public void drawHighlight(android.graphics.Canvas canvas) {
         Rect cellRect;
         Coordinate cell;
@@ -88,16 +92,26 @@ public class Cellpath {
      * Sets the cellpath at these coordinates as active.
      * @param coordinate
      */
-    public void setActive(Coordinate coordinate) {
-        if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
-                point_a.getCoordinate().getRow() == coordinate.getRow()) {
-            this.active = true;
+    public boolean isPathActive(Coordinate coordinate) {
+        Coordinate lastPoint;
+
+        // Check point A and B
+        if(isPoint(coordinate))
+            return true;
+
+        // If the path is empty we are done
+        if(m_path.isEmpty()) return false;
+
+        lastPoint = m_path.get(m_path.size() - 1);
+
+        // Check last point in path
+        if(lastPoint.getCol() == coordinate.getCol() &&
+           lastPoint.getRow() == coordinate.getRow()) {
+
+            return true;
         }
 
-        if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
-                point_b.getCoordinate().getRow() == coordinate.getRow()) {
-            this.active = true;
-        }
+        return false;
     }
 
     /**
@@ -106,14 +120,16 @@ public class Cellpath {
      * @param coordinate Takes in a given coordinate.
      * @return
      */
-    public boolean checkPointButtons(Coordinate coordinate) {
-        if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
-                point_a.getCoordinate().getRow() == coordinate.getRow()) {
+    public boolean isPoint(Coordinate coordinate) {
+        if(point_a.getCoordinate().getCol() == coordinate.getCol() &&
+            point_a.getCoordinate().getRow() == coordinate.getRow()) {
+
             return true;
         }
 
-        if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
-                point_b.getCoordinate().getRow() == coordinate.getRow()) {
+        if(point_b.getCoordinate().getCol() == coordinate.getCol() &&
+            point_b.getCoordinate().getRow() == coordinate.getRow()) {
+
             return true;
         }
 
@@ -129,14 +145,16 @@ public class Cellpath {
      */
     public boolean checkIfEnd(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
-                point_a.getCoordinate().getRow() == coordinate.getRow() &&
-                !point_a.isStart()) {
+            point_a.getCoordinate().getRow() == coordinate.getRow() &&
+            !point_a.isStart()) {
+
             return true;
         }
 
         if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
-                point_b.getCoordinate().getRow() == coordinate.getRow() &&
-                !point_b.isStart()) {
+            point_b.getCoordinate().getRow() == coordinate.getRow() &&
+            !point_b.isStart()) {
+
             return true;
         }
 
@@ -151,14 +169,16 @@ public class Cellpath {
      */
     public void setStart(Coordinate coordinate) {
         if (point_a.getCoordinate().getCol() == coordinate.getCol() &&
-                point_a.getCoordinate().getRow() == coordinate.getRow()) {
+            point_a.getCoordinate().getRow() == coordinate.getRow()) {
+
             point_a.setStart(true);
             point_b.setStart(false);
             this.finished = false;
         }
 
         if (point_b.getCoordinate().getCol() == coordinate.getCol() &&
-                point_b.getCoordinate().getRow() == coordinate.getRow()) {
+            point_b.getCoordinate().getRow() == coordinate.getRow()) {
+
             point_b.setStart(true);
             point_a.setStart(false);
             this.finished = false;
