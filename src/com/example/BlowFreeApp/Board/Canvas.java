@@ -28,8 +28,10 @@ public class Canvas extends View {
     private int NUM_CELLS;
 
     private Grid grid;
-    private onTouch touchListner;
+    private onTouch touchListener;
     private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
+
+    private AlertDialog winWindow;
 
     // Board style finals
     private static final int POINT_PADDING = 25;
@@ -61,7 +63,7 @@ public class Canvas extends View {
         grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
 
         // Setup listener
-        touchListner = new onTouch(this);
+        touchListener = new onTouch(this);
 
         System.out.println("Size of board: " + sizeOfBoard);
         // next call a function here and extract the info needed to
@@ -275,14 +277,13 @@ public class Canvas extends View {
             // Reset the path this cellpath has.
             cp.getThisPath().reset();
 
-            // Only start drawing if the cellpath coordinate list is not empty.
-            if(cp.isEmpty()) continue;
-
-            cp.draw(canvas);
-
-            // If the path is finished we highlight it
-            if(cp.isFinished())
+            // If the path is active or finished we highlight it
+            if(!cp.isActive() || cp.isFinished())
                 cp.drawHighlight(canvas);
+
+            // Only start drawing if the cellpath coordinate list is not empty.
+            if(!cp.isEmpty())
+                cp.draw(canvas);
         }
     }
 
@@ -306,27 +307,40 @@ public class Canvas extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // Get the current coordinate the finger touched
-        Coordinate coordinate = grid.getCellIndex((int) event.getX(), (int) event.getY()).coordinate;
+        Coordinate cell = grid.getCellIndex((int) event.getX(), (int) event.getY()).coordinate;
 
         // Check if the coordinate is on the board
-        if (coordinate.getCol() >= NUM_CELLS || coordinate.getRow() >= NUM_CELLS )
+        if(!inCanvas(cell))
             return true;
 
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            touchListner.touchDown(coordinate, m_cellPaths);
-        }
-        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            touchListner.touchMove(coordinate, m_cellPaths);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP :
+                touchListener.touchUp(m_cellPaths);
+                break;
+            case MotionEvent.ACTION_DOWN :
+                touchListener.touchDown(cell, m_cellPaths);
+                break;
+            case MotionEvent.ACTION_MOVE :
+                touchListener.touchMove(cell, m_cellPaths);
 
-            // Check for Win
-            if(isWin(m_cellPaths))
-                displayWinner();
-        }
-        else if(event.getAction() == MotionEvent.ACTION_UP) {
-            touchListner.touchUp(m_cellPaths);
+                // Check for Win
+                if(isWin(m_cellPaths))
+                    displayWinner();
         }
 
         return true;
+    }
+
+    /**
+     * Checks if the cell is on canvas
+     * @param cell clicked on cell
+     * @return is cell in canvas
+     */
+    private boolean inCanvas(Coordinate cell) {
+        return cell.getCol() <= NUM_CELLS &&
+                cell.getRow() <= NUM_CELLS &&
+                cell.getCol() >= 0         &&
+                cell.getRow() >= 0;
     }
 
     /**
@@ -343,7 +357,9 @@ public class Canvas extends View {
     }
 
     public void displayWinner() {
-        new AlertDialog.Builder(getContext())
+        if(winWindow != null) return;
+
+        winWindow = new AlertDialog.Builder(getContext())
                 .setTitle("OMG YOU WON")
                 .setMessage("You must have an IQ above 145, at least!")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
