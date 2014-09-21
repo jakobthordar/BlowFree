@@ -24,17 +24,17 @@ public class GameStatus extends ListActivity {
         Cursor cursor = mSA.queryStudents();
         String cols[] = DbHelper.TableGamestatusCols;
         String from[] = { cols[1], cols[2], cols[3] };
-        int to[] = { R.id.s_sid, R.id.s_name, R.id.s_cool };
+        //int to[] = { R.id.s_sid, R.id.s_name, R.id.s_cool };
         startManagingCursor( cursor );
-        mCA = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to );
+        //mCA = new SimpleCursorAdapter(this, R.layout.row, cursor, from, to );
 
         mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 if ( columnIndex == 3 ) {
-                    ((ImageView)view).setImageResource(
+                    /*((ImageView)view).setImageResource(
                             (cursor.getInt(columnIndex) == 0) ?
-                                    R.drawable.emo_im_sad : R.drawable.emo_im_cool );
+                                    R.drawable.emo_im_sad : R.drawable.emo_im_cool );*/
                     return true;
                 }
                 return false;
