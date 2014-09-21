@@ -104,7 +104,7 @@ public class onTouch {
     /**
      * Checks is the two points are adjacent
      * @param cellA Cell A
-     * @param cellB Cell B
+     * @param cellBl B
      * @return if cells are neighbours
      */
     private boolean isNeighbours(Coordinate cellA, Coordinate cellB) {

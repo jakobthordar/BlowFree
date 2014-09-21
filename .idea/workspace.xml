@@ -25,9 +25,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4916211-c9fd-48a8-b2a4-b7bee9affdc8" name="Default" comment="adding XML parsing and all the views.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatus.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
@@ -96,11 +93,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="onTouch.java" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="onTouch.java" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.61445785" vertical-offset="1173" max-vertical-offset="2227">
-                  <caret line="99" column="75" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
+                <state vertical-scroll-proportion="0.40963855" vertical-offset="1173" max-vertical-offset="2227">
+                  <caret line="91" column="35" selection-start-line="91" selection-start-column="35" selection-end-line="91" selection-end-column="35" />
                   <folding />
                 </state>
               </provider>
@@ -122,11 +119,11 @@
                   </provider>
                 </entry>
               </file>
-              <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="true">
+              <file leaf-file-name="workspace.xml" pinned="false" current="true" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.67469877" vertical-offset="20122" max-vertical-offset="21029">
-                      <caret line="1210" column="17" selection-start-line="1210" selection-start-column="17" selection-end-line="1210" selection-end-column="17" />
+                    <state vertical-scroll-proportion="0.4186747" vertical-offset="18711" max-vertical-offset="19618">
+                      <caret line="1117" column="21" selection-start-line="1117" selection-start-column="21" selection-end-line="1117" selection-end-column="21" />
                       <folding />
                     </state>
                   </provider>
@@ -212,8 +209,8 @@
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
       </list>
     </option>
   </component>
@@ -305,54 +302,6 @@
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="Board" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Board" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="events" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="activities" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -368,38 +317,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value=".idea" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -719,12 +636,12 @@
       <workItem from="1411163961599" duration="15558000" />
       <workItem from="1411263593315" duration="111000" />
       <workItem from="1411316170375" duration="10788000" />
-      <workItem from="1411330073929" duration="22000" />
+      <workItem from="1411330073929" duration="243000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123966000" />
+    <option name="totallyTimeSpent" value="124187000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1210,18 +1127,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.67469877" vertical-offset="20122" max-vertical-offset="21029">
-          <caret line="1210" column="17" selection-start-line="1210" selection-start-column="17" selection-end-line="1210" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.40963855" vertical-offset="1173" max-vertical-offset="2227">
+          <caret line="91" column="35" selection-start-line="91" selection-start-column="35" selection-end-line="91" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java">
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61445785" vertical-offset="1173" max-vertical-offset="2227">
-          <caret line="99" column="75" selection-start-line="99" selection-start-column="75" selection-end-line="99" selection-end-column="75" />
+        <state vertical-scroll-proportion="0.4186747" vertical-offset="18711" max-vertical-offset="19618">
+          <caret line="1117" column="21" selection-start-line="1117" selection-start-column="21" selection-end-line="1117" selection-end-column="21" />
           <folding />
         </state>
       </provider>
