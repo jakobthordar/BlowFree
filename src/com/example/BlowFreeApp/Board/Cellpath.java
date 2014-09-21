@@ -116,13 +116,7 @@ public class Cellpath {
         lastPoint = m_path.get(m_path.size() - 1);
 
         // Check last point in path
-        if(lastPoint.getCol() == coordinate.getCol() &&
-           lastPoint.getRow() == coordinate.getRow()) {
-
-            return true;
-        }
-
-        return false;
+        return lastPoint.equalPos(coordinate);
     }
 
     public boolean isIntersected() { return isIntersected; }
@@ -132,21 +126,24 @@ public class Cellpath {
     }
 
     public void setIntersectionPath() {
-        this.m_path = pathIntersected;
+        this.m_path = (ArrayList<Coordinate>) pathIntersected.clone();
     }
 
     public boolean isIntersection(Cellpath path) {
         Coordinate intersectionPoint = null;
 
-        for (Coordinate cell : path.m_path) {
-            if (m_path.contains(cell)) {
+        for (Coordinate cell : m_path) {
+            if (path.m_path .contains(cell)) {
                 intersectionPoint = cell;
+                break;
             }
         }
 
         // if intersection point is found
         if (intersectionPoint != null) {
             pathIntersected = getIntersectionPath(intersectionPoint);
+            setFinished(false);
+
             return true;
         }
 

@@ -98,13 +98,13 @@ public class onTouch {
                                                  // Move is Valid if :
         return  path.isActive()               && // 1. Path is active
                !path.isFinished()             && // 2. Path is not finished
-               !isInPath(move, path, paths);     // 4. Touched cell is path
+               !isInPath(move, path, paths);     // 3. Touched cell is path
     }
 
     /**
      * Checks is the two points are adjacent
      * @param cellA Cell A
-     * @param cellBl B
+     * @param cellB Cell B
      * @return if cells are neighbours
      */
     private boolean isNeighbours(Coordinate cellA, Coordinate cellB) {

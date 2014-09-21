@@ -273,11 +273,18 @@ public class Canvas extends View {
      * @param canvas
      */
     public void drawPaths(android.graphics.Canvas canvas) {
+        Cellpath activePath = null;
+
         for (Cellpath cp : m_cellPaths) {
             // Reset the path this cellpath has.
             cp.getThisPath().reset();
 
-            // If the path is active or finished we highlight it
+            if(cp.isActive()) {
+                activePath = cp;
+                continue;
+            }
+
+            // If the path is not active or finished we highlight it
             if(!cp.isActive() || cp.isFinished())
                 cp.drawHighlight(canvas);
 
@@ -285,6 +292,9 @@ public class Canvas extends View {
             if(!cp.isEmpty())
                 cp.draw(canvas);
         }
+
+        if(activePath != null)
+            activePath.draw(canvas);
     }
 
     /**
@@ -337,8 +347,8 @@ public class Canvas extends View {
      * @return is cell in canvas
      */
     private boolean inCanvas(Coordinate cell) {
-        return cell.getCol() <= NUM_CELLS &&
-                cell.getRow() <= NUM_CELLS &&
+        return cell.getCol()  < NUM_CELLS &&
+                cell.getRow() < NUM_CELLS &&
                 cell.getCol() >= 0         &&
                 cell.getRow() >= 0;
     }
