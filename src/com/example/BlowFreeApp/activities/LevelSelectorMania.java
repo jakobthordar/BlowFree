@@ -1,66 +1,60 @@
 package com.example.BlowFreeApp.activities;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.*;
 import com.example.BlowFreeApp.GameInfo;
-import com.example.BlowFreeApp.Global;
-import com.example.BlowFreeApp.PackLevels;
+import com.example.BlowFreeApp.PackLevelFactory;
+import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
+import com.example.BlowFreeApp.database.DbHelper;
+import com.example.BlowFreeApp.database.GameStatusAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class LevelSelectorMania extends ListActivity {
 
-    List<PackLevels> mPacksMania = new ArrayList<PackLevels>();
-    private Global mGlobals = Global.getInstance();
+    List<Puzzle> mPacksMania = new ArrayList<Puzzle>();
     List<GameInfo> mGameI = new ArrayList<GameInfo>();
-
-    int sizeOfBoard;
+    private GameStatusAdapter adapter = new GameStatusAdapter(this);
+    private SimpleCursorAdapter mCA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level_mania);
-        Intent intent = getIntent();
+        //setContentView(R.layout.activity_level_mania);
+        //Intent intent = getIntent();
 
-        try {
-            readPackFoLevelsMania(getAssets().open("packs/mania.xml"), mPacksMania);
-            List<PackLevels> packsMania = new ArrayList<PackLevels>();
-            readPackFoLevelsMania(getAssets().open("packs/mania.xml"), packsMania);
-            mGlobals.mPacksLevels = packsMania;
-        } catch (Exception e) {
-            System.out.println("could not read fle regular.xml");
-        }
+        Cursor cursor = adapter.queryGameStatusMania();
+        String cols[] = DbHelper.TableGameStatusCols;
+        String from[] = { cols[1], cols[2], cols[3] };
+        int to[] = { R.id.listLevel};
 
-        ArrayAdapter<PackLevels> adapt = new ArrayAdapter<PackLevels>(this,
-                android.R.layout.simple_list_item_1, mPacksMania);
+        startManagingCursor( cursor );
+        mCA = new SimpleCursorAdapter(this, R.layout.activity_level_mania, cursor, from, to );
 
-
-        ListView listView = (ListView) findViewById(R.id.listLevelmania);
-        listView.setAdapter(adapt);
-
-        listView.setOnItemClickListener(mMessageClickedHandler);
+        mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                if ( columnIndex == 2 ) {
+                    ((ImageView)view).setImageResource(
+                            (cursor.getInt(columnIndex) == 0) ?
+                                    R.drawable.emo_im_sad : R.drawable.emo_im_cool );
+                    return true;
+                }
+                return false;
+            }
+        });
+        setListAdapter( mCA );
 
     }
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
            // size is always 7 for mania
-           sizeOfBoard = 7;
            startLevelMania(id);
         }
     };
@@ -71,44 +65,8 @@ public class LevelSelectorMania extends ListActivity {
         int levelId;
         levelId = (int) id;
 
-        GameInfo g = new GameInfo(sizeOfBoard,levelId);
-        mGameI.add(g);
-        mGlobals.mGameInfo = mGameI;
+        Puzzle activeGame = PackLevelFactory.getGameById(levelId);
+        PackLevelFactory.setActiveGame(activeGame);
         startActivity(intent);
-
-
     }
-
-    private void readPackFoLevelsMania(InputStream is, List<PackLevels> packs) {
-
-        try {
-
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse( is );
-            NodeList cList = doc.getElementsByTagName( "challenge" );
-
-            for(int i = 0; i< cList.getLength(); ++i) {
-                Node cNode = cList.item(i);
-                Element challenge = (Element) cNode;
-                String name = challenge.getAttribute("name");
-
-                NodeList n = cNode.getChildNodes();
-
-                for (int c = 0; c < n.getLength(); ++c) {
-                    Node nNode = n.item(c);
-                    if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eNode = (Element) nNode;
-                        String id = eNode.getAttribute("id");
-
-                        packs.add(new PackLevels(id,name));
-                    }
-                }
-            }
-        }
-        catch ( Exception e ) {
-            System.out.println("Could not read the pack, in readPack()");
-        }
-    }
-
 }

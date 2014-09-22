@@ -31,25 +31,9 @@ public class Cellpath {
     private boolean active;
     private boolean isIntersected;
 
-    public Cellpath(PointButton A, PointButton B, int color) {
+    public Cellpath(PointButton A, PointButton B) {
         this.point_a = A;
         this.point_b = B;
-        this.color = color;
-
-        // Set Color
-        paintPath.setColor(color);
-        paintHighlight.setColor(color);
-
-        // Cell path paint settings
-        paintPath.setStyle(Paint.Style.STROKE);
-        paintPath.setStrokeWidth(32);
-
-        paintPath.setStrokeCap(Paint.Cap.ROUND);
-        paintPath.setStrokeJoin(Paint.Join.ROUND);
-        paintPath.setAntiAlias(true);
-
-        // Set Cell Highlight paint
-        paintHighlight.setAlpha(80);
     }
 
     /**
@@ -250,6 +234,24 @@ public class Cellpath {
 
     public int getColor() {
         return color;
+    }
+
+    public void setColor(int color) {
+        // Set Color
+        this.color = color;
+        paintPath.setColor(color);
+        paintHighlight.setColor(color);
+
+        // Cell path paint settings
+        paintPath.setStyle(Paint.Style.STROKE);
+        paintPath.setStrokeWidth(32);
+
+        paintPath.setStrokeCap(Paint.Cap.ROUND);
+        paintPath.setStrokeJoin(Paint.Join.ROUND);
+        paintPath.setAntiAlias(true);
+
+        // Set Cell Highlight paint
+        paintHighlight.setAlpha(80);
     }
 
     public Path getThisPath() {

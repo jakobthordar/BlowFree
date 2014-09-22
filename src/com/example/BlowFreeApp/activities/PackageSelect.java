@@ -1,7 +1,6 @@
 package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,8 +21,7 @@ import java.util.List;
 
 public class PackageSelect extends Activity {
 
-    List<Pack> mPacks = new ArrayList<Pack>();
-    private Global mGlobals = Global.getInstance();
+    private List<Pack> mPacks = new ArrayList<Pack>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,20 +29,10 @@ public class PackageSelect extends Activity {
         setContentView(R.layout.activity_level);
         Intent intent = getIntent();
 
-        try{
-            readPack(getAssets().open("packs/packs.xml"), mPacks);
-            List<Pack> packs = new ArrayList<Pack>();
-            readPack(getAssets().open("packs/packs.xml"), packs);
-            mGlobals.mPacks = packs;
-        }
-        catch ( Exception e){
-            System.out.println("could not read pack");
-        }
-
         ArrayList<String> array = new ArrayList<String>();
 
         // TO DO put descritpoin in list also
-        for(Pack p: mGlobals.mPacks){
+        for(Pack p : PackLevelFactory.getPacks()){
             array.add(p.getName());
         }
 

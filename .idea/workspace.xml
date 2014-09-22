@@ -39,17 +39,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4916211-c9fd-48a8-b2a4-b7bee9affdc8" name="Default" comment="adding XML parsing and all the views.">
-      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\res\layout\activity_game" afterPath="" />
-      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\res\layout\activity_game_instances" afterPath="" />
-      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\res\layout\activity_new_game" afterPath="" />
-      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\res\layout\activity_settings" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/Thumbs.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-ldpi/Thumbs.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/Thumbs.db" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/emo_im_cool.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/emo_im_sad.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/CellpathColors.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/PackLevelFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Puzzle.java" />
+      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\src\com\example\BlowFreeApp\Global.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\src\com\example\BlowFreeApp\PackLevels.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\src\com\example\BlowFreeApp\ReadXML.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\cygwin64\home\Oli\Java\android\BlowFree\src\com\example\BlowFreeApp\database\GameStatus.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Coordinate.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Coordinate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/GameInstances.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/GameInstances.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Global.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Global.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Grid.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" />
@@ -60,10 +69,12 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Settings.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Settings.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_game.xml" afterPath="$PROJECT_DIR$/res/layout/activity_game.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_level.xml" afterPath="$PROJECT_DIR$/res/layout/activity_level.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_level_mania.xml" afterPath="$PROJECT_DIR$/res/layout/activity_level_mania.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_level_selector.xml" afterPath="$PROJECT_DIR$/res/layout/activity_level_selector.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/packs/mania.xml" afterPath="$PROJECT_DIR$/assets/packs/mania.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -91,8 +102,8 @@
       <file leaf-file-name="Canvas.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6171">
-              <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="697" max-vertical-offset="4199">
+              <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -126,12 +137,12 @@
       </file>
       <file leaf-file-name="activity_game.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
           </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1139">
-              <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.37058" vertical-offset="0" max-vertical-offset="1071">
+              <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -140,8 +151,18 @@
       <file leaf-file-name="Game.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
-              <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="391">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="13770" max-vertical-offset="20009">
+              <caret line="816" column="17" selection-start-line="816" selection-start-column="17" selection-end-line="816" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -202,7 +223,6 @@
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelect.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/events/onTouch.java" />
-        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Coordinate.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/events/onTouch.java" />
@@ -210,6 +230,7 @@
         <option value="$PROJECT_DIR$/res/layout/activity_game1.xml" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
         <option value="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java" />
+        <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_game.xml" />
       </list>
     </option>
@@ -233,7 +254,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="0" />
+    <option name="STATE" value="2" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -248,7 +269,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -264,68 +285,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Board" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFree" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="BlowFreeApp" />
-              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activities" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -363,7 +322,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -682,12 +641,13 @@
       <workItem from="1411330073929" duration="6071000" />
       <workItem from="1411356077407" duration="2860000" />
       <workItem from="1411401413568" duration="1187000" />
-      <workItem from="1411404648812" duration="7134000" />
+      <workItem from="1411404648812" duration="7351000" />
+      <workItem from="1411412059622" duration="144000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="141196000" />
+    <option name="totallyTimeSpent" value="141557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -726,13 +686,13 @@
     <layout-to-restore>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.121875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -750,8 +710,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3284055" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2154171" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -783,6 +743,44 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_new_game.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="357">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="391">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="12886" max-vertical-offset="19210">
+          <caret line="758" column="12" selection-start-line="758" selection-start-column="12" selection-end-line="758" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/PointButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="846">
@@ -953,13 +951,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/PackLevels.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="510">
-          <caret line="8" column="47" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3006431" vertical-offset="0" max-vertical-offset="1632">
@@ -1002,24 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Global.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56838906" vertical-offset="0" max-vertical-offset="658">
-          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/GameInfo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.56838906" vertical-offset="0" max-vertical-offset="658">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59789157" vertical-offset="18711" max-vertical-offset="19618">
-          <caret line="1124" column="19" selection-start-line="1124" selection-start-column="19" selection-end-line="1124" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1156,27 +1133,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6171">
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="4080">
+          <caret line="41" column="30" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
-          <caret line="20" column="36" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="391">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="13770" max-vertical-offset="20009">
+          <caret line="816" column="17" selection-start-line="816" selection-start-column="17" selection-end-line="816" selection-end-column="17" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_game.xml">
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="1139">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.37058" vertical-offset="0" max-vertical-offset="1071">
+          <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="15" />
           <folding />
         </state>
       </provider>
