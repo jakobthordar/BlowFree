@@ -14,11 +14,16 @@ import java.util.List;
  */
 public class onTouch {
     private View view;
-
+    
     public onTouch(View board) {
         this.view = board;
     }
 
+    /**
+     * Fires on touch down
+     * @param cell Cell touched down
+     * @param paths All paths on the board
+     */
     public void touchDown(Coordinate cell, List<Cellpath> paths) {
         for (Cellpath cp : paths) {
             cp.setActive(cp.isPathActive(cell));
@@ -41,6 +46,10 @@ public class onTouch {
         view.invalidate();
     }
 
+    /**
+     * Fires on touchUp
+     * @param paths All paths on the board
+     */
     public void touchUp(List<Cellpath> paths) {
 
         // Remove active on touchUp
@@ -55,6 +64,11 @@ public class onTouch {
         view.invalidate();
     }
 
+    /**
+     * Fires on touchMove
+     * @param cell Cell touched on
+     * @param paths All paths on the board
+     */
     public void touchMove(Coordinate cell, List<Cellpath> paths) {
         List<Coordinate> coordinateList;
         Coordinate last;
@@ -78,6 +92,11 @@ public class onTouch {
         }
     }
 
+    /**
+     * Set the path intersection
+     * @param path Current path being moved
+     * @param paths All board paths
+     */
     private void setIntersection(Cellpath path, List<Cellpath> paths) {
         for(Cellpath cp : paths) {
             // Ignore path that is active

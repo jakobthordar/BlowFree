@@ -270,7 +270,7 @@ public class Canvas extends View {
     /**
      * Draws board paths.
      * Highlights paths that are finished
-     * @param canvas
+     * @param canvas We need the canvas for a context to be able to draw.
      */
     public void drawPaths(android.graphics.Canvas canvas) {
         Cellpath activePath = null;
