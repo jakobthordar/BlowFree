@@ -146,6 +146,7 @@ public class Canvas extends View {
             if(!cp.isActive() || cp.isFinished())
                 cp.drawHighlight(canvas);
 
+
             // Only start drawing if the cellpath coordinate list is not empty.
             if(!cp.isEmpty())
                 cp.draw(canvas);
@@ -194,7 +195,8 @@ public class Canvas extends View {
                 // Check for Win
                 if(isWin(m_cellPaths))
                     displayWinner();
-        }
+
+            }
 
         return true;
     }
@@ -226,7 +228,6 @@ public class Canvas extends View {
 
     public void displayWinner() {
         if(winWindow != null) return;
-
         winWindow = new AlertDialog.Builder(getContext())
                 .setTitle("OMG YOU WON")
                 .setMessage("You must have an IQ above 145, at least!")
@@ -237,5 +238,7 @@ public class Canvas extends View {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
+        PackLevelFactory.getSoundPlayer().playWin();
     }
+
 }

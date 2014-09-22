@@ -15,6 +15,8 @@ public class MainMenu extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         PackLevelFactory packLevelFactory = new PackLevelFactory(this);
+
+        PackLevelFactory.getSoundPlayer().playTheme();
     }
 
     public void newGame(View view){
