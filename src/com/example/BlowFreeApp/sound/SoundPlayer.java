@@ -9,29 +9,29 @@ import com.example.BlowFreeApp.R;
 public class SoundPlayer {
 
     Context context;
-    MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayerWin;
+    MediaPlayer mediaPlayerConnect;
+    MediaPlayer mediaPlayerTheme;
     public SoundPlayer(Context c)
     {
         this.context = c;
     }
 
     public void playConnect(){
-        mediaPlayer = MediaPlayer.create(context, R.raw.connect);
-        mediaPlayer.start();
+        mediaPlayerConnect = MediaPlayer.create(context, R.raw.connect);
+        mediaPlayerConnect.start();
     }
-
     public void playWin(){
-        mediaPlayer = MediaPlayer.create(context, R.raw.win);
-        mediaPlayer.start();
+        mediaPlayerWin = MediaPlayer.create(context, R.raw.win);
+        mediaPlayerWin.start();
         Vibrator v = (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
         v.vibrate(500);
     }
     public void playTheme(){
-        mediaPlayer = MediaPlayer.create(context, R.raw.theme);
-        mediaPlayer.start();
+        mediaPlayerTheme = MediaPlayer.create(context, R.raw.theme);
+        mediaPlayerTheme.start();
     }
-    public void stopTheme(){
-        mediaPlayer = MediaPlayer.create(context, R.raw.theme);
-        mediaPlayer.stop();
+    public MediaPlayer getThemePlayer(){
+        return mediaPlayerTheme;
     }
 }
