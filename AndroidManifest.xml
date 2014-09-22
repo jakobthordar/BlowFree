@@ -19,6 +19,8 @@
         <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
+        <activity android:name=".settings.GameSettings" android:label="Settings"/>
+
     </application>
     <uses-permission android:name="android.permission.VIBRATE" />
 </manifest>
