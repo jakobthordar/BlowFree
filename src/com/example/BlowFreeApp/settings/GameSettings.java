@@ -2,10 +2,12 @@ package com.example.BlowFreeApp.settings;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.widget.CheckBox;
 import android.widget.Toast;
 import com.example.BlowFreeApp.PackLevelFactory;
@@ -13,7 +15,6 @@ import com.example.BlowFreeApp.R;
 import com.example.BlowFreeApp.sound.SoundPlayer;
 
 public class GameSettings extends PreferenceActivity {
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,9 +34,6 @@ public class GameSettings extends PreferenceActivity {
                 }else{
                     PackLevelFactory.getSoundPlayer().playTheme();
                 }
-
-
-
                 return false;
             }
         });
