@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical" >
+
+    <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.26"
+            android:shrinkColumns="1"
+            android:stretchColumns="1" >
+
+        <TableRow>
+            <TextView
+                    android:id="@+id/lvl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="level 1" android:textStyle="bold" android:textSize="26dp"
+                    android:textIsSelectable="true" android:layout_marginLeft="20dp"/>
+            <TextView
+                    android:id="@+id/boardSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5x5"
+                    android:alpha = ".5"
+                    android:paddingBottom="0dp" android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp" android:textSize="20dp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:id="@+id/connected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="flows: "
+                    android:paddingBottom="0dp" android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5dp" android:textSize="14dp" android:layout_column="0"/>
+        </TableRow>
+    </TableLayout>
+
+    <TableRow android:layout_width="match_parent" android:layout_height="wrap_content">
+    </TableRow>
+    <com.example.BlowFreeApp.Board.Canvas
+            android:id="@+id/surface"
+            android:layout_width="match_parent"
+            android:background="#444444"
+            android:layout_height="353dp"
+            android:layout_weight="0.30" android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" android:layout_marginBottom="5dp"/>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reset" />
+
+</LinearLayout>
