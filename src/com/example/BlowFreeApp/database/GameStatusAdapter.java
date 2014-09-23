@@ -35,43 +35,64 @@ public class GameStatusAdapter {
         db.close();
     }
 
-    public long insertGameStatus( int gid, boolean finished, int type) {
+    public long insertGameStatusRegular( int gid, boolean finished, String name) {
+        String[] cols = DbHelper.TableGameStatusCols;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put( cols[1], ((Integer)gid).toString() );
+        contentValues.put( cols[2], finished ? "1" : "0" );
+        contentValues.put( cols[3], name);
+        openToWrite();
+        long value = db.insert(DbHelper.TableGameStatusRegular, null, contentValues );
+        close();
+        return value;
+    }
+    public long insertGameStatusMania( int gid, boolean finished, String name) {
+        String[] cols = DbHelper.TableGameStatusCols;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put( cols[1], ((Integer)gid).toString() );
+        contentValues.put( cols[2], finished ? "1" : "0" );
+        contentValues.put( cols[3], name);
+        openToWrite();
+        long value = db.insert(DbHelper.TableGameStatusMania, null, contentValues );
+        close();
+        return value;
+    }
+
+    public long updateGameStatusRegular( int gid, boolean finished, int type ) {
         String[] cols = DbHelper.TableGameStatusCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put( cols[1], ((Integer)gid).toString() );
         contentValues.put( cols[2], finished ? "1" : "0" );
         contentValues.put( cols[3],  ((Integer)type).toString());
         openToWrite();
-        long value = db.insert(DbHelper.TableGameStatus, null, contentValues );
+        long value = db.update(DbHelper.TableGameStatusRegular, contentValues, cols[1] + gid, null );
         close();
         return value;
     }
 
-    public long updateGameStatus( int gid, boolean finished, int type ) {
+    public long updateGameStatusMania( int gid, boolean finished, int type ) {
         String[] cols = DbHelper.TableGameStatusCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put( cols[1], ((Integer)gid).toString() );
         contentValues.put( cols[2], finished ? "1" : "0" );
         contentValues.put( cols[3],  ((Integer)type).toString());
         openToWrite();
-        long value = db.update(DbHelper.TableGameStatus, contentValues, cols[1] + gid, null );
+        long value = db.update(DbHelper.TableGameStatusMania, contentValues, cols[1] + gid, null );
         close();
         return value;
     }
 
-    public Cursor queryGameStatus() {
+    public Cursor queryGameStatusRegular() {
         openToRead();
-        Cursor cursor = db.query( DbHelper.TableGameStatus,
+        Cursor cursor = db.query( DbHelper.TableGameStatusRegular,
                 DbHelper.TableGameStatusCols, null, null, null, null, null);
         return cursor;
     }
 
-    public Cursor queryGameStatus( int sid) {
+    public Cursor queryGameStatusMania() {
         openToRead();
-        String[] cols = DbHelper.TableGameStatusCols;
-        Cursor cursor = db.query( DbHelper.TableGameStatus,
-                cols, cols[1] + "" + sid, null, null, null, null);
+        Cursor cursor = db.query( DbHelper.TableGameStatusMania,
+                DbHelper.TableGameStatusCols, null, null, null, null, null);
         return cursor;
     }
-
 }

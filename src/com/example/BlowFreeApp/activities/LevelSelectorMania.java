@@ -29,7 +29,7 @@ public class LevelSelectorMania extends ListActivity {
         //setContentView(R.layout.activity_level_mania);
         //Intent intent = getIntent();
 
-        Cursor cursor = adapter.queryGameStatus();
+        Cursor cursor = adapter.queryGameStatusMania();
         String cols[] = DbHelper.TableGameStatusCols;
         String from[] = { cols[1], cols[2], cols[3] };
         int to[] = { R.id.listLevel};

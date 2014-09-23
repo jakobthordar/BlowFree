@@ -131,7 +131,7 @@ public class PackLevelFactory {
                         String temp = puzzle.getElementsByTagName("flows").item(0).getFirstChild().getNodeValue();
                         cellpaths = trimString(temp);
                         packs.add(new Puzzle(name, challengeId, puzzleId, size, cellpaths));
-                        //gameStatusAdapter.insertGameStatus(0, false, name);
+                        insertIntoTable(name, puzzleId, size);
                    }
                 }
             }
@@ -141,6 +141,22 @@ public class PackLevelFactory {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void insertIntoTable(String name, int puzzleId, int size) {
+        // EASY
+        if (size == 5) {
+            gameStatusAdapter.insertGameStatusRegular(puzzleId, false, name);
+        }
+        // MEDIUM
+        if (size == 6) {
+            gameStatusAdapter.insertGameStatusRegular(puzzleId, false, name);
+
+        }
+        // HARD
+        if (size == 7) {
+            gameStatusAdapter.insertGameStatusMania(puzzleId, false, name);
         }
     }
 
@@ -193,6 +209,10 @@ public class PackLevelFactory {
      */
     public static Puzzle getGameById(int id) {
         return regularLevels.get(id);
+    }
+
+    public static GameStatusAdapter getGameStatusAdapter() {
+        return gameStatusAdapter;
     }
 
     public static List<Pack> getPacks() {
