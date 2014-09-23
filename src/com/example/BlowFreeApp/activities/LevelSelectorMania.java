@@ -50,7 +50,6 @@ public class LevelSelectorMania extends ListActivity {
             }
         });
         setListAdapter( mCA );
-
     }
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
