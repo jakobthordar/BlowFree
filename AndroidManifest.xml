@@ -5,19 +5,25 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
-        <activity android:name=".activities.MainMenu"
-                  android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".activities.PackageSelect" android:label="BlowFree"></activity>
-        <activity android:name=".activities.Settings" android:label="BlowFree"></activity>
-        <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
-        <activity android:name=".activities.Game" android:label="BlowFree"></activity>
-        <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
-        <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
-        <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
-    </application>
+    <activity android:name=".activities.MainMenu"
+              android:label="@string/app_name">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+    </activity>
+    <activity android:name=".activities.PackageSelect" android:label="BlowFree"></activity>
+    <activity android:name=".activities.Settings" android:label="BlowFree"></activity>
+    <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
+    <activity android:name=".activities.Game" android:label="BlowFree"></activity>
+    <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
+    <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
+    <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
+</application>
+    <supports-screens android:resizeable="true"
+                      android:smallScreens="true"
+                      android:normalScreens="true"
+                      android:largeScreens="true"
+
+                      android:anyDensity="true" />
 </manifest>
