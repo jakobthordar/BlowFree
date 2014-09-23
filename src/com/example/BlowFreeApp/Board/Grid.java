@@ -89,7 +89,7 @@ public class Grid {
      * @param y row number index
      * @return returns the cell as rectangle
      */
-    public static Rect getCellPoint(int x, int y, int padding) {
+    public Rect getCellPoint(int x, int y, int padding) {
         Rect cell = getCellRect(x, y);
 
         cell.set(cell.left + padding, cell.top + padding, cell.right - padding, cell.bottom - padding);

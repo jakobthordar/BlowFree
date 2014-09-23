@@ -14,11 +14,16 @@ import java.util.List;
  */
 public class onTouch {
     private View view;
-
+    
     public onTouch(View board) {
         this.view = board;
     }
 
+    /**
+     * Fires on touch down
+     * @param cell Cell touched down
+     * @param paths All paths on the board
+     */
     public void touchDown(Coordinate cell, List<Cellpath> paths) {
         for (Cellpath cp : paths) {
             cp.setActive(cp.isPathActive(cell));
@@ -41,23 +46,35 @@ public class onTouch {
         view.invalidate();
     }
 
+    /**
+     * Fires on touchUp
+     * @param paths All paths on the board
+     */
     public void touchUp(List<Cellpath> paths) {
 
         // Remove active on touchUp
         for (Cellpath cp : paths) {
-            if (cp.isActive()) {
-                cp.setActive(false);
-            }
+            if(cp.isIntersected())
+                cp.setIntersectionPath();
+
+            cp.setActive(false);
+            cp.setIntersection(false);
         }
 
+        view.invalidate();
     }
 
+    /**
+     * Fires on touchMove
+     * @param cell Cell touched on
+     * @param paths All paths on the board
+     */
     public void touchMove(Coordinate cell, List<Cellpath> paths) {
         List<Coordinate> coordinateList;
         Coordinate last;
 
         for (Cellpath cp : paths) {
-            if (isValidMove(cp, paths, cell)) {
+            if(isValidMove(cp, paths, cell)) {
 
                 if (cp.checkIfEnd(cell))
                     cp.setFinished(true);
@@ -65,32 +82,52 @@ public class onTouch {
                 coordinateList = cp.getCoordinates();
                 last = coordinateList.get(coordinateList.size() - 1);
 
-                if (isNeighbours(last.getCol(), last.getRow(), cell.getCol(), cell.getRow())) {
+                if (isNeighbours(last, cell)) {
                     cp.append(new Coordinate(cell.getCol(), cell.getRow()));
                     view.invalidate();
                 }
+
+                setIntersection(cp, paths);
             }
         }
     }
 
-    private boolean isValidMove(Cellpath path, List<Cellpath> paths, Coordinate cell) {
-                                                // Move is Valid if :
-        return path.isActive()               && // 1. Path is active
-               !path.isFinished()            && // 2. Path is not finished
-               !path.isEmpty()               && // 3. Path is not empty
-               !isInPath(cell, path, paths);    // 4. Touched cell is path
+    /**
+     * Set the path intersection
+     * @param path Current path being moved
+     * @param paths All board paths
+     */
+    private void setIntersection(Cellpath path, List<Cellpath> paths) {
+        for(Cellpath cp : paths) {
+            // Ignore path that is active
+            if(cp.equals(path)) continue;
+
+            cp.setIntersection(cp.isIntersection(path));
+        }
+    }
+
+    /**
+     * Checks if next move is valid
+     * @param path Path begin moved
+     * @param paths All paths on the board
+     * @param move Move being validate
+     * @return if move is valid
+     */
+    private boolean isValidMove(Cellpath path, List<Cellpath> paths, Coordinate move) {
+                                                 // Move is Valid if :
+        return  path.isActive()               && // 1. Path is active
+               !path.isFinished()             && // 2. Path is not finished
+               !isInPath(move, path, paths);     // 3. Touched cell is path
     }
 
     /**
      * Checks is the two points are adjacent
-     * @param c1 Point C x
-     * @param r1 Point R x
-     * @param c2 Point C y
-     * @param r2 Point R y
-     * @return if points are neighbours
+     * @param cellA Cell A
+     * @param cellB Cell B
+     * @return if cells are neighbours
      */
-    private boolean isNeighbours(int c1, int r1, int c2, int r2) {
-        return Math.abs(c1-c2) + Math.abs(r1-r2) == 1;
+    private boolean isNeighbours(Coordinate cellA, Coordinate cellB) {
+        return Math.abs(cellA.getCol() - cellB.getCol()) + Math.abs(cellA.getRow() - cellB.getRow()) == 1;
     }
 
     /**

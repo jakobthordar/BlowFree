@@ -21,6 +21,15 @@ public class Coordinate {
         return m_row;
     }
 
+    public boolean equalPos(Coordinate cell) {
+        return cell.getCol() == m_col && cell.getRow() == m_row;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + m_col + ", " + m_row + ")";
+    }
+
     @Override
     public boolean equals( Object other ) {
         if ( !(other instanceof Coordinate) ) {

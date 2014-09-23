@@ -10,23 +10,30 @@ import java.util.List;
  * Created by yngvi on 5.9.2014.
  */
 public class Cellpath {
-
+    // Paths of coordinates
     private ArrayList<Coordinate> m_path = new ArrayList<Coordinate>();
+    private ArrayList<Coordinate> pathIntersected = new ArrayList<Coordinate>();
+
+    // End points
     private PointButton point_a;
     private PointButton point_b;
+
+    // Paint Objects
     private Paint paintPath  = new Paint();
     private Paint paintHighlight = new Paint();
-    private Paint paintPoint = new Paint();
-    private Path path = new Path();
+    private Path drawPath = new Path();
+
+    // Path and Point color
     private int color;
+
+    // Boolean representing path state
     private boolean finished;
     private boolean active;
+    private boolean isIntersected;
 
     public Cellpath(PointButton A, PointButton B) {
         this.point_a = A;
         this.point_b = B;
-        this.color = color;
-
     }
 
     /**
@@ -35,20 +42,21 @@ public class Cellpath {
      */
     public void draw(android.graphics.Canvas canvas) {
         Point center;
-        Coordinate cell = m_path.get(0);
+        ArrayList<Coordinate> path = (isIntersected) ? pathIntersected : m_path;
+        Coordinate cell = path.get(0);
 
         // Get and set the paths starting point
         center = Grid.getCellCenter(cell.getCol(), cell.getRow());
-        path.moveTo(center.x, center.y);
+        drawPath.moveTo(center.x, center.y);
 
-        for(int i = 1; i < m_path.size(); ++i) {
+        for(int i = 1; i < path.size(); ++i) {
             cell = m_path.get(i);
             center = Grid.getCellCenter(cell.getCol(), cell.getRow());
 
-            path.lineTo(center.x, center.y);
+            drawPath.lineTo(center.x, center.y);
         }
 
-        canvas.drawPath(path, paintPath);
+        canvas.drawPath(drawPath, paintPath);
     }
 
     /**
@@ -92,13 +100,54 @@ public class Cellpath {
         lastPoint = m_path.get(m_path.size() - 1);
 
         // Check last point in path
-        if(lastPoint.getCol() == coordinate.getCol() &&
-           lastPoint.getRow() == coordinate.getRow()) {
+        return lastPoint.equalPos(coordinate);
+    }
+
+    public boolean isIntersected() { return isIntersected; }
+
+    public void setIntersection(boolean intersection) {
+        this.isIntersected = intersection;
+    }
+
+    public void setIntersectionPath() {
+        this.m_path = (ArrayList<Coordinate>) pathIntersected.clone();
+    }
+
+    public boolean isIntersection(Cellpath path) {
+        Coordinate intersectionPoint = null;
+
+        for (Coordinate cell : m_path) {
+            if (path.m_path .contains(cell)) {
+                intersectionPoint = cell;
+                break;
+            }
+        }
+
+        // if intersection point is found
+        if (intersectionPoint != null) {
+            pathIntersected = getIntersectionPath(intersectionPoint);
+            setFinished(false);
 
             return true;
         }
 
         return false;
+    }
+
+    private ArrayList<Coordinate> getIntersectionPath(Coordinate intersect) {
+        ArrayList<Coordinate> sectionPath = (ArrayList<Coordinate>) m_path.clone();
+        Coordinate cell;
+
+        for(int i = 0; i < m_path.size(); i++) {
+            cell = sectionPath.get(sectionPath.size() - 1);
+            sectionPath.remove(sectionPath.size() - 1);
+
+            if(cell.equals(intersect)) {
+                break;
+            }
+        }
+
+        return sectionPath;
     }
 
     /**
@@ -174,6 +223,7 @@ public class Cellpath {
 
     public void setFinished(boolean isFinished) {
         this.finished = isFinished;
+
         this.point_a.setStart(false);
         this.point_b.setStart(false);
     }
@@ -205,11 +255,7 @@ public class Cellpath {
     }
 
     public Path getThisPath() {
-        return path;
-    }
-
-    public void setThisPath(Path thisPath) {
-        this.path = thisPath;
+      return drawPath;
     }
 
     public void append(Coordinate co) {
@@ -242,6 +288,8 @@ public class Cellpath {
     }
 
     public boolean isEmpty() {
-        return m_path.isEmpty();
+        ArrayList<Coordinate> path = (isIntersected) ? pathIntersected : m_path;
+
+        return path.size() <= 1;
     }
 }
