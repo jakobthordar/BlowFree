@@ -19,6 +19,7 @@
         <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
+        <activity android:name=".settings.GameSettings" android:label="Settings"/>
     </application>
     <supports-screens android:resizeable="true"
                       android:smallScreens="true"
