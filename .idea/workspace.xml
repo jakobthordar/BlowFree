@@ -24,23 +24,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.example.BlowFreeApp" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4916211-c9fd-48a8-b2a4-b7bee9affdc8" name="Default" comment="adding XML parsing and all the views.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/CellpathColors.java" />
-      <change type="DELETED" beforePath="C:\Users\Kobblander\IdeaProjects\BlowFreeBetter\src\com\example\BlowFreeApp\ReadXML.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Kobblander\IdeaProjects\BlowFreeBetter\src\com\example\BlowFreeApp\database\GameStatus.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Users\Kobblander\IdeaProjects\BlowFreeBetter\src\com\example\BlowFreeApp\Global.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/PackLevelFactory.java" />
-      <change type="MOVED" beforePath="C:\Users\Kobblander\IdeaProjects\BlowFreeBetter\src\com\example\BlowFreeApp\PackLevels.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Puzzle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Canvas.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Cellpath.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Coordinate.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/Board/Coordinate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/DbHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/database/GameStatusAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorMania.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/LevelSelectorRegular.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/MainMenu.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/MainMenu.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" afterPath="$PROJECT_DIR$/src/com/example/BlowFreeApp/activities/PackageSelect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/packs/mania.xml" afterPath="$PROJECT_DIR$/assets/packs/mania.xml" />
+    <list default="true" id="e4916211-c9fd-48a8-b2a4-b7bee9affdc8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="BlowFreeApp.iws" />
@@ -716,12 +700,17 @@
       <workItem from="1411335987286" duration="3123000" />
       <workItem from="1411339229038" duration="18930000" />
       <workItem from="1411406050550" duration="9412000" />
-      <workItem from="1411427466111" duration="2473000" />
+      <workItem from="1411427466111" duration="2577000" />
     </task>
+    <task id="LOCAL-00001" summary="Created a factory and changed files eeeeverywhere">
+      <created>1411431102113</created>
+      <updated>1411431102114</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147094000" />
+    <option name="totallyTimeSpent" value="147198000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -805,7 +794,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="adding XML parsing and all the views." />
-    <option name="LAST_COMMIT_MESSAGE" value="adding XML parsing and all the views." />
+    <MESSAGE value="Created a factory and changed files eeeeverywhere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a factory and changed files eeeeverywhere" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -872,6 +862,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="1207">
           <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
