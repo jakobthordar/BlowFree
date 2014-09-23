@@ -3,13 +3,11 @@ package com.example.BlowFreeApp.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import com.example.BlowFreeApp.Global;
+import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.R;
 
 
 public class Game extends Activity {
-
-    private Global mGlobals = Global.getInstance();
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {

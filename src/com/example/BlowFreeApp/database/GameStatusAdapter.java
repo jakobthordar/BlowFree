@@ -36,7 +36,7 @@ public class GameStatusAdapter {
     }
 
     public long insertGameStatus( int gid, boolean finished, int type) {
-        String[] cols = DbHelper.TableGamestatusCols;
+        String[] cols = DbHelper.TableGameStatusCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put( cols[1], ((Integer)gid).toString() );
         contentValues.put( cols[2], finished ? "1" : "0" );
@@ -48,7 +48,7 @@ public class GameStatusAdapter {
     }
 
     public long updateGameStatus( int gid, boolean finished, int type ) {
-        String[] cols = DbHelper.TableGamestatusCols;
+        String[] cols = DbHelper.TableGameStatusCols;
         ContentValues contentValues = new ContentValues();
         contentValues.put( cols[1], ((Integer)gid).toString() );
         contentValues.put( cols[2], finished ? "1" : "0" );
@@ -59,16 +59,16 @@ public class GameStatusAdapter {
         return value;
     }
 
-    public Cursor queryStudents() {
+    public Cursor queryGameStatus() {
         openToRead();
         Cursor cursor = db.query( DbHelper.TableGameStatus,
-                DbHelper.TableGamestatusCols, null, null, null, null, null);
+                DbHelper.TableGameStatusCols, null, null, null, null, null);
         return cursor;
     }
 
-    public Cursor queryStudent( int sid) {
+    public Cursor queryGameStatus( int sid) {
         openToRead();
-        String[] cols = DbHelper.TableGamestatusCols;
+        String[] cols = DbHelper.TableGameStatusCols;
         Cursor cursor = db.query( DbHelper.TableGameStatus,
                 cols, cols[1] + "" + sid, null, null, null, null);
         return cursor;

@@ -16,30 +16,17 @@ public class Cellpath {
     private PointButton point_b;
     private Paint paintPath  = new Paint();
     private Paint paintHighlight = new Paint();
+    private Paint paintPoint = new Paint();
     private Path path = new Path();
     private int color;
     private boolean finished;
     private boolean active;
 
-    public Cellpath(PointButton A, PointButton B, int color) {
+    public Cellpath(PointButton A, PointButton B) {
         this.point_a = A;
         this.point_b = B;
         this.color = color;
 
-        // Set Color
-        paintPath.setColor(color);
-        paintHighlight.setColor(color);
-
-        // Cell path paint settings
-        paintPath.setStyle(Paint.Style.STROKE);
-        paintPath.setStrokeWidth(32);
-
-        paintPath.setStrokeCap(Paint.Cap.ROUND);
-        paintPath.setStrokeJoin(Paint.Join.ROUND);
-        paintPath.setAntiAlias(true);
-
-        // Set Cell Highlight paint
-        paintHighlight.setAlpha(80);
     }
 
     /**
@@ -199,8 +186,22 @@ public class Cellpath {
         return color;
     }
 
-    public void setPaintPath(Paint paintPath) {
-        this.paintPath = paintPath;
+    public void setColor(int color) {
+        // Set Color
+        this.color = color;
+        paintPath.setColor(color);
+        paintHighlight.setColor(color);
+
+        // Cell path paint settings
+        paintPath.setStyle(Paint.Style.STROKE);
+        paintPath.setStrokeWidth(32);
+
+        paintPath.setStrokeCap(Paint.Cap.ROUND);
+        paintPath.setStrokeJoin(Paint.Join.ROUND);
+        paintPath.setAntiAlias(true);
+
+        // Set Cell Highlight paint
+        paintHighlight.setAlpha(80);
     }
 
     public Path getThisPath() {

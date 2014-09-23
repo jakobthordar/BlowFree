@@ -5,6 +5,9 @@ public class Coordinate {
     private int m_col;
     private int m_row;
 
+    public Coordinate() {
+    }
+
     public  Coordinate( int col, int row ) {
         m_col = col;
         m_row = row;

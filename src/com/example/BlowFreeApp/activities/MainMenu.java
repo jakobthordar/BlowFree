@@ -4,18 +4,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.R;
 
 
 public class MainMenu extends Activity {
 
-    public String EXTRA_MESSAGE = "level 1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        PackLevelFactory packLevelFactory = new PackLevelFactory(this);
     }
 
     public void newGame(View view){

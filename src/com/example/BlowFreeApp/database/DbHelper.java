@@ -12,15 +12,18 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "GAMESTATUS_DB";
     public static final int DB_VERSION = 1;
 
-    public static final String TableGameStatus = "gameStatus";
-    public static final String[] TableGamestatusCols = { "_id", "gid", "finished", "type" };
+
+    public static final String TableGameStatus = "gameStatusRegular";
+    public static final String TableGameStatusRegular = "gameStatusRegular";
+    public static final String TableGameStatusMania = "gameStatusMania";
+    public static final String[] TableGameStatusCols = { "_id", "gid", "finished", "type" };
 
     private static final String sqlCreateTableGameStatus =
-            "CREATE TABLE students(" +
+            "CREATE TABLE gameStatus(" +
                     " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " gid INTEGER NOT NULL," +
                     " finished INTEGER NOT NULL," +
-                    " type INTEGER NOT NULL" +
+                    " name TYPE INTEGER NOT NULL" +
                     ");";
 
     private static final String sqlDropTableGameStatus =
