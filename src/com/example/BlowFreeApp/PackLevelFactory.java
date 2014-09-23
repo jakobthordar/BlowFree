@@ -9,6 +9,7 @@ import com.example.BlowFreeApp.Board.Coordinate;
 import com.example.BlowFreeApp.Board.PointButton;
 import com.example.BlowFreeApp.activities.Pack;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
+import com.example.BlowFreeApp.sound.SoundPlayer;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -31,11 +32,13 @@ public class PackLevelFactory {
     private static GameStatusAdapter gameStatusAdapter;
     private static Puzzle activeGame;
     private static Context context;
+    private static SoundPlayer soundPlayer;
 
 
     public PackLevelFactory(Context c) {
         context = c;
         gameStatusAdapter = new GameStatusAdapter(c);
+        soundPlayer = new SoundPlayer(c);
         readRegular();
         readMania();
         readPacks();
@@ -213,6 +216,10 @@ public class PackLevelFactory {
 
     public static GameStatusAdapter getGameStatusAdapter() {
         return gameStatusAdapter;
+    }
+
+    public static SoundPlayer getSoundPlayer() {
+        return soundPlayer;
     }
 
     public static List<Pack> getPacks() {

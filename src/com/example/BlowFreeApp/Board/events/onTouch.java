@@ -3,6 +3,7 @@ package com.example.BlowFreeApp.Board.events;
 import android.view.View;
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.Board.Coordinate;
+import com.example.BlowFreeApp.PackLevelFactory;
 
 import java.util.List;
 
@@ -75,9 +76,10 @@ public class onTouch {
 
         for (Cellpath cp : paths) {
             if(isValidMove(cp, paths, cell)) {
-
-                if (cp.checkIfEnd(cell))
+                if (cp.checkIfEnd(cell)) {
                     cp.setFinished(true);
+                    PackLevelFactory.getSoundPlayer().playConnect();
+                }
 
                 coordinateList = cp.getCoordinates();
                 last = coordinateList.get(coordinateList.size() - 1);
@@ -86,7 +88,6 @@ public class onTouch {
                     cp.append(new Coordinate(cell.getCol(), cell.getRow()));
                     view.invalidate();
                 }
-
                 setIntersection(cp, paths);
             }
         }

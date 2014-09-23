@@ -1,6 +1,7 @@
 package com.example.BlowFreeApp.Board;
 
 import android.graphics.*;
+import com.example.BlowFreeApp.PackLevelFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -224,11 +225,14 @@ public class Cellpath {
     public void setFinished(boolean isFinished) {
         this.finished = isFinished;
 
+
+
         this.point_a.setStart(false);
         this.point_b.setStart(false);
     }
 
     public boolean isFinished() {
+
         return finished;
     }
 
