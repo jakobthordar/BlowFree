@@ -4,6 +4,7 @@ import android.view.View;
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.Board.Coordinate;
 import com.example.BlowFreeApp.PackLevelFactory;
+import com.example.BlowFreeApp.sound.SoundPlayer;
 
 import java.util.List;
 
@@ -84,7 +85,9 @@ public class onTouch {
 
                     if (cp.checkIfEnd(cell)) {
                         cp.setFinished(true);
-                        PackLevelFactory.getSoundPlayer().playConnect();
+                        // there where sound issues of we dont new sound class each time
+                        SoundPlayer p = new SoundPlayer(view.getContext());
+                        p.playConnect();
                     }
 
                     setIntersection(cp, paths);

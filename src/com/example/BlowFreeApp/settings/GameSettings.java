@@ -24,11 +24,13 @@ public class GameSettings extends PreferenceActivity {
                 CheckBoxPreference c = (CheckBoxPreference) preference;
                 if ((!c.isChecked())) {
 
-                    PackLevelFactory.getSoundPlayer().setBoolForSounds(false);
+                    PackLevelFactory.setBoolForSound(false);
+                   // PackLevelFactory.getSoundPlayer().setBoolForSounds(false);
 
                     return true;
                 }else{
-                    PackLevelFactory.getSoundPlayer().setBoolForSounds(true);
+                    PackLevelFactory.setBoolForSound(true);
+                   // PackLevelFactory.getSoundPlayer().setBoolForSounds(true);
                 }
                 return false;
             }

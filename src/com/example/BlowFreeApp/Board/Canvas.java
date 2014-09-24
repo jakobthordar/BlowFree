@@ -15,6 +15,7 @@ import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.activities.Game;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
+import com.example.BlowFreeApp.sound.SoundPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -236,7 +237,6 @@ public class Canvas extends View {
 
         return true;
     }
-
     /**
      * Counts how many path are connected
      * @return how many paths are connected
@@ -293,7 +293,9 @@ public class Canvas extends View {
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
-        PackLevelFactory.getSoundPlayer().playWin();
+        SoundPlayer sp = new SoundPlayer(getContext());
+        sp.playWin();
+        //PackLevelFactory.getSoundPlayer().playWin();
     }
 
 }

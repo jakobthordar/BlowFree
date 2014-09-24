@@ -35,7 +35,17 @@ public class PackLevelFactory {
     private static SoundPlayer soundPlayer;
     private static Game gameActivity;
 
+    private static boolean shouldBePlaying;
+
+    public static boolean getBoolForSound(){
+        return shouldBePlaying;
+    }
+    public static void setBoolForSound(boolean b){
+        shouldBePlaying = b;
+    }
+
     public PackLevelFactory(Context c) {
+        shouldBePlaying = true;
         context = c;
         gameStatusAdapter = new GameStatusAdapter(c);
         soundPlayer = new SoundPlayer(c);
