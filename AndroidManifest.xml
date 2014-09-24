@@ -17,8 +17,10 @@
         <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
         <activity android:name=".activities.Game" android:label="BlowFree"></activity>
         <activity android:name=".activities.GameInstances" android:label="BlowFree"></activity>
-        <activity android:name=".activities.LevelSelectorRegular" android:label="BlowFree"></activity>
-        <activity android:name=".activities.LevelSelectorMania" android:label="BlowFree"></activity>
+        <activity android:name=".activities.DifficultySelector" android:label="BlowFree"></activity>
+        <activity android:name=".activities.LevelSelectorEasy" android:label="BlowFree"></activity>
+        <activity android:name=".activities.LevelSelectorMedium" android:label="BlowFree"></activity>
+        <activity android:name=".activities.LevelSelectorHard" android:label="BlowFree"></activity>
     </application>
     <uses-permission android:name="android.permission.VIBRATE" />
 </manifest>

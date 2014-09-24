@@ -42,15 +42,4 @@
             <flows>(1 2 3 1), (0 1 4 4), (0 2 2 2), (0 4 3 2)</flows>
         </puzzle>
     </challenge>
-
-    <challenge id="2" name="6x6">
-        <puzzle id="1">
-            <size>6</size>
-            <flows>(2 3 4 0), (0 0 0 4), (2 5 5 0), (0 5 1 0), (2 4 4 1), (2 0 2 2)</flows>
-        </puzzle>
-        <puzzle id="2">
-            <size>6</size>
-            <flows>(1 4 3 2), (5 0 5 2), (2 0 5 3), (2 2 2 4), (1 0 5 4), (3 3 4 4)</flows>
-        </puzzle>
-    </challenge>
 </pack>

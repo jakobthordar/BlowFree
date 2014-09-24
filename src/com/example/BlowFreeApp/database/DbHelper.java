@@ -13,35 +13,48 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION = 1;
 
 
-    public static final String TableGameStatusRegular = "gameStatusRegular";
-    public static final String TableGameStatusMania = "gameStatusMania";
+    public static final String TableGameStatusEasy = "gameStatusEasy";
+    public static final String TableGameStatusMedium = "gameStatusMedium";
+    public static final String TableGameStatusHard = "gameStatusHard";
+
     /**
      * The cols are identical in the tables
      */
     public static final String[] TableGameStatusCols = { "_id", "gid", "finished", "name" };
 
 
-    private static final String sqlCreateTableGameStatusRegular =
-            "CREATE TABLE gameStatusRegular(" +
+    private static final String sqlCreateTableGameStatusEasy =
+            "CREATE TABLE gameStatusEasy(" +
                     " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " gid INTEGER NOT NULL," +
                     " finished INTEGER NOT NULL," +
                     " name TEXT" +
                     ");";
 
-    private static final String sqlCreateTableGameStatusMania =
-            "CREATE TABLE gameStatusMania(" +
+    private static final String sqlCreateTableGameStatusMedium =
+            "CREATE TABLE gameStatusMedium(" +
                     " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " gid INTEGER NOT NULL," +
                     " finished INTEGER NOT NULL," +
                     " name TEXT" +
                     ");";
 
-    private static final String sqlDropTableGameStatusRegular =
-            "DROP TABLE IF EXISTS gameStatusRegular;";
+    private static final String sqlCreateTableGameStatusHard =
+            "CREATE TABLE gameStatusHard(" +
+                    " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    " gid INTEGER NOT NULL," +
+                    " finished INTEGER NOT NULL," +
+                    " name TEXT" +
+                    ");";
 
-    private static final String sqlDropTableGameStatusMania =
-            "DROP TABLE IF EXISTS gameStatusMania;";
+    private static final String sqlDropTableGameStatusEasy =
+            "DROP TABLE IF EXISTS gameStatusEasy;";
+
+    private static final String sqlDropTableGameStatusMedium =
+            "DROP TABLE IF EXISTS gameStatusMedium;";
+
+    private static final String sqlDropTableGameStatusHard =
+            "DROP TABLE IF EXISTS gameStatusHard;";
 
     public DbHelper( Context context ) {
         super( context, DB_NAME, null, DB_VERSION );
@@ -49,14 +62,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL( sqlCreateTableGameStatusRegular );
-        db.execSQL( sqlCreateTableGameStatusMania );
+        db.execSQL( sqlCreateTableGameStatusEasy );
+        db.execSQL( sqlCreateTableGameStatusMedium );
+        db.execSQL( sqlCreateTableGameStatusHard );
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL( sqlDropTableGameStatusRegular );
-        db.execSQL( sqlDropTableGameStatusMania );
+        db.execSQL( sqlDropTableGameStatusEasy );
+        db.execSQL( sqlDropTableGameStatusMedium );
+        db.execSQL( sqlDropTableGameStatusHard );
         onCreate( db );
     }
 }

@@ -3,6 +3,7 @@ package com.example.BlowFreeApp.activities;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,12 +14,15 @@ import com.example.BlowFreeApp.R;
 
 import java.util.ArrayList;
 
-public class PackageSelect extends Activity {
+/**
+ * Created by Kobblander on 9/22/2014.
+ */
+public class DifficultySelector extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level);
+        //setContentView(R.layout.activity_level);
 
         ArrayList<String> array = new ArrayList<String>();
         array.add("Easy");
@@ -27,14 +31,11 @@ public class PackageSelect extends Activity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, array);
 
-        ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(mMessageClickedHandler);
+        setListAdapter(adapter);
+        getListView().setOnItemClickListener(mMessageClickedHandler);
+
     }
 
-    /**
-     * Create a message handling object as an anonymous class.
-     */
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
             if (id == 0) {
@@ -48,7 +49,6 @@ public class PackageSelect extends Activity {
             }
         }
     };
-
     public void easyPack(View v) {
         Intent intent = new Intent(this, LevelSelectorEasy.class);
         startActivity(intent);

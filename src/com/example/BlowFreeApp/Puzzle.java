@@ -4,6 +4,7 @@ package com.example.BlowFreeApp;
 
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.Board.Coordinate;
+import com.example.BlowFreeApp.database.DbHelper;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Puzzle {
     private int puzzleId;
     private int size;
     private List<Cellpath> cellPaths;
+    private String tableGameStatus;
 
 
     public Puzzle(String name, int challangeId, int puzzleId, int size,
@@ -22,6 +24,19 @@ public class Puzzle {
         this.puzzleId = puzzleId;
         this.size = size;
         this.cellPaths = cellPaths;
+        if (size == 5) {
+            this.tableGameStatus = DbHelper.TableGameStatusEasy;
+        }
+        if (size == 6) {
+            this.tableGameStatus = DbHelper.TableGameStatusMedium;
+        }
+        if (size == 7) {
+            this.tableGameStatus = DbHelper.TableGameStatusHard;
+        }
+    }
+
+    public String getTableGameStatus() {
+        return tableGameStatus;
     }
 
     public String getName() {
