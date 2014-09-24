@@ -16,13 +16,11 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String TableGameStatusEasy = "gameStatusEasy";
     public static final String TableGameStatusMedium = "gameStatusMedium";
     public static final String TableGameStatusHard = "gameStatusHard";
-    public static final String TableActiveGame = "activeGame";
 
     /**
      * The cols are identical in the tables
      */
     public static final String[] TableGameStatusCols = { "_id", "gid", "finished", "name" };
-    public static final String[] TableActiveGameCols = { "_id", "gid" };
 
 
     private static final String sqlCreateTableGameStatusEasy =
@@ -49,11 +47,6 @@ public class DbHelper extends SQLiteOpenHelper {
                     " name TEXT" +
                     ");";
 
-    private static final String sqlCreateTableActiveGame =
-            "CREATE TABLE activeGame(" +
-                    " _id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                    " gid INTEGER NOT NULL," +
-                    ");";
 
     private static final String sqlDropTableGameStatusEasy =
             "DROP TABLE IF EXISTS gameStatusEasy;";
@@ -64,8 +57,6 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String sqlDropTableGameStatusHard =
             "DROP TABLE IF EXISTS gameStatusHard;";
 
-    private static final String sqlDropTableActiveGame =
-            "DROP TABLE IF EXISTS activeGame;";
 
     public DbHelper( Context context ) {
         super( context, DB_NAME, null, DB_VERSION );
@@ -76,7 +67,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL( sqlCreateTableGameStatusEasy );
         db.execSQL( sqlCreateTableGameStatusMedium );
         db.execSQL( sqlCreateTableGameStatusHard );
-        db.execSQL( sqlCreateTableActiveGame );
     }
 
     @Override
@@ -84,7 +74,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL( sqlDropTableGameStatusEasy );
         db.execSQL( sqlDropTableGameStatusMedium );
         db.execSQL( sqlDropTableGameStatusHard );
-        db.execSQL( sqlDropTableActiveGame );
         onCreate( db );
     }
 }
