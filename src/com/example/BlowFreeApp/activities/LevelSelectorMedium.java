@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -79,6 +80,9 @@ public class LevelSelectorMedium extends Activity{
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 TextView tv;
                 tv = (TextView) view;
+                // Style
+                tv.setBackgroundResource(R.drawable.cell_border);
+                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
                     Integer i = cursor.getInt(1) + 1;

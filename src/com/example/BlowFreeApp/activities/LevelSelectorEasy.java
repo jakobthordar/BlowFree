@@ -6,8 +6,12 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
@@ -67,6 +71,7 @@ public class LevelSelectorEasy extends Activity {
         String cols[] = DbHelper.TableGameStatusCols;
         String from[] = { cols[1], cols[2], cols[3] };
         int to[] = { android.R.id.text1 , android.R.id.text1, android.R.id.text1 };
+
         cursor = db.queryGameStatus(DbHelper.TableGameStatusEasy);
         cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to);
         cursorAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
@@ -74,6 +79,10 @@ public class LevelSelectorEasy extends Activity {
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 TextView tv;
                 tv = (TextView) view;
+
+                // Style
+                tv.setBackgroundResource(R.drawable.cell_border);
+                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
                     Integer i = cursor.getInt(1) + 1;

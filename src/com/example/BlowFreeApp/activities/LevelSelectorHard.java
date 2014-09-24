@@ -1,11 +1,11 @@
 package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
-import android.app.ListActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -16,9 +16,6 @@ import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
 import com.example.BlowFreeApp.database.DbHelper;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class LevelSelectorHard extends Activity {
@@ -47,6 +44,9 @@ public class LevelSelectorHard extends Activity {
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 TextView tv;
                 tv = (TextView) view;
+                // Style
+                tv.setBackgroundResource(R.drawable.cell_border);
+                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
                     Integer i = cursor.getInt(1) + 1;
