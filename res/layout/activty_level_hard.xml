@@ -15,7 +15,7 @@
             android:columnWidth="90dp"
             android:numColumns="3"
             android:verticalSpacing="20dp"
-            android:horizontalSpacing="10dp"
+            android:horizontalSpacing="20dp"
             android:stretchMode="columnWidth"
             android:layout_alignParentEnd="false" android:layout_alignParentStart="false"
             android:fastScrollAlwaysVisible="false" android:drawSelectorOnTop="false" android:clickable="false"

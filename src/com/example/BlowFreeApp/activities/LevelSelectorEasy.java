@@ -43,6 +43,9 @@ public class LevelSelectorEasy extends Activity {
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
                 TextView tv;
                 tv = (TextView) view;
+                // Style
+                tv.setBackgroundResource(R.drawable.cell_border);
+                tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
                     Integer i = cursor.getInt(1) + 1;
