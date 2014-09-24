@@ -3,6 +3,7 @@ package com.example.BlowFreeApp.Board;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
@@ -23,10 +24,9 @@ public class Canvas extends View {
 
     private Grid grid;
     private onTouch touchListener;
+    private GameStatusAdapter db = new GameStatusAdapter(getContext());
     private List<Cellpath> m_cellPaths;
     private Puzzle stats;
-    private ViewController view;
-    private GameStatusAdapter adapter = new GameStatusAdapter(getContext());
 
     private boolean openWinWindow = false;
 
@@ -217,8 +217,18 @@ public class Canvas extends View {
                 touchListener.touchMove(cell, m_cellPaths);
 
                 // Check for Win
-                if(isWin(m_cellPaths))
+                if(isWin(m_cellPaths)) {
+                    Cursor cursor = db.queryGameStatusId(stats.getTableGameStatus(), stats.getPuzzleId());
+                    String finished = "";
                     displayWinner();
+                    if(cursor.moveToFirst()) {
+                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+                        db.updateGameStatus(stats.getTableGameStatus(), stats.getPuzzleId(), true, 2);
+                        db.close();
+                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
+                    }
+                }
 
             }
 

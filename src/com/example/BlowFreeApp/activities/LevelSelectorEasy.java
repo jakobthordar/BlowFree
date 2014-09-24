@@ -3,56 +3,77 @@ package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.*;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
+import com.example.BlowFreeApp.database.DbHelper;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 
 public class LevelSelectorEasy extends Activity {
-    private GameStatusAdapter adapter = new GameStatusAdapter(this);
-    private int sizeOfBoard;
+
+    private GameStatusAdapter db = PackLevelFactory.getGameStatusAdapter();
+    private Cursor cursor;
+    private SimpleCursorAdapter cursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level);
-        //Intent intent = getIntent();
+        setContentView(R.layout.activity_level_easy);
+
+        GridView gridView = (GridView) findViewById(R.id.gridLevelEasy);
+
+        cursor = db.queryGameStatus(DbHelper.TableGameStatusEasy);
+        String cols[] = DbHelper.TableGameStatusCols;
+        String from[] = { cols[1], cols[2], cols[3] };
+        int to[] = { android.R.id.text1 , android.R.id.text1, android.R.id.text1 };
+        cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to);
+
+        cursorAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                TextView tv;
+                tv = (TextView) view;
+                String columnName = cursor.getColumnName(columnIndex);
+                //TODO: OFFBYONE
+                if (columnIndex == 1) {
+                    Integer i = cursor.getInt(1) + 1;
+                    tv.setText(i.toString());
+                }
+                if (columnIndex == 2) {
+                    int finished = cursor.getInt(columnIndex);
+                    if (finished == 0) {
+                        tv.setTextColor(Color.WHITE);
+                    }
+                    else {
+                        tv.setTextColor(Color.GREEN);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
 
 
-        ArrayAdapter<Puzzle> adapt = new ArrayAdapter<Puzzle>(this, android.R.layout.simple_list_item_1, PackLevelFactory.getEasyLevels());
 
-        ListView listView = (ListView) findViewById(R.id.list);
-        listView.setAdapter(adapt);
-
-        listView.setOnItemClickListener(mMessageClickedHandler);
+        gridView.setAdapter(cursorAdapter);
+        gridView.setOnItemClickListener(mMessageClickedHandler);
     }
 
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
-            // Sets the correct game id of the game.
-            if (id <= 9) {
-                sizeOfBoard = 5;
-            }
-            if (id > 9) {
-                sizeOfBoard = 6;
-            }
-            startLevel(id);
+            // size is always 7 for mania
+            startLevel((int)id);
         }
     };
-
-    public void startLevel(long id){
+    public void startLevel(int id){
         Intent myIntent = new Intent(this, Game.class);
-        int gameId;
-        gameId = (int) id;
-
-        Puzzle activeGame = PackLevelFactory.getEasyGame(gameId);
+        Puzzle activeGame = PackLevelFactory.getEasyGame(id);
         PackLevelFactory.setActiveGame(activeGame);
-
         startActivity(myIntent);
     }
 }
