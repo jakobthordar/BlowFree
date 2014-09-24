@@ -51,15 +51,6 @@ public class GameStatusAdapter {
         return value;
     }
 
-    public long insertActiveGame(int gid) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put( "gid", ((Integer)gid).toString() );
-        openToWrite();
-        long value = db.insert(DbHelper.TableActiveGame, null, contentValues );
-        close();
-        return value;
-    }
-
     /**
      * Updates the database with given values
      * @param tableGameStatus Each Puzzle has an instance of table game status
@@ -73,22 +64,6 @@ public class GameStatusAdapter {
         long value = db.update(tableGameStatus, contentValues, cols[1] + "=" + gid, null);
         close();
         return value;
-    }
-
-    public long updateActiveGame(int gid) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put( "gid", ((Integer)gid).toString() );
-        openToWrite();
-        long value = db.update(DbHelper.TableActiveGame, contentValues, "gid" + "=" + gid, null);
-        close();
-        return value;
-    }
-
-    public Cursor queryActiveGame() {
-        openToRead();
-        Cursor cursor = db.query( DbHelper.TableActiveGame,
-                cols, null, null, null, null, null);
-        return cursor;
     }
 
     public Cursor queryGameStatus(String tableGameStatus) {
