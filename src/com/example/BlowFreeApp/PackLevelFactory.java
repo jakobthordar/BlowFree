@@ -2,6 +2,7 @@ package com.example.BlowFreeApp;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.graphics.Color;
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.Board.CellpathColors;
@@ -84,7 +85,14 @@ public class PackLevelFactory {
                         cellpaths = trimString(temp);
                         Puzzle p = new Puzzle(name, challengeId, puzzleId, size, cellpaths);
                         puzzles.add(p);
-                        insertIntoTable(name, puzzleId, p.getTableGameStatus());
+                        Cursor cursor = gameStatusAdapter.queryGameStatusId(p.getTableGameStatus(), puzzleId);
+                        int gid = -1;
+                        if(cursor.moveToFirst()) {
+                            gid = cursor.getInt(cursor.getColumnIndex(cursor.getColumnName(1)));
+                        }
+                        if (!(gid == puzzleId)) {
+                            insertIntoTable(name, puzzleId, p.getTableGameStatus());
+                        }
                    }
                 }
             }
@@ -99,6 +107,7 @@ public class PackLevelFactory {
 
     private static void insertIntoTable(String name, int puzzleId, String tableGameStatus) {
         gameStatusAdapter.insertGameStatus(tableGameStatus, puzzleId, false, name);
+        gameStatusAdapter.close();
     }
 
     /**

@@ -9,14 +9,19 @@
                 tools:context="com.example.BlowFreeApp.activities.LevelSelectorEasy">
 
     <GridView
-            android:id="@+id/listLevelEasy"
+            android:id="@+id/gridLevelEasy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="90dp"
-            android:numColumns="auto_fit"
-            android:verticalSpacing="10dp"
+            android:numColumns="4"
+            android:verticalSpacing="20dp"
             android:horizontalSpacing="10dp"
             android:stretchMode="columnWidth"
-            android:gravity="center">
+            android:layout_alignParentEnd="false" android:layout_alignParentStart="false"
+            android:fastScrollAlwaysVisible="false" android:drawSelectorOnTop="false" android:clickable="false"
+            tools:listitem="@android:layout/simple_list_item_1"
+            android:layout_alignParentLeft="false" android:layout_alignParentBottom="false" android:gravity="center"
+            android:paddingTop="50dp" android:paddingRight="30dp" android:paddingLeft="30dp"
+            >
     </GridView>
 </RelativeLayout>

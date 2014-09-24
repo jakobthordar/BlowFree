@@ -57,7 +57,7 @@ public class Puzzle {
 
     @Override
     public String toString() {
-        return "Level: " + this.name + ", Puzzle: " + this.puzzleId;
+        return "" + puzzleId;
     }
 
     public int getChallengeId() {

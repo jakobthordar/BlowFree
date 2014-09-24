@@ -62,29 +62,22 @@ public class GameStatusAdapter {
         contentValues.put( cols[2], finished ? "1" : "0" );
         contentValues.put( cols[3],  ((Integer)type).toString());
         openToWrite();
-        long value = db.update(tableGameStatus, contentValues, cols[1] + gid, null);
+        long value = db.update(tableGameStatus, contentValues, cols[1] + "=" + gid, null);
         close();
         return value;
     }
 
-    public Cursor queryGameStatusEasy() {
+    public Cursor queryGameStatus(String tableGameStatus) {
         openToRead();
-        Cursor cursor = db.query( DbHelper.TableGameStatusEasy,
+        Cursor cursor = db.query( tableGameStatus,
                 cols, null, null, null, null, null);
         return cursor;
     }
 
-    public Cursor queryGameStatusMedium() {
+    public Cursor queryGameStatusId(String tableGameStatus, int id) {
         openToRead();
-        Cursor cursor = db.query( DbHelper.TableGameStatusMedium,
-                cols, null, null, null, null, null);
-        return cursor;
-    }
-
-    public Cursor queryGameStatusHard() {
-        openToRead();
-        Cursor cursor = db.query( DbHelper.TableGameStatusHard,
-                cols, null, null, null, null, null);
+        Cursor cursor = db.query( tableGameStatus,
+                cols, cols[1] + "=" + id, null, null, null, null, null);
         return cursor;
     }
 }
