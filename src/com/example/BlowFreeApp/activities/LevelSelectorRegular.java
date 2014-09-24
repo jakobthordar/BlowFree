@@ -2,29 +2,17 @@ package com.example.BlowFreeApp.activities;
 
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import com.example.BlowFreeApp.GameInfo;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class LevelSelectorRegular extends Activity {

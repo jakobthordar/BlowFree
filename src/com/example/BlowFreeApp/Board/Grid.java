@@ -13,7 +13,7 @@ public class Grid {
     private Rect cell = new Rect();
 
     // Board width x height
-    private int width, height;
+    private static int width, height;
 
     // Cell size in pixels
     private static int cellWidth, cellHeight;

@@ -13,17 +13,18 @@ import com.example.BlowFreeApp.Board.events.onTouch;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Canvas extends View {
     private int NUM_CELLS;
 
-    private int type;
     private Grid grid;
     private onTouch touchListener;
-    private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
-    private Puzzle thisGame;
+    private List<Cellpath> m_cellPaths;
+    private Puzzle stats;
+    private ViewController view;
     private GameStatusAdapter adapter = new GameStatusAdapter(getContext());
 
     private AlertDialog winWindow;
@@ -40,36 +41,13 @@ public class Canvas extends View {
      */
     public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
-        CellpathColors colors = CellpathColors.getInstance();
-        // get info from globals to make board
-        thisGame = PackLevelFactory.getActiveGame();
-        m_cellPaths = thisGame.getCellPaths();
 
-        /*if(idForBoard  > 9 ){
-            idForBoard = idForBoard - 10;
-        }*/
-        if (thisGame.getSize() == 5)
-            type = 0;
-        if (thisGame.getSize() == 6)
-            type = 1;
-        if (thisGame.getSize() == 7)
-            type = 2;
-
-        NUM_CELLS = thisGame.getSize();
-
-        // Setup Grid
-        grid = new Grid(NUM_CELLS, NUM_CELLS);
-        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
-
-        // Setup listener
-        touchListener = new onTouch(this);
-
-        // next call a function here and extract the info needed to
-        // draw the board
+        // Canvas init
+        create();
     }
 
     /**
-     * This function reads the XML to be able to aquire the correct board to draw
+     * This function reads the XML to be able to acquire the correct board to draw
      * and that boards flows.
      */
     @Override
@@ -80,12 +58,51 @@ public class Canvas extends View {
         int size = Math.min(width, height);
 
         setMeasuredDimension( size + getPaddingLeft() + getPaddingRight(),
-                size + getPaddingTop() + getPaddingBottom() );
+                              size + getPaddingTop() + getPaddingBottom() );
+
+
     }
 
     @Override
     protected void onSizeChanged( int xNew, int yNew, int xOld, int yOld ) {
         grid.setSize(xNew, yNew);
+    }
+
+    /**
+     * Create the canvas
+     */
+
+    public void create() {
+        CellpathColors colors = CellpathColors.getInstance();
+        // get info from globals to make board
+        stats = PackLevelFactory.getActiveGame();
+
+        m_cellPaths = new ArrayList<Cellpath>(stats.getCellPaths());
+        NUM_CELLS = stats.getSize();
+
+        // Setup Grid
+        grid = new Grid(NUM_CELLS, NUM_CELLS);
+        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
+
+        // Setup listener
+        touchListener = new onTouch(this);
+    }
+
+    /**
+     * Reset the canvas
+     */
+    public void reset() {
+        // Rest Paths
+        for(Cellpath cp : m_cellPaths) {
+            cp.setFinished(false);
+            cp.reset();
+        }
+
+        // Rest stats
+        stats.reset();
+
+        // Redraw canvas
+        invalidate();
     }
 
     /**
@@ -185,6 +202,12 @@ public class Canvas extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP :
                 touchListener.touchUp(m_cellPaths);
+
+                // Add Move
+                stats.addMoves();
+
+                // Set flows
+                stats.setFlow(pathsConnected());
                 break;
             case MotionEvent.ACTION_DOWN :
                 touchListener.touchDown(cell, m_cellPaths);
@@ -199,6 +222,20 @@ public class Canvas extends View {
             }
 
         return true;
+    }
+
+    /**
+     * Counts how many path are connected
+     * @return how many paths are connected
+     */
+    private int pathsConnected() {
+        int flows = 0;
+
+        for(Cellpath cp : m_cellPaths)
+            if(cp.isFinished())
+                flows ++;
+
+        return flows;
     }
 
     /**

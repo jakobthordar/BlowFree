@@ -1,7 +1,9 @@
 package com.example.BlowFreeApp.Board;
 
-import android.graphics.*;
-import com.example.BlowFreeApp.PackLevelFactory;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.List;

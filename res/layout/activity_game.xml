@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical" >
+              android:orientation="vertical" android:id="@+id/window">
 
     <TableLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,13 +11,14 @@
             android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:shrinkColumns="2"
-            android:stretchColumns="2" >
+            android:stretchColumns="2" android:layout_alignParentTop="true" android:id="@+id/tableLayout">
 
         <TableRow>
             <TextView
                     android:id="@+id/lvl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:editable = "true"
                     android:text="level 1" android:textStyle="bold" android:textSize="26dp"
                     android:textIsSelectable="true" android:layout_marginLeft="20dp"/>
             <TextView
@@ -31,118 +32,120 @@
         </TableRow>
     </TableLayout>
 
-    <GridLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="1"
-            >
-        <LinearLayout
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_centerHorizontal="true" android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@+id/tableLayout" android:layout_above="@+id/navbar">
+        <GridLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="20dp" android:orientation="horizontal" android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp" android:layout_marginBottom="2dp">
-            <TextView
-                    android:id="@+id/connect"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="flows: "
-                    android:textSize="16dp"
-                    android:layout_column="0"/>
-            <TextView
-                    android:id="@+id/connectCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0/5"
-                    android:textSize="13dp"/>
-
-            <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            <TextView
-                    android:id="@+id/moves"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="moves : "
-                    android:textSize="16dp"/>
-            <TextView
-                    android:id="@+id/moveCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="13dp"/>
-            <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-            <TextView
-                    android:id="@+id/best"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="best : "
-                    android:textSize="16dp"/>
-            <TextView
-                    android:id="@+id/bestCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-"
-                    android:textSize="13dp"/>
-
-        </LinearLayout>
-
-    </GridLayout>
-
-    <com.example.BlowFreeApp.Board.Canvas
-            android:id="@+id/surface"
-            android:layout_width="fill_parent"
-            android:background="#444444"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.25" android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" android:layout_marginBottom="5dp"/>
-
-
-    <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="50dp" android:orientation="horizontal" android:layout_margin="10dp">
-        <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        <Button
-                android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_action_back"
-                android:background="@drawable/nav_button"
-                android:layout_gravity="left" android:gravity="center"
-                android:layout_weight="0.16" android:paddingLeft="5dp"/>
+                android:columnCount="1"
+                android:layout_alignParentTop="true" android:id="@+id/gridLayout">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp" android:orientation="horizontal" android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp" android:layout_marginBottom="2dp">
+                <TextView
+                        android:id="@+id/connect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="flows: "
+                        android:textSize="16dp"
+                        android:layout_column="0"/>
+                <TextView
+                        android:id="@+id/connectCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0/5"
+                        android:textSize="13dp"/>
 
-        <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-        <Button
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                <TextView
+                        android:id="@+id/moves"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="moves : "
+                        android:textSize="16dp"/>
+                <TextView
+                        android:id="@+id/moveCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="13dp"/>
+                <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+                <TextView
+                        android:id="@+id/best"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="best : "
+                        android:textSize="16dp"/>
+                <TextView
+                        android:id="@+id/bestCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        android:textSize="13dp"/>
+
+            </LinearLayout>
+
+        </GridLayout>
+
+        <com.example.BlowFreeApp.Board.Canvas
+                android:id="@+id/board"
+                android:layout_width="fill_parent"
+                android:background="#444444"
                 android:layout_height="fill_parent"
-                android:layout_width="35dp"
-                android:background="@drawable/nav_button"
-                android:drawableLeft="@drawable/ic_action_refresh"
-                android:longClickable="false" android:padding="5dp" android:layout_gravity="center"
-                android:singleLine="false" android:layout_weight="0.20"
-                />
-        <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="0.25"
+                android:layout_below="@+id/gridLayout" android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
 
-        <Button
-                android:layout_width="33dp"
+    <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/nav_button"
-                android:drawableLeft="@drawable/ic_action_forward"
-                android:layout_gravity="left" android:gravity="center"
-                android:layout_weight="0.16" android:singleLine="true" android:paddingLeft="5dp"/>
-        <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-    </LinearLayout>
-</LinearLayout>
+                android:orientation="horizontal" android:layout_margin="10dp"
+                android:layout_alignParentBottom="true"
+
+                android:id="@+id/navbar" android:layout_marginBottom="25dp" android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false" android:layout_alignParentRight="false"
+                android:clickable="false" android:paddingBottom="10dp">
+
+            <Button
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_action_back"
+                    android:background="@drawable/nav_button"
+                    android:id="@+id/back_button"
+                    android:layout_gravity="left" android:gravity="center"
+                    android:layout_weight="0.16" android:paddingLeft="3dp" android:layout_alignParentTop="true"
+                    android:layout_toLeftOf="@+id/reset" android:layout_marginRight="44dp"/>
+
+            <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:background="@drawable/nav_button"
+                    android:drawableLeft="@drawable/ic_action_refresh"
+                    android:longClickable="false" android:padding="3dp" android:layout_gravity="center"
+                    android:singleLine="false" android:layout_weight="0.20"
+                    android:id="@+id/reset" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+
+            <Button
+                    android:layout_width="33dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/nav_button"
+                    android:drawableLeft="@drawable/ic_action_forward"
+                    android:id="@+id/forward_button"
+                    android:layout_gravity="left" android:gravity="center"
+                    android:layout_weight="0.16" android:singleLine="true" android:paddingLeft="3dp"
+                    android:layout_alignParentTop="true" android:layout_toRightOf="@+id/reset"
+                    android:layout_marginLeft="50dp"/>
+        </RelativeLayout>
+</RelativeLayout>

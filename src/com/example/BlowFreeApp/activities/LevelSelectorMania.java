@@ -1,15 +1,11 @@
 package com.example.BlowFreeApp.activities;
 
-import android.app.ActivityManager;
 import android.app.ListActivity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import com.example.BlowFreeApp.GameInfo;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
@@ -22,7 +18,6 @@ import java.util.List;
 public class LevelSelectorMania extends ListActivity {
 
     List<Puzzle> mPacksMania = new ArrayList<Puzzle>();
-    List<GameInfo> mGameI = new ArrayList<GameInfo>();
     private GameStatusAdapter adapter = new GameStatusAdapter(this);
     private SimpleCursorAdapter mCA;
 
