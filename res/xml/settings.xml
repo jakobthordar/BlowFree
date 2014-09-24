@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="sound"
+            android:key="theme_sound"
+            >
+        <CheckBoxPreference
+                android:key="sound_Theme_sound"
+                android:summary="Play the theme song"
+                android:title="Song"
+                android:defaultValue="true"
+
+                />
+        <CheckBoxPreference
+                android:key="sound_Connect_sound"
+                android:summary="Play sound when connecting dots"
+                android:title="Sound"
+                android:defaultValue="true"
+                />
+    </PreferenceCategory>
+
+</PreferenceScreen>

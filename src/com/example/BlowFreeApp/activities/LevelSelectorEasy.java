@@ -7,28 +7,41 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.GridView;
 import android.widget.ListView;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
+import com.example.BlowFreeApp.database.GameStatusAdapter;
 
 public class LevelSelectorEasy extends Activity {
+
+    private GameStatusAdapter adapter = new GameStatusAdapter(this);
+    private int sizeOfBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level_easy);
+        setContentView(R.layout.activity_level);
+        //Intent intent = getIntent();
+
+
         ArrayAdapter<Puzzle> adapt = new ArrayAdapter<Puzzle>(this, android.R.layout.simple_list_item_1, PackLevelFactory.getEasyLevels());
 
-        GridView gridView = (GridView) findViewById(R.id.listLevelEasy);
-        gridView.setAdapter(adapt);
+        ListView listView = (ListView) findViewById(R.id.list);
+        listView.setAdapter(adapt);
 
-        gridView.setOnItemClickListener(mMessageClickedHandler);
+        listView.setOnItemClickListener(mMessageClickedHandler);
     }
 
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
+            // Sets the correct game id of the game.
+            if (id <= 9) {
+                sizeOfBoard = 5;
+            }
+            if (id > 9) {
+                sizeOfBoard = 6;
+            }
             startLevel(id);
         }
     };
@@ -43,6 +56,8 @@ public class LevelSelectorEasy extends Activity {
 
         startActivity(myIntent);
     }
+
+
 }
 
 

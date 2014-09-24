@@ -172,7 +172,7 @@ public class PackLevelFactory {
         return easyLevels;
     }
 
-    public static List<Puzzle> geMediumLevels() {
+    public static List<Puzzle> getMediumLevels() {
         return mediumLevels;
     }
 

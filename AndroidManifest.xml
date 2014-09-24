@@ -12,7 +12,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activities.PackageSelect" android:label="BlowFree"></activity>
         <activity android:name=".activities.Settings" android:label="BlowFree"></activity>
         <activity android:name=".activities.NewGame" android:label="BlowFree"></activity>
         <activity android:name=".activities.Game" android:label="BlowFree"></activity>
@@ -21,6 +20,14 @@
         <activity android:name=".activities.LevelSelectorEasy" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorMedium" android:label="BlowFree"></activity>
         <activity android:name=".activities.LevelSelectorHard" android:label="BlowFree"></activity>
+        <activity android:name=".settings.GameSettings" android:label="Settings"/>
     </application>
+    <supports-screens android:resizeable="true"
+                      android:smallScreens="true"
+                      android:normalScreens="true"
+                      android:largeScreens="true"
+
+                      android:anyDensity="true" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
 </manifest>

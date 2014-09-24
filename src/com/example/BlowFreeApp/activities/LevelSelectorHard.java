@@ -1,6 +1,9 @@
 package com.example.BlowFreeApp.activities;
 
+import android.app.ActivityManager;
 import android.app.ListActivity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -67,4 +70,6 @@ public class LevelSelectorHard extends ListActivity {
         PackLevelFactory.setActiveGame(activeGame);
         startActivity(intent);
     }
+
+
 }
