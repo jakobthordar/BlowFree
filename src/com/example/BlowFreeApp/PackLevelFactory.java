@@ -49,9 +49,11 @@ public class PackLevelFactory {
         context = c;
         gameStatusAdapter = new GameStatusAdapter(c);
         soundPlayer = new SoundPlayer(c);
+        activeGame = null;
         easyLevels = readFile("packs/easy.xml");
         mediumLevels = readFile("packs/medium.xml");
         hardLevels = readFile("packs/hard.xml");
+        gameStatusAdapter.insertActiveGame(-1);
     }
 
     private List<Puzzle> readFile(String name) {
@@ -175,10 +177,12 @@ public class PackLevelFactory {
     }
 
     public static Puzzle getMediumGame(int id) {
+        if(mediumLevels.size() - 1 < id || id < 0) return null;
         return mediumLevels.get(id);
     }
 
     public static Puzzle getHardGame(int id) {
+        if(hardLevels.size() - 1 < id || id < 0) return null;
         return hardLevels.get(id);
     }
 
