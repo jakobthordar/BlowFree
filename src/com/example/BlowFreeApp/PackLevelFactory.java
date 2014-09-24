@@ -43,7 +43,6 @@ public class PackLevelFactory {
         easyLevels = readFile("packs/easy.xml");
         mediumLevels = readFile("packs/medium.xml");
         hardLevels = readFile("packs/hard.xml");
-        gameStatusAdapter.insertActiveGame(-1);
     }
 
     private List<Puzzle> readFile(String name) {
