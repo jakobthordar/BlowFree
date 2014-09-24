@@ -81,6 +81,8 @@ public class Canvas extends View {
         m_cellPaths = new ArrayList<Cellpath>(stats.getCellPaths());
         NUM_CELLS = stats.getSize();
 
+       // CellpathColors colors = CellpathColors.getInstance();
+        colors.setColorsForCellPaths(m_cellPaths);
         // Setup Grid
         grid = new Grid(NUM_CELLS, NUM_CELLS);
         grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());

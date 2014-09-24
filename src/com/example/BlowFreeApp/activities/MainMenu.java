@@ -24,11 +24,6 @@ public class MainMenu extends Activity {
         setContentView(R.layout.activity_main);
         PackLevelFactory packLevelFactory = new PackLevelFactory(this);
 
-        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
-        if(pref.getBoolean("sound_Theme_sound", true  )){
-            PackLevelFactory.getSoundPlayer().playTheme();
-        }
-
     }
 
     public void newGame(View view){

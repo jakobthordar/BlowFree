@@ -148,10 +148,10 @@ public class PackLevelFactory {
             cellPaths.add(cellPath);
         }
 
-        CellpathColors colors = CellpathColors.getInstance();
-        colors.setColorsForCellPaths(cellPaths);
         return cellPaths;
     }
+
+
 
     /**
      * This ID is not the same as gameID, simply the index of the list or the arrayList

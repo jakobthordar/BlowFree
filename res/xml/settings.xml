@@ -4,19 +4,24 @@
 
     <PreferenceCategory
             android:title="sound"
-            android:key="theme_sound"
+            android:key="game_soundhaha"
             >
         <CheckBoxPreference
-                android:key="sound_Theme_sound"
-                android:summary="Play the theme song"
-                android:title="Song"
+                android:key="game_sound"
+                android:summary="Sound on or off"
+                android:title="sounds"
                 android:defaultValue="true"
-
                 />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="color"
+            android:key="theme_color"
+            >
         <CheckBoxPreference
-                android:key="sound_Connect_sound"
-                android:summary="Play sound when connecting dots"
-                android:title="Sound"
+                android:key="color_theme_other"
+                android:summary="Original color them"
+                android:title="Color theme"
                 android:defaultValue="true"
                 />
     </PreferenceCategory>

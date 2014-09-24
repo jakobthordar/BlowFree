@@ -11,27 +11,32 @@ public class SoundPlayer {
     Context context;
     MediaPlayer mediaPlayerWin;
     MediaPlayer mediaPlayerConnect;
-    MediaPlayer mediaPlayerTheme;
+
+    boolean shouldBePlaying = true;
+
     public SoundPlayer(Context c)
     {
         this.context = c;
     }
 
     public void playConnect(){
-        mediaPlayerConnect = MediaPlayer.create(context, R.raw.connect);
-        mediaPlayerConnect.start();
+        if(shouldBePlaying) {
+            mediaPlayerConnect = MediaPlayer.create(context, R.raw.connect);
+            mediaPlayerConnect.start();
+
+        }
     }
     public void playWin(){
-        mediaPlayerWin = MediaPlayer.create(context, R.raw.win);
-        mediaPlayerWin.start();
-        Vibrator v = (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
-        v.vibrate(500);
+        if(shouldBePlaying) {
+            mediaPlayerWin = MediaPlayer.create(context, R.raw.win);
+            mediaPlayerWin.start();
+
+            Vibrator v = (Vibrator) this.context.getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(500);
+        }
     }
-    public void playTheme(){
-        mediaPlayerTheme = MediaPlayer.create(context, R.raw.theme);
-        mediaPlayerTheme.start();
-    }
-    public MediaPlayer getThemePlayer(){
-        return mediaPlayerTheme;
+
+    public void setBoolForSounds(boolean b){
+        shouldBePlaying = b;
     }
 }
