@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "GAMESTATUS_DB";
-    public static final int DB_VERSION = 6;
+    public static final int DB_VERSION = 7;
 
 
     public static final String TableGameStatusEasy = "gameStatusEasy";

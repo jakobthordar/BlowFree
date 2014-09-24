@@ -46,7 +46,6 @@ public class LevelSelectorMedium extends Activity{
                 TextView tv;
                 tv = (TextView) view;
                 // Style
-                tv.setBackgroundResource(R.drawable.cell_border);
                 tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
@@ -57,9 +56,11 @@ public class LevelSelectorMedium extends Activity{
                     int finished = cursor.getInt(columnIndex);
                     if (finished == 0) {
                         tv.setTextColor(Color.WHITE);
+                        tv.setBackgroundResource(R.drawable.cell_border);
                     }
                     else {
                         tv.setTextColor(Color.GREEN);
+                        tv.setBackgroundResource(R.drawable.cell_win);
                     }
                 }
                 return true;
@@ -84,7 +85,6 @@ public class LevelSelectorMedium extends Activity{
                 TextView tv;
                 tv = (TextView) view;
                 // Style
-                tv.setBackgroundResource(R.drawable.cell_border);
                 tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
 
                 if (columnIndex == 1) {
@@ -95,9 +95,11 @@ public class LevelSelectorMedium extends Activity{
                     int finished = cursor.getInt(columnIndex);
                     if (finished == 0) {
                         tv.setTextColor(Color.WHITE);
+                        tv.setBackgroundResource(R.drawable.cell_border);
                     }
                     else {
                         tv.setTextColor(Color.GREEN);
+                        tv.setBackgroundResource(R.drawable.cell_win);
                     }
                 }
                 return true;
