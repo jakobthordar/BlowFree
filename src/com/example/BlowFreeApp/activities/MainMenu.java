@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Toast;
 import com.example.BlowFreeApp.PackLevelFactory;
+import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
 import com.example.BlowFreeApp.settings.GameSettings;
 import java.util.*;
@@ -37,8 +38,11 @@ public class MainMenu extends Activity {
     }
 
     public void continueGame(View view){
-        Intent myIntent = new Intent(this, GameInstances.class);
-        startActivity(myIntent);
+        Intent myIntent = new Intent(this, Game.class);
+        Puzzle activeGame = PackLevelFactory.getActiveGame();
+        if (activeGame != null) {
+            startActivity(myIntent);
+        }
     }
     public void gameSettings(View view){
         Intent myIntent = new Intent(this, GameSettings.class);

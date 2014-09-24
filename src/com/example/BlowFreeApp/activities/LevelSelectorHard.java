@@ -1,71 +1,119 @@
 package com.example.BlowFreeApp.activities;
 
+import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
+import com.example.BlowFreeApp.R;
+import com.example.BlowFreeApp.database.DbHelper;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LevelSelectorHard extends ListActivity {
+public class LevelSelectorHard extends Activity {
 
-    List<Puzzle> mPacksMania = new ArrayList<Puzzle>();
-    private GameStatusAdapter adapter = new GameStatusAdapter(this);
-    private SimpleCursorAdapter mCA;
+
+    private GameStatusAdapter db = PackLevelFactory.getGameStatusAdapter();
+    private Cursor cursor;
+    private SimpleCursorAdapter cursorAdapter;
+    GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activty_level_hard);
-        //Intent intent = getIntent();
+        setContentView(R.layout.activty_level_hard);
 
-        /*Cursor cursor = adapter.queryGameStatusMania();
+        cursor = db.queryGameStatus(DbHelper.TableGameStatusHard);
+        gridView = (GridView) findViewById(R.id.gridLevelHard);
+
         String cols[] = DbHelper.TableGameStatusCols;
         String from[] = { cols[1], cols[2], cols[3] };
-        int to[] = { R.id.listLevel};
+        int to[] = { android.R.id.text1 , android.R.id.text1, android.R.id.text1 };
+        cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to);
 
-        startManagingCursor( cursor );
-        mCA = new SimpleCursorAdapter(this, R.layout.activty_level_hard, cursor, from, to );
-
-        mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
+        cursorAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
             @Override
             public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                if ( columnIndex == 2 ) {
-                    ((ImageView)view).setImageResource(
-                            (cursor.getInt(columnIndex) == 0) ?
-                                    R.drawable.emo_im_sad : R.drawable.emo_im_cool );
-                    return true;
+                TextView tv;
+                tv = (TextView) view;
+
+                if (columnIndex == 1) {
+                    Integer i = cursor.getInt(1) + 1;
+                    tv.setText(i.toString());
                 }
-                return false;
+                if (columnIndex == 2) {
+                    int finished = cursor.getInt(columnIndex);
+                    if (finished == 0) {
+                        tv.setTextColor(Color.WHITE);
+                    }
+                    else {
+                        tv.setTextColor(Color.GREEN);
+                    }
+                }
+                return true;
             }
         });
-        setListAdapter( mCA );
-        */
+
+        gridView.setAdapter(cursorAdapter);
+        gridView.setOnItemClickListener(mMessageClickedHandler);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String cols[] = DbHelper.TableGameStatusCols;
+        String from[] = { cols[1], cols[2], cols[3] };
+        int to[] = { android.R.id.text1 , android.R.id.text1, android.R.id.text1 };
+        cursor = db.queryGameStatus(DbHelper.TableGameStatusHard);
+        cursorAdapter = new SimpleCursorAdapter(this, android.R.layout.simple_list_item_1, cursor, from, to);
+        cursorAdapter.setViewBinder(new SimpleCursorAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                TextView tv;
+                tv = (TextView) view;
+
+                if (columnIndex == 1) {
+                    Integer i = cursor.getInt(1) + 1;
+                    tv.setText(i.toString());
+                }
+                if (columnIndex == 2) {
+                    int finished = cursor.getInt(columnIndex);
+                    if (finished == 0) {
+                        tv.setTextColor(Color.WHITE);
+                    }
+                    else {
+                        tv.setTextColor(Color.GREEN);
+                    }
+                }
+                return true;
+            }
+        });
+        gridView.setAdapter(cursorAdapter);
+    }
+
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
-           // size is always 7 for mania
-           startLevelMania(id);
+            // Reduce by one because onClick starts at 1
+            startLevel((int)id - 1);
         }
     };
 
-    public void startLevelMania(long id){
-
-        Intent intent = new Intent(this, Game.class);
-        int levelId;
-        levelId = (int) id;
-
-        Puzzle activeGame = PackLevelFactory.getHardGame(levelId);
+    public void startLevel(int id){
+        Intent myIntent = new Intent(this, Game.class);
+        Puzzle activeGame = PackLevelFactory.getHardGame(id);
         PackLevelFactory.setActiveGame(activeGame);
-        startActivity(intent);
+        startActivity(myIntent);
     }
-
 
 }

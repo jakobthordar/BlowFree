@@ -219,14 +219,10 @@ public class Canvas extends View {
                 // Check for Win
                 if(isWin(m_cellPaths)) {
                     Cursor cursor = db.queryGameStatusId(stats.getTableGameStatus(), stats.getPuzzleId());
-                    String finished = "";
                     displayWinner();
                     if(cursor.moveToFirst()) {
-                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
                         db.updateGameStatus(stats.getTableGameStatus(), stats.getPuzzleId(), true, 2);
                         db.close();
-                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
-                        finished = cursor.getString(cursor.getColumnIndex(cursor.getColumnName(2)));
                     }
                 }
 

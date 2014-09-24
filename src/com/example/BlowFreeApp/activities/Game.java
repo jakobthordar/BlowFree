@@ -1,6 +1,7 @@
 package com.example.BlowFreeApp.activities;
 
 import android.app.Activity;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,14 +10,18 @@ import com.example.BlowFreeApp.Board.Canvas;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
+import com.example.BlowFreeApp.database.GameStatusAdapter;
+
 public class Game extends Activity {
+
+    GameStatusAdapter db = PackLevelFactory.getGameStatusAdapter();
+    Puzzle stats = PackLevelFactory.getActiveGame();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Puzzle stats = PackLevelFactory.getActiveGame();
         PackLevelFactory.setGameActivity(this);
 
         // Set Init game viw
@@ -94,10 +99,13 @@ public class Game extends Activity {
     }
 
     private void navRest(View v) {
-        Puzzle game = PackLevelFactory.getActiveGame();
         Canvas canvas = (Canvas) findViewById(R.id.board);
         canvas.reset();
-
+        Cursor cursor = db.queryGameStatusId(stats.getTableGameStatus(), stats.getPuzzleId());
+        if (cursor.moveToFirst()) {
+            db.updateGameStatus(stats.getTableGameStatus(), stats.getPuzzleId(), false, 2);
+            db.close();
+        }
     }
 
     public void setText(int id, String text) {
