@@ -76,8 +76,6 @@ public class LevelSelectorEasy extends Activity {
         PackLevelFactory.setActiveGame(activeGame);
         startActivity(myIntent);
     }
-
-
 }
 
 

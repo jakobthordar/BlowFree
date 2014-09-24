@@ -1,7 +1,9 @@
 package com.example.BlowFreeApp.Board;
 
-import android.graphics.*;
-import com.example.BlowFreeApp.PackLevelFactory;
+import android.graphics.Paint;
+import android.graphics.Path;
+import android.graphics.Point;
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,10 @@ public class Cellpath {
     public void draw(android.graphics.Canvas canvas) {
         Point center;
         ArrayList<Coordinate> path = (isIntersected) ? pathIntersected : m_path;
+
+        // Ignore empty cell paths
+        if(path.isEmpty()) return;
+
         Coordinate cell = path.get(0);
 
         // Get and set the paths starting point

@@ -13,21 +13,22 @@ import android.view.View;
 import com.example.BlowFreeApp.Board.events.onTouch;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
+import com.example.BlowFreeApp.activities.Game;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Canvas extends View {
     private int NUM_CELLS;
 
-    private int type;
     private Grid grid;
     private onTouch touchListener;
-    private List<Cellpath> m_cellPaths = new ArrayList<Cellpath>();
-    private Puzzle thisGame;
     private GameStatusAdapter db = new GameStatusAdapter(getContext());
+    private List<Cellpath> m_cellPaths;
+    private Puzzle stats;
 
-    private AlertDialog winWindow;
+    private boolean openWinWindow = false;
 
     // Board style finals
     private static final int POINT_PADDING = 25;
@@ -41,36 +42,13 @@ public class Canvas extends View {
      */
     public Canvas(Context context, AttributeSet attrs) {
         super(context, attrs);
-        CellpathColors colors = CellpathColors.getInstance();
-        // get info from globals to make board
-        thisGame = PackLevelFactory.getActiveGame();
-        m_cellPaths = thisGame.getCellPaths();
 
-        /*if(idForBoard  > 9 ){
-            idForBoard = idForBoard - 10;
-        }*/
-        if (thisGame.getSize() == 5)
-            type = 0;
-        if (thisGame.getSize() == 6)
-            type = 1;
-        if (thisGame.getSize() == 7)
-            type = 2;
-
-        NUM_CELLS = thisGame.getSize();
-
-        // Setup Grid
-        grid = new Grid(NUM_CELLS, NUM_CELLS);
-        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
-
-        // Setup listener
-        touchListener = new onTouch(this);
-
-        // next call a function here and extract the info needed to
-        // draw the board
+        // Canvas init
+        create();
     }
 
     /**
-     * This function reads the XML to be able to aquire the correct board to draw
+     * This function reads the XML to be able to acquire the correct board to draw
      * and that boards flows.
      */
     @Override
@@ -81,12 +59,51 @@ public class Canvas extends View {
         int size = Math.min(width, height);
 
         setMeasuredDimension( size + getPaddingLeft() + getPaddingRight(),
-                size + getPaddingTop() + getPaddingBottom() );
+                              size + getPaddingTop() + getPaddingBottom() );
+
+
     }
 
     @Override
     protected void onSizeChanged( int xNew, int yNew, int xOld, int yOld ) {
         grid.setSize(xNew, yNew);
+    }
+
+    /**
+     * Create the canvas
+     */
+
+    public void create() {
+        CellpathColors colors = CellpathColors.getInstance();
+        // get info from globals to make board
+        stats = PackLevelFactory.getActiveGame();
+
+        m_cellPaths = new ArrayList<Cellpath>(stats.getCellPaths());
+        NUM_CELLS = stats.getSize();
+
+        // Setup Grid
+        grid = new Grid(NUM_CELLS, NUM_CELLS);
+        grid.setPadding(getPaddingTop(), getPaddingBottom(), getPaddingRight(), getPaddingLeft());
+
+        // Setup listener
+        touchListener = new onTouch(this);
+    }
+
+    /**
+     * Reset the canvas
+     */
+    public void reset() {
+        // Rest Paths
+        for(Cellpath cp : m_cellPaths) {
+            cp.setFinished(false);
+            cp.reset();
+        }
+
+        // Rest stats
+        stats.reset();
+
+        // Redraw canvas
+        invalidate();
     }
 
     /**
@@ -186,6 +203,12 @@ public class Canvas extends View {
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP :
                 touchListener.touchUp(m_cellPaths);
+
+                // Add Move
+                stats.addMoves();
+
+                // Set flows
+                stats.setFlow(pathsConnected());
                 break;
             case MotionEvent.ACTION_DOWN :
                 touchListener.touchDown(cell, m_cellPaths);
@@ -210,6 +233,20 @@ public class Canvas extends View {
             }
 
         return true;
+    }
+
+    /**
+     * Counts how many path are connected
+     * @return how many paths are connected
+     */
+    private int pathsConnected() {
+        int flows = 0;
+
+        for(Cellpath cp : m_cellPaths)
+            if(cp.isFinished())
+                flows ++;
+
+        return flows;
     }
 
     /**
@@ -238,13 +275,18 @@ public class Canvas extends View {
     }
 
     public void displayWinner() {
-        if(winWindow != null) return;
-        winWindow = new AlertDialog.Builder(getContext())
+        if(openWinWindow) return;
+
+        openWinWindow = true;
+
+        new AlertDialog.Builder(getContext())
                 .setTitle("OMG YOU WON")
                 .setMessage("You must have an IQ above 145, at least!")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
+                        Game main = PackLevelFactory.getGameActivity();
+                        main.setGameLevel(true);
+                        openWinWindow = false;
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)

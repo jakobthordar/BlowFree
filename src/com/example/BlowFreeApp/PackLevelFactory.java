@@ -3,11 +3,11 @@ package com.example.BlowFreeApp;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.Board.CellpathColors;
 import com.example.BlowFreeApp.Board.Coordinate;
 import com.example.BlowFreeApp.Board.PointButton;
+import com.example.BlowFreeApp.activities.Game;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 import com.example.BlowFreeApp.sound.SoundPlayer;
 import org.w3c.dom.Document;
@@ -33,6 +33,7 @@ public class PackLevelFactory {
     private static Puzzle activeGame;
     private static Context context;
     private static SoundPlayer soundPlayer;
+    private static Game gameActivity;
 
     public PackLevelFactory(Context c) {
         context = c;
@@ -158,6 +159,8 @@ public class PackLevelFactory {
      * @return
      */
     public static Puzzle getEasyGame(int id) {
+        if(easyLevels.size() - 1 < id || id < 0) return null;
+
         return easyLevels.get(id);
     }
 
@@ -200,4 +203,10 @@ public class PackLevelFactory {
     public static void setActiveGame(Puzzle a) {
         activeGame = a;
     }
+
+    public static void setGameActivity(Game activity) {
+        gameActivity = activity;
+    }
+
+    public static Game getGameActivity() { return gameActivity; }
 }

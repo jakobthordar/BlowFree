@@ -76,19 +76,20 @@ public class onTouch {
 
         for (Cellpath cp : paths) {
             if(isValidMove(cp, paths, cell)) {
-                if (cp.checkIfEnd(cell)) {
-                    cp.setFinished(true);
-                    PackLevelFactory.getSoundPlayer().playConnect();
-                }
-
                 coordinateList = cp.getCoordinates();
                 last = coordinateList.get(coordinateList.size() - 1);
 
                 if (isNeighbours(last, cell)) {
                     cp.append(new Coordinate(cell.getCol(), cell.getRow()));
+
+                    if (cp.checkIfEnd(cell)) {
+                        cp.setFinished(true);
+                        PackLevelFactory.getSoundPlayer().playConnect();
+                    }
+
+                    setIntersection(cp, paths);
                     view.invalidate();
                 }
-                setIntersection(cp, paths);
             }
         }
     }
