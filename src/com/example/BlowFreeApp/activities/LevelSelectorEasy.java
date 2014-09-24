@@ -13,25 +13,20 @@ import com.example.BlowFreeApp.Puzzle;
 import com.example.BlowFreeApp.R;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 
-import java.util.List;
-
-public class LevelSelectorRegular extends Activity {
-
+public class LevelSelectorEasy extends Activity {
     private GameStatusAdapter adapter = new GameStatusAdapter(this);
     private int sizeOfBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level_selector);
+        setContentView(R.layout.activity_level);
         //Intent intent = getIntent();
 
 
-        ArrayAdapter<Puzzle> adapt = new ArrayAdapter<Puzzle>(this,
-                android.R.layout.simple_list_item_1, PackLevelFactory.getRegularLevels());
+        ArrayAdapter<Puzzle> adapt = new ArrayAdapter<Puzzle>(this, android.R.layout.simple_list_item_1, PackLevelFactory.getEasyLevels());
 
-        List<Puzzle> regularLevels = PackLevelFactory.getRegularLevels();
-        ListView listView = (ListView) findViewById(R.id.listLevel);
+        ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapt);
 
         listView.setOnItemClickListener(mMessageClickedHandler);
@@ -55,13 +50,11 @@ public class LevelSelectorRegular extends Activity {
         int gameId;
         gameId = (int) id;
 
-        Puzzle activeGame = PackLevelFactory.getGameById(gameId);
+        Puzzle activeGame = PackLevelFactory.getEasyGame(gameId);
         PackLevelFactory.setActiveGame(activeGame);
 
         startActivity(myIntent);
     }
-
-
 }
 
 

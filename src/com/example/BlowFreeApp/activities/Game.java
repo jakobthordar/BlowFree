@@ -43,18 +43,54 @@ public class Game extends Activity {
     }
 
     private void navBack(View v) {
-        Puzzle game = PackLevelFactory.getActiveGame();
-        int id = game.getPuzzleId();
-        Puzzle newGame = PackLevelFactory.getGameById(id - 1);
-
-        PackLevelFactory.setActiveGame(newGame);
-
-        Canvas canvas = (Canvas) findViewById(R.id.board);
-        canvas.create();
+        setGameLevel(false);
     }
 
     private void navForward(View v) {
+        setGameLevel(true);
+    }
 
+    public void setGameLevel(boolean forward) {
+        // Set New Active Game
+        int id = PackLevelFactory.getActiveGame().getPuzzleId();
+
+        // Forward or backwards
+        id = (forward) ? id  : id - 2;
+
+        Puzzle newGame = getGame(id);
+
+        // If game was not found we do nothing
+        if(newGame == null) return;
+
+        // Set the new game as active
+        PackLevelFactory.setActiveGame(newGame);
+
+        // Create and then rest the canvas
+        Canvas canvas = (Canvas) findViewById(R.id.board);
+        canvas.create();
+        canvas.reset();
+
+        // Update layout text
+        initGameView(newGame);
+
+    }
+
+    private Puzzle getGame(int id) {
+        String type = PackLevelFactory.getActiveGame().getTableGameStatus();
+
+        // Get Easy game
+        if(type == "gameStatusEasy")
+            return PackLevelFactory.getEasyGame(id);
+
+        // Get Medium game
+        if(type == "gameStatusMedium")
+            return PackLevelFactory.getMediumGame(id);
+
+        // Get Hard game
+        if(type == "gameStatusHard")
+            return PackLevelFactory.getHardGame(id);
+
+        return null;
     }
 
     private void navRest(View v) {

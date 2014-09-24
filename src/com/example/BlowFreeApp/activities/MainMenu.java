@@ -32,7 +32,7 @@ public class MainMenu extends Activity {
     }
 
     public void newGame(View view){
-        Intent myIntent = new Intent(this, PackageSelect.class);
+        Intent myIntent = new Intent(this, DifficultySelector.class);
         startActivity(myIntent);
     }
 

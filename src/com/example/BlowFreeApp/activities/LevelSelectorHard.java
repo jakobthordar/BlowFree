@@ -2,20 +2,19 @@ package com.example.BlowFreeApp.activities;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.*;
+import android.widget.AdapterView;
+import android.widget.SimpleCursorAdapter;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
-import com.example.BlowFreeApp.R;
-import com.example.BlowFreeApp.database.DbHelper;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class LevelSelectorMania extends ListActivity {
+public class LevelSelectorHard extends ListActivity {
 
     List<Puzzle> mPacksMania = new ArrayList<Puzzle>();
     private GameStatusAdapter adapter = new GameStatusAdapter(this);
@@ -24,16 +23,16 @@ public class LevelSelectorMania extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_level_mania);
+        //setContentView(R.layout.activty_level_hard);
         //Intent intent = getIntent();
 
-        Cursor cursor = adapter.queryGameStatusMania();
+        /*Cursor cursor = adapter.queryGameStatusMania();
         String cols[] = DbHelper.TableGameStatusCols;
         String from[] = { cols[1], cols[2], cols[3] };
         int to[] = { R.id.listLevel};
 
         startManagingCursor( cursor );
-        mCA = new SimpleCursorAdapter(this, R.layout.activity_level_mania, cursor, from, to );
+        mCA = new SimpleCursorAdapter(this, R.layout.activty_level_hard, cursor, from, to );
 
         mCA.setViewBinder( new SimpleCursorAdapter.ViewBinder() {
             @Override
@@ -48,7 +47,7 @@ public class LevelSelectorMania extends ListActivity {
             }
         });
         setListAdapter( mCA );
-
+        */
     }
     private AdapterView.OnItemClickListener mMessageClickedHandler = new AdapterView.OnItemClickListener() {
         public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -63,7 +62,7 @@ public class LevelSelectorMania extends ListActivity {
         int levelId;
         levelId = (int) id;
 
-        Puzzle activeGame = PackLevelFactory.getGameById(levelId);
+        Puzzle activeGame = PackLevelFactory.getHardGame(levelId);
         PackLevelFactory.setActiveGame(activeGame);
         startActivity(intent);
     }

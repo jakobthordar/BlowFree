@@ -3,6 +3,8 @@ package com.example.BlowFreeApp;
 
 import com.example.BlowFreeApp.Board.Cellpath;
 import com.example.BlowFreeApp.activities.Game;
+import com.example.BlowFreeApp.database.DbHelper;
+
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Puzzle {
     private int size;
     private int moves, bestMove;
     private List<Cellpath> cellPaths;
+    private String tableGameStatus;
 
 
     public Puzzle(String name, int challangeId, int puzzleId, int size,
@@ -24,6 +27,20 @@ public class Puzzle {
         this.cellPaths = cellPaths;
         this.moves = 0;
         this.bestMove = Integer.MAX_VALUE;
+
+        if (size == 5) {
+            this.tableGameStatus = DbHelper.TableGameStatusEasy;
+        }
+        if (size == 6) {
+            this.tableGameStatus = DbHelper.TableGameStatusMedium;
+        }
+        if (size == 7) {
+            this.tableGameStatus = DbHelper.TableGameStatusHard;
+        }
+    }
+
+    public String getTableGameStatus() {
+        return tableGameStatus;
     }
 
     public String getName() {

@@ -46,6 +46,10 @@ public class Cellpath {
     public void draw(android.graphics.Canvas canvas) {
         Point center;
         ArrayList<Coordinate> path = (isIntersected) ? pathIntersected : m_path;
+
+        // Ignore empty cell paths
+        if(path.isEmpty()) return;
+
         Coordinate cell = path.get(0);
 
         // Get and set the paths starting point

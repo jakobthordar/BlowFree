@@ -7,7 +7,6 @@ import com.example.BlowFreeApp.Board.CellpathColors;
 import com.example.BlowFreeApp.Board.Coordinate;
 import com.example.BlowFreeApp.Board.PointButton;
 import com.example.BlowFreeApp.activities.Game;
-import com.example.BlowFreeApp.activities.Pack;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 import com.example.BlowFreeApp.sound.SoundPlayer;
 import org.w3c.dom.Document;
@@ -26,85 +25,35 @@ import java.util.List;
 
 public class PackLevelFactory {
 
-    private static List<Pack> packs = new ArrayList<Pack>();
-    private static List<Puzzle> maniaLevels = new ArrayList<Puzzle>();
-    private static List<Puzzle> regularLevels = new ArrayList<Puzzle>();
+    private static List<Puzzle> hardLevels = new ArrayList<Puzzle>();
+    private static List<Puzzle> mediumLevels = new ArrayList<Puzzle>();
+    private static List<Puzzle> easyLevels = new ArrayList<Puzzle>();
     private static GameStatusAdapter gameStatusAdapter;
     private static Puzzle activeGame;
     private static Context context;
     private static SoundPlayer soundPlayer;
     private static Game gameActivity;
 
-
     public PackLevelFactory(Context c) {
         context = c;
         gameStatusAdapter = new GameStatusAdapter(c);
         soundPlayer = new SoundPlayer(c);
-        readRegular();
-        readMania();
-        readPacks();
+        easyLevels = readFile("packs/easy.xml");
+        mediumLevels = readFile("packs/medium.xml");
+        hardLevels = readFile("packs/hard.xml");
     }
 
-    /**
-     * Reads from regular.xml
-     */
-    private void readRegular() {
+    private List<Puzzle> readFile(String name) {
+        List<Puzzle> list = new ArrayList<Puzzle>();
         try {
-            List<Puzzle> packs = new ArrayList<Puzzle>();
-            readPackLevelsXML(context.getAssets().open("packs/regular.xml"), packs);
-            regularLevels = packs;
+            readPackLevelsXML(context.getAssets().open(name), list);
         } catch (IOException e) {
-            System.out.println("Could not read regular file");
+            System.out.println("Could not read " + name + " file. " + e.getMessage());
         }
+        return list;
     }
 
-    private void readMania() {
-        try {
-            List<Puzzle> packsMania = new ArrayList<Puzzle>();
-            readPackLevelsXML(context.getAssets().open("packs/mania.xml"), packsMania);
-            maniaLevels = packsMania;
-        } catch (IOException e) {
-            System.out.println("Could not read mania file");
-        }
-    }
-
-    private void readPacks() {
-        try{
-            List<Pack> p = new ArrayList<Pack>();
-            readPacksXML(context.getAssets().open("packs/packs.xml"), p);
-            packs = p;
-        }
-        catch ( Exception e){
-            System.out.println("could not read pack");
-        }
-    }
-
-    private void readPacksXML( InputStream is, List<Pack> packs) {
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse( is );
-            NodeList nList = doc.getElementsByTagName( "pack" );
-            for ( int c = 0; c < nList.getLength(); ++c ) {
-                Node nNode = nList.item(c);
-                if ( nNode.getNodeType() == Node.ELEMENT_NODE ) {
-                    Element eNode = (Element) nNode;
-                    String name = eNode.getElementsByTagName( "name" ).item(0).getFirstChild().getNodeValue();
-                    String description = eNode.getElementsByTagName( "description" ).item(0).getFirstChild().getNodeValue();
-                    String file = eNode.getElementsByTagName( "file" ).item(0).getFirstChild().getNodeValue();
-                    packs.add( new Pack( name, description, file ) );
-                }
-            }
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readPackLevelsXML(InputStream is, List<Puzzle> packs) {
+    private void readPackLevelsXML(InputStream is, List<Puzzle> puzzles) {
         String name;
         int challengeId;
         int puzzleId;
@@ -134,8 +83,9 @@ public class PackLevelFactory {
                         size = Integer.parseInt(puzzle.getElementsByTagName("size").item(0).getFirstChild().getNodeValue());
                         String temp = puzzle.getElementsByTagName("flows").item(0).getFirstChild().getNodeValue();
                         cellpaths = trimString(temp);
-                        packs.add(new Puzzle(name, challengeId, puzzleId, size, cellpaths));
-                        insertIntoTable(name, puzzleId, size);
+                        Puzzle p = new Puzzle(name, challengeId, puzzleId, size, cellpaths);
+                        puzzles.add(p);
+                        insertIntoTable(name, puzzleId, p.getTableGameStatus());
                    }
                 }
             }
@@ -148,20 +98,8 @@ public class PackLevelFactory {
         }
     }
 
-    private static void insertIntoTable(String name, int puzzleId, int size) {
-        // EASY
-        if (size == 5) {
-            gameStatusAdapter.insertGameStatusRegular(puzzleId, false, name);
-        }
-        // MEDIUM
-        if (size == 6) {
-            gameStatusAdapter.insertGameStatusRegular(puzzleId, false, name);
-
-        }
-        // HARD
-        if (size == 7) {
-            gameStatusAdapter.insertGameStatusMania(puzzleId, false, name);
-        }
+    private static void insertIntoTable(String name, int puzzleId, String tableGameStatus) {
+        gameStatusAdapter.insertGameStatus(tableGameStatus, puzzleId, false, name);
     }
 
     /**
@@ -211,8 +149,18 @@ public class PackLevelFactory {
      * @param id
      * @return
      */
-    public static Puzzle getGameById(int id) {
-        return regularLevels.get(id);
+    public static Puzzle getEasyGame(int id) {
+        if(easyLevels.size() - 1 < id || id < 0) return null;
+
+        return easyLevels.get(id);
+    }
+
+    public static Puzzle getMediumGame(int id) {
+        return mediumLevels.get(id);
+    }
+
+    public static Puzzle getHardGame(int id) {
+        return hardLevels.get(id);
     }
 
     public static GameStatusAdapter getGameStatusAdapter() {
@@ -223,16 +171,16 @@ public class PackLevelFactory {
         return soundPlayer;
     }
 
-    public static List<Pack> getPacks() {
-        return packs;
+    public static List<Puzzle> getEasyLevels() {
+        return easyLevels;
     }
 
-    public static List<Puzzle> getManiaLevels() {
-        return maniaLevels;
+    public static List<Puzzle> getMediumLevels() {
+        return mediumLevels;
     }
 
-    public static List<Puzzle> getRegularLevels() {
-        return regularLevels;
+    public static List<Puzzle> getHardLevels() {
+        return hardLevels;
     }
 
     public static Puzzle getActiveGame() {

@@ -12,6 +12,7 @@ import android.view.View;
 import com.example.BlowFreeApp.Board.events.onTouch;
 import com.example.BlowFreeApp.PackLevelFactory;
 import com.example.BlowFreeApp.Puzzle;
+import com.example.BlowFreeApp.activities.Game;
 import com.example.BlowFreeApp.database.GameStatusAdapter;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class Canvas extends View {
     private ViewController view;
     private GameStatusAdapter adapter = new GameStatusAdapter(getContext());
 
-    private AlertDialog winWindow;
+    private boolean openWinWindow = false;
 
     // Board style finals
     private static final int POINT_PADDING = 25;
@@ -264,13 +265,18 @@ public class Canvas extends View {
     }
 
     public void displayWinner() {
-        if(winWindow != null) return;
-        winWindow = new AlertDialog.Builder(getContext())
+        if(openWinWindow) return;
+
+        openWinWindow = true;
+
+        new AlertDialog.Builder(getContext())
                 .setTitle("OMG YOU WON")
                 .setMessage("You must have an IQ above 145, at least!")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
+                        Game main = PackLevelFactory.getGameActivity();
+                        main.setGameLevel(true);
+                        openWinWindow = false;
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
