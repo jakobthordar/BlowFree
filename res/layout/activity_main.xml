@@ -11,15 +11,8 @@
     <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*" >
-        <Button
-                android:id="@+id/Continue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/continue_game"
-                android:onClick="continueGame"
-                />
-
+            android:stretchColumns="*" android:layout_centerInParent="true" android:id="@+id/tableLayout"
+            android:layout_marginLeft="20dp" android:layout_marginRight="20dp">
         <Button
                 android:id="@+id/NewGame"
                 android:layout_width="wrap_content"
@@ -27,13 +20,35 @@
                 android:text="@string/new_game"
                 android:onClick="newGame"
                 />
+
+        <Button
+                android:id="@+id/Continue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/continue_game"
+                android:onClick="continueGame"
+                android:layout_marginTop="10dp"/>
+
         <Button
                 android:id="@+id/Settings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/settings"
                 android:onClick="gameSettings"
-                />
+                android:layout_marginTop="10dp"/>
     </TableLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:id="@+id/linearLayout">
+    </LinearLayout>
+    <TextView
+            android:layout_width="247dp"
+            android:layout_height="93dp"
+            android:text="Blow Free"
+            android:id="@+id/textView" android:textColor="#ffff2d3c" android:textSize="50dp"
+            android:textIsSelectable="false" android:gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="33dp" android:layout_above="@+id/tableLayout"
+            android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
