@@ -33,7 +33,7 @@ public class Game extends Activity {
 
     private void initGameView (Puzzle stats) {
         // Set Lvl
-        setText(R.id.lvl, "Level " + stats.getPuzzleId());
+        setText(R.id.lvl, "Level " + (stats.getPuzzleId() + 1));
 
         // Set Size
         setText(R.id.boardSize, stats.getSize() +  "x" + stats.getSize());
@@ -55,7 +55,7 @@ public class Game extends Activity {
         int id = PackLevelFactory.getActiveGame().getPuzzleId();
 
         // Forward or backwards
-        id = (forward) ? id  : id - 2;
+        id = (forward) ? id + 1 : id - 1;
 
         Puzzle newGame = getGame(id);
 
